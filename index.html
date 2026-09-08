@@ -637,6 +637,10 @@
   // Chỉ 2 nhóm KHCN.07/08 có dữ liệu trong toàn bộ 10 nhóm cấp 1 → chuẩn hoá lại w1
   var W1_NORM = { KHCN07: W1_GOC.KHCN07/(W1_GOC.KHCN07+W1_GOC.KHCN08), KHCN08: W1_GOC.KHCN08/(W1_GOC.KHCN07+W1_GOC.KHCN08) };
 
+  // KHCN.10.01 (Điều 17 + Phụ lục II): cơ chế TRỪ ĐIỂM sau điểm tổng hợp, không qua w2 — nhẹ -20/ca, vừa -50, nặng -100.
+  // Không hiển thị lý do/tên đơn vị công khai — chỉ trừ ngầm vào S theo yêu cầu người dùng.
+  var DIEM_TRU_LIEM_CHINH = { "kinh-te": 20, "cntt-tt": 20 };
+
   function officialScore(u){
     var m0703 = mucNguong0134(u.nhomManh);
     var m0704 = mucNguong0134(u.nhomTiemNang);
@@ -644,6 +648,7 @@
     var diemNhom07 = W2_NORM_07["07.03"]*diem(m0703) + W2_NORM_07["07.04"]*diem(m0704);
     var diemNhom08 = W2_NORM_08["08.02"]*diem(m0802);
     var S = 1000 * (W1_NORM.KHCN07*diemNhom07 + W1_NORM.KHCN08*diemNhom08);
+    S = Math.max(0, S - (DIEM_TRU_LIEM_CHINH[u.id]||0));
     return {S:S, m0703:m0703, m0704:m0704, m0802:m0802};
   }
 
