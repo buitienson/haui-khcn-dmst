@@ -288,8 +288,8 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Bảng xếp hạng thang điểm 1.000 <span class="badge official" style="vertical-align:middle;"><span class="dot"></span>Công thức chính thức</span></h2>
-        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>3/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.05 — Công bố khoa học; KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 9 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 9 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
+        <h2>Xếp hạng thang điểm 1.000 <span class="badge official" style="vertical-align:middle;"><span class="dot"></span>Công thức chính thức</span></h2>
+        <div class="desc">Công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>3/12 nhóm tiêu chí đã đủ dữ liệu</b> (KHCN.05 — Công bố khoa học; KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 9 nhóm còn lại loại khỏi phép tính, trọng số w1/w2 chuẩn hoá lại trong phạm vi này theo Điều 6 khoản 2.</div>
       </div>
     </div>
     <div id="officialRankingTable"></div>
@@ -301,11 +301,40 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Xếp hạng hoạt động 8 đơn vị</h2>
-        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, dùng số công bố GỘP (chưa tách hạng) khác với điểm KHCN.05 chính thức ở bảng trên, và còn 2 chỉ số (đề án, hội thảo) chưa tính được điểm chính thức. <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
+        <h2>Xếp hạng năng suất</h2>
+        <div class="desc">Chỉ số tổng hợp, trọng số 5 chỉ số sơ bộ (công bố, sáng kiến, nhóm nghiên cứu, đề án, hội thảo) — công bố dùng số GỘP, khác điểm KHCN.05 chính thức ở bảng trên. <b>Không dùng công thức Phụ lục II.</b> Mức xếp loại theo tứ phân vị trong 8 đơn vị.</div>
       </div>
     </div>
     <div id="rankingTable"></div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>So sánh 8 đơn vị</h2>
+        <div class="desc">Số thô, sơ bộ năm học 2025-2026, không phải điểm 0-1.000. Công bố ở đây là số gộp, khác số tách hạng KHCN.05.01-05.03 dùng chấm điểm chính thức. Màu cột theo khối ngành.</div>
+      </div>
+    </div>
+    <div class="metric-tabs" id="metricTabs"></div>
+    <div id="metricPanels"></div>
+    <div class="legend" style="margin-top:20px;">
+      <span><i style="background:var(--khoi-a)"></i>Khối Kỹ thuật, công nghệ và tự nhiên</span>
+      <span><i style="background:var(--khoi-b)"></i>Khối Khoa học xã hội và nhân văn</span>
+    </div>
+  </div>
+</section>
+
+<section id="heatmap-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>So sánh nhiều chỉ số theo đơn vị</h2>
+        <div class="desc">Mỗi cột chuẩn hoá 0–100% theo giá trị cao nhất trong cột đó (không phải điểm chính thức). Đậm màu = đang dẫn đầu chỉ số đó.</div>
+      </div>
+    </div>
+    <div class="heatmap" id="heatmapWrap"></div>
   </div>
 </section>
 
@@ -368,35 +397,6 @@
     </div>
     <div class="nq57-grid" id="nq57Grid"></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:16px;">Nguồn mục tiêu quốc gia: Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị "Về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia". Các chỉ tiêu quốc gia (TFP, kinh tế số, R&amp;D/GDP) đo ở cấp toàn nền kinh tế, không có số tương ứng trực tiếp ở cấp một trường đại học — nêu ở đây để định vị mức độ đóng góp, không phải để so sánh trực tiếp.</p>
-  </div>
-</section>
-
-<section id="compare">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>So sánh 8 đơn vị</h2>
-        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — số thô để so sánh nhanh, không phải điểm 0-1.000. Nhóm nghiên cứu, sáng kiến và công bố đã có điểm chính thức ở bảng trên (điểm công bố dùng số liệu tách theo hạng KHCN.05.01-05.03, KHÔNG phải số công bố gộp hiển thị ở tab dưới đây); đề án, hội thảo còn chờ chuẩn hoá theo mẫu số nhân sự. Màu cột phân theo khối ngành.</div>
-      </div>
-    </div>
-    <div class="metric-tabs" id="metricTabs"></div>
-    <div id="metricPanels"></div>
-    <div class="legend" style="margin-top:20px;">
-      <span><i style="background:var(--khoi-a)"></i>Khối Kỹ thuật, công nghệ và tự nhiên</span>
-      <span><i style="background:var(--khoi-b)"></i>Khối Khoa học xã hội và nhân văn</span>
-    </div>
-  </div>
-</section>
-
-<section id="heatmap-section">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>So sánh nhiều chỉ số theo đơn vị</h2>
-        <div class="desc">Mỗi cột chuẩn hoá 0–100% theo giá trị cao nhất trong cột đó (không phải điểm chính thức). Đậm màu = đang dẫn đầu chỉ số đó.</div>
-      </div>
-    </div>
-    <div class="heatmap" id="heatmapWrap"></div>
   </div>
 </section>
 
