@@ -305,6 +305,11 @@
         <table class="score-table" id="congboTable"></table>
       </div>
     </div>
+    <div class="linechart-card" style="margin-top:18px;">
+      <h3 style="margin-bottom:4px;">Tách theo hạng KHCN.05.01-05.04 (sơ bộ, theo đơn vị)</h3>
+      <div class="stat-line" style="margin-bottom:12px;">Trích từ kê khai công trình khoa học NH 2025-2026, lọc đúng tác giả HaUI (Vị trí TG1 = "Trong trường"), quy đổi đơn vị khớp 100% tổng công bố đã hiển thị ở trên (1.473). Cột "Khác" là bài/báo cáo không xếp được vào 4 mục (quốc tế không xếp hạng, chưa phân loại...), loại khỏi mọi phép tính điểm.</div>
+      <div style="overflow-x:auto;"><table class="score-table" id="khcn05DetailTable"></table></div>
+    </div>
   </div>
 </section>
 
@@ -326,12 +331,12 @@
     <div class="section-head">
       <div>
         <h2>Bảng xếp hạng thang điểm 1.000</h2>
-        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>2/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 10 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 10 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
+        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>3/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.05 — Công bố khoa học; KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 9 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 9 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
       </div>
       <span class="badge official"><span class="dot"></span>Công thức chính thức</span>
     </div>
     <div id="officialRankingTable"></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Nhóm KHCN.07 tính trên KHCN.07.03 (nhóm nghiên cứu mạnh) + KHCN.07.04 (nhóm nghiên cứu tiềm năng), chưa gồm KHCN.07.01/07.02/07.05 (chưa có số liệu). Nhóm KHCN.08 tính trên KHCN.08.02 (sáng kiến cấp trên cơ sở, số liệu sơ bộ), chưa gồm KHCN.08.01/08.03/08.04. Số liệu nhóm nghiên cứu 2025 chưa gồm 1 nhóm vừa quy đổi lại từ Viện Công nghệ (chưa xác nhận về đơn vị nào) — xem Excel đối soát trên Drive.</p>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Nhóm KHCN.05 tính trên KHCN.05.01 (bài trong nước) + 05.02 (báo cáo trong nước ISBN) + 05.03 (bài WoS/Scopus quy đổi/giảng viên — Q1 top 2%/2-5% tính hệ số 4, Q1 còn lại 3, Q2=2, Q3=1,5, Q4=1; "WoS/Scopus chưa xếp hạng" tạm gộp vào Q4, GIẢ ĐỊNH chưa xác nhận), chưa gồm 05.04 (thiếu dữ liệu hạng hội thảo CORE A*/A/B/C) và 05.05 (thiếu số liệu trích dẫn). Một số bài/báo cáo (quốc tế không xếp hạng WoS/Scopus, "chưa phân loại"...) không xếp được vào 4 mục trên nên bị loại khỏi tính điểm — xem mục thống kê chi tiết bên dưới. Mẫu số giảng viên (NTGV) của 05.03 lấy theo đơn vị sinh hoạt chuyên môn, CHƯA đối chiếu xong với danh bạ eGov (đang chênh ở Ngoại ngữ - Du lịch), và ngưỡng mức 1-5 của 05.03 trong Phụ lục II tự ghi chú chỉ tính từ 8 quan sát (1 năm) — điểm nhóm 05 có thể còn thay đổi. Nhóm KHCN.07 tính trên KHCN.07.03 (nhóm nghiên cứu mạnh) + KHCN.07.04 (nhóm nghiên cứu tiềm năng), chưa gồm KHCN.07.01/07.02/07.05 (chưa có số liệu). Nhóm KHCN.08 tính trên KHCN.08.02 (sáng kiến cấp trên cơ sở, số liệu sơ bộ), chưa gồm KHCN.08.01/08.03/08.04. Số liệu nhóm nghiên cứu 2025 chưa gồm 1 nhóm vừa quy đổi lại từ Viện Công nghệ (chưa xác nhận về đơn vị nào) — xem Excel đối soát trên Drive.</p>
   </div>
 </section>
 
@@ -340,7 +345,7 @@
     <div class="section-head">
       <div>
         <h2>Xếp hạng hoạt động 8 đơn vị</h2>
-        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, bao gồm cả các nhóm chưa tính được điểm chính thức ở trên (công bố, đề án, hội thảo). <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
+        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, dùng số công bố GỘP (chưa tách hạng) khác với điểm KHCN.05 chính thức ở bảng trên, và còn 2 chỉ số (đề án, hội thảo) chưa tính được điểm chính thức. <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
       </div>
     </div>
     <div id="rankingTable"></div>
@@ -352,7 +357,7 @@
     <div class="section-head">
       <div>
         <h2>So sánh 8 đơn vị</h2>
-        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — số thô để so sánh nhanh, không phải điểm 0-1.000. Nhóm nghiên cứu và sáng kiến đã có điểm chính thức ở bảng trên; công bố, đề án, hội thảo còn chờ chuẩn hoá theo mẫu số nhân sự (N_TVC — đang đối chiếu 2 nguồn số liệu, chưa chốt). Màu cột phân theo khối ngành.</div>
+        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — số thô để so sánh nhanh, không phải điểm 0-1.000. Nhóm nghiên cứu, sáng kiến và công bố đã có điểm chính thức ở bảng trên (điểm công bố dùng số liệu tách theo hạng KHCN.05.01-05.03, KHÔNG phải số công bố gộp hiển thị ở tab dưới đây); đề án, hội thảo còn chờ chuẩn hoá theo mẫu số nhân sự (N_TVC — đang đối chiếu 2 nguồn số liệu, chưa chốt). Màu cột phân theo khối ngành.</div>
       </div>
     </div>
     <div class="metric-tabs" id="metricTabs"></div>
@@ -413,22 +418,38 @@
 
   var UNITS = [
     {id:"co-khi-o-to", ten:"Trường Cơ khí - Ô tô", khoi:"a", kN:1, giangvien:131,
-      congbo:217, sangkien:14, nhomNC:3, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:415, hoithao:1},
+      congbo:217, sangkien:14, nhomNC:3, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:415, hoithao:1,
+      c0501:37, c0502:1, q1a:2, q1b:26, q2q:47, q3q:36, q4q:40, c0504:18, cKhac05:10},
     {id:"dien-dien-tu", ten:"Trường Điện - Điện tử", khoi:"a", kN:1, giangvien:133,
-      congbo:182, sangkien:6, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0},
+      congbo:182, sangkien:6, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
+      c0501:30, c0502:28, q1a:1, q1b:6, q2q:18, q3q:29, q4q:22, c0504:38, cKhac05:10},
     {id:"kinh-te", ten:"Trường Kinh tế", khoi:"b", kN:1, giangvien:162,
-      congbo:334, sangkien:10, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:1, deanKP:735, hoithao:1},
+      congbo:334, sangkien:10, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:1, deanKP:735, hoithao:1,
+      c0501:156, c0502:64, q1a:2, q1b:6, q2q:2, q3q:16, q4q:21, c0504:24, cKhac05:43},
     {id:"ngoai-ngu-du-lich", ten:"Trường Ngoại ngữ - Du lịch", khoi:"b", kN:1, giangvien:247,
-      congbo:347, sangkien:7, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:0, deanKP:0, hoithao:1},
+      congbo:347, sangkien:7, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:0, deanKP:0, hoithao:1,
+      c0501:145, c0502:10, q1a:4, q1b:17, q2q:6, q3q:1, q4q:5, c0504:145, cKhac05:14},
     {id:"cntt-tt", ten:"Trường Công nghệ thông tin và Truyền thông", khoi:"a", kN:1, giangvien:88,
-      congbo:96, sangkien:27, nhomNC:2, nhomManh:1, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0},
+      congbo:96, sangkien:27, nhomNC:2, nhomManh:1, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
+      c0501:27, c0502:16, q1a:0, q1b:6, q2q:6, q3q:7, q4q:22, c0504:8, cKhac05:4},
     {id:"cong-nghe-hoa", ten:"Khoa Công nghệ Hóa", khoi:"a", kN:1, giangvien:45,
-      congbo:87, sangkien:3, nhomNC:2, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:685, hoithao:0},
+      congbo:87, sangkien:3, nhomNC:2, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:685, hoithao:0,
+      c0501:29, c0502:0, q1a:0, q1b:10, q2q:27, q3q:12, q4q:8, c0504:1, cKhac05:0},
     {id:"cong-nghe-may", ten:"Khoa Công nghệ may và Thiết kế thời trang", khoi:"a", kN:1, giangvien:29,
-      congbo:35, sangkien:2, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:0},
+      congbo:35, sangkien:2, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:0,
+      c0501:17, c0502:4, q1a:0, q1b:0, q2q:1, q3q:1, q4q:5, c0504:4, cKhac05:3},
     {id:"giao-duc-dai-cuong", ten:"Khoa Giáo dục đại cương", khoi:"b", kN:1.2, giangvien:85,
-      congbo:175, sangkien:14, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1}
+      congbo:175, sangkien:14, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1,
+      c0501:91, c0502:38, q1a:0, q1b:9, q2q:5, q3q:8, q4q:0, c0504:14, cKhac05:10}
   ];
+  // Nguồn 05.01-05.04: 01-nguon/14. Tong hop cong trinh khoa hoc...xlsx sheet "Chi tiết công trình",
+  // lọc Vị trí TG1="Trong trường", quy đổi đơn vị đúng phương pháp đã dùng cho `congbo` (khớp
+  // 100% tổng 1473) — kiểm chứng lại 08.9.2026. c0501=Bài báo trong nước; c0502=Báo cáo trong
+  // nước ISBN; q1a=Q1 top 2%/2-5% (đúng KHCN.05.03), q1b=Q1 còn lại, q2q/q3q/q4q=Q2/Q3/Q4 (bài
+  // "WoS/Scopus chưa xếp hạng" gộp tạm vào q4q — GIẢ ĐỊNH, chưa xác nhận); c0504=RAW số báo cáo
+  // hội thảo QT ISBN/WoS-Scopus (CHƯA quy đổi theo hạng CORE A*/A/B/C vì thiếu dữ liệu hạng, nên
+  // KHÔNG dùng để chấm điểm chính thức 05.04); cKhac05=bài/báo cáo không xếp được vào 4 mục trên
+  // (quốc tế không xếp hạng, "chưa phân loại"...) — loại khỏi mọi phép tính, chỉ hiển thị minh bạch.
   UNITS.forEach(function(u){ u.congboPerGV = Math.round((u.congbo/u.giangvien)*100)/100; });
 
   var TOAN_TRUONG = {
@@ -616,6 +637,28 @@
     '<thead><tr><th>Năm học</th><th style="text-align:right">Trong nước</th><th style="text-align:right">Quốc tế WoS/Scopus</th><th style="text-align:right">Tổng</th><th style="text-align:right">% Quốc tế</th></tr></thead>'+
     '<tbody>'+congboRows.join("")+'</tbody>';
 
+  // ---------- Bảng chi tiết KHCN.05.01-05.04 theo đơn vị ----------
+  (function(){
+    var totCols = ['c0501','c0502','q05_03','c0504','cKhac05','tong05'];
+    var sums = {c0501:0,c0502:0,q05_03:0,c0504:0,cKhac05:0,tong05:0};
+    var rows05 = UNITS.map(function(u){
+      var tong0503 = u.q1a+u.q1b+u.q2q+u.q3q+u.q4q;
+      var bqt = Math.round((4*u.q1a+3*u.q1b+2*u.q2q+1.5*u.q3q+1*u.q4q)/u.giangvien*100)/100;
+      var tong = u.c0501+u.c0502+tong0503+u.c0504+u.cKhac05;
+      sums.c0501+=u.c0501; sums.c0502+=u.c0502; sums.q05_03+=tong0503; sums.c0504+=u.c0504; sums.cKhac05+=u.cKhac05; sums.tong05+=tong;
+      return '<tr><td>'+u.ten+'</td><td class="num mono">'+n(u.c0501)+'</td><td class="num mono">'+n(u.c0502)+'</td>'+
+        '<td class="num mono">'+n(tong0503)+' <span style="color:var(--ink-faint)">('+bqt.toFixed(2)+'/GV)</span></td>'+
+        '<td class="num mono">'+n(u.c0504)+'</td><td class="num mono">'+n(u.cKhac05)+'</td><td class="num mono" style="font-weight:700;">'+n(tong)+'</td></tr>';
+    });
+    rows05.push('<tr style="font-weight:700;"><td>Tổng 8 đơn vị</td><td class="num mono">'+n(sums.c0501)+'</td><td class="num mono">'+n(sums.c0502)+'</td><td class="num mono">'+n(sums.q05_03)+'</td><td class="num mono">'+n(sums.c0504)+'</td><td class="num mono">'+n(sums.cKhac05)+'</td><td class="num mono">'+n(sums.tong05)+'</td></tr>');
+    document.getElementById("khcn05DetailTable").innerHTML =
+      '<thead><tr><th>Đơn vị</th><th style="text-align:right">05.01<br><span style="font-weight:400;font-size:11px;">bài trong nước</span></th>'+
+      '<th style="text-align:right">05.02<br><span style="font-weight:400;font-size:11px;">báo cáo ISBN</span></th>'+
+      '<th style="text-align:right">05.03<br><span style="font-weight:400;font-size:11px;">số bài (quy đổi/GV)</span></th>'+
+      '<th style="text-align:right">05.04<br><span style="font-weight:400;font-size:11px;">báo cáo QT, RAW</span></th>'+
+      '<th style="text-align:right">Khác</th><th style="text-align:right">Tổng</th></tr></thead><tbody>'+rows05.join("")+'</tbody>';
+  })();
+
   // ---------- NQ57 ----------
   document.getElementById("nq57Grid").innerHTML = NQ57_TARGETS.map(function(t){
     return '<div class="nq57-card"><div class="target"><b>'+t.ten+'</b><br>Mục tiêu quốc gia đến 2030: '+t.muctieu+'</div>'+
@@ -627,41 +670,62 @@
   function mucNguong0134(x){ if(x<=0) return 1; if(x===1) return 2; if(x===2) return 3; if(x===3) return 4; return 5; }
   function diem(muc){ return (muc-1)/4; }
 
+  // Ngưỡng mức KHCN.05.01/05.02/05.03 — Phụ lục II (nửa mở, giống lối [a,b) đã dùng cho KHCN.01.01...)
+  function muc0501(x){ if(x<3) return 1; if(x<10) return 2; if(x<26) return 3; if(x<57) return 4; return 5; }
+  function muc0502(x){ if(x<1) return 1; if(x<2) return 2; if(x<4) return 3; if(x<7) return 4; return 5; }
+  function muc0503(bqt){ if(bqt<0.49) return 1; if(bqt<0.72) return 2; if(bqt<0.76) return 3; if(bqt<1.43) return 4; return 5; }
+  function bqt0503(u){ return (4*u.q1a + 3*u.q1b + 2*u.q2q + 1.5*u.q3q + 1*u.q4q) / u.giangvien; }
+
   // Trọng số gốc theo Phụ lục I/II
-  var W1_GOC = {KHCN07: 0.10, KHCN08: 0.05};
-  var W2_GOC = {"07.03": 0.5, "07.04": 0.2, "08.02": 0.4};
+  var W1_GOC = {KHCN05: 0.10, KHCN07: 0.10, KHCN08: 0.05};
+  var W2_GOC = {"05.01": 0.1, "05.02": 0.1, "05.03": 0.3, "07.03": 0.5, "07.04": 0.2, "08.02": 0.4};
+  // Nhóm 05: chỉ 05.01+05.02+05.03 có dữ liệu (thiếu 05.04 — cần hạng CORE; 05.05 — cần trích dẫn),
+  // tổng w2 gốc 0,5 → chuẩn hoá lại 3 tiêu chí này = 1.0
+  var W2_SUM_05 = W2_GOC["05.01"]+W2_GOC["05.02"]+W2_GOC["05.03"];
+  var W2_NORM_05 = { "05.01": W2_GOC["05.01"]/W2_SUM_05, "05.02": W2_GOC["05.02"]/W2_SUM_05, "05.03": W2_GOC["05.03"]/W2_SUM_05 };
   // Chỉ 07.03+07.04 có dữ liệu trong nhóm 07 (tổng w2 gốc 0.7) → chuẩn hoá lại còn 2 tiêu chí này = 1.0
   var W2_NORM_07 = { "07.03": W2_GOC["07.03"]/(W2_GOC["07.03"]+W2_GOC["07.04"]), "07.04": W2_GOC["07.04"]/(W2_GOC["07.03"]+W2_GOC["07.04"]) };
   // Chỉ 08.02 có dữ liệu trong nhóm 08 → nhận trọn 1.0
   var W2_NORM_08 = { "08.02": 1.0 };
-  // Chỉ 2 nhóm KHCN.07/08 có dữ liệu trong toàn bộ 10 nhóm cấp 1 → chuẩn hoá lại w1
-  var W1_NORM = { KHCN07: W1_GOC.KHCN07/(W1_GOC.KHCN07+W1_GOC.KHCN08), KHCN08: W1_GOC.KHCN08/(W1_GOC.KHCN07+W1_GOC.KHCN08) };
+  // 3 nhóm KHCN.05/07/08 có dữ liệu trong toàn bộ 10 nhóm cấp 1 → chuẩn hoá lại w1
+  var W1_SUM = W1_GOC.KHCN05 + W1_GOC.KHCN07 + W1_GOC.KHCN08;
+  var W1_NORM = { KHCN05: W1_GOC.KHCN05/W1_SUM, KHCN07: W1_GOC.KHCN07/W1_SUM, KHCN08: W1_GOC.KHCN08/W1_SUM };
 
   // KHCN.10.01 (Điều 17 + Phụ lục II): cơ chế TRỪ ĐIỂM sau điểm tổng hợp, không qua w2 — nhẹ -20/ca, vừa -50, nặng -100.
   // Không hiển thị lý do/tên đơn vị công khai — chỉ trừ ngầm vào S theo yêu cầu người dùng.
   var DIEM_TRU_LIEM_CHINH = { "kinh-te": 20, "cntt-tt": 20 };
 
   function officialScore(u){
+    var m0501 = muc0501(u.c0501);
+    var m0502 = muc0502(u.c0502);
+    var m0503 = muc0503(bqt0503(u));
     var m0703 = mucNguong0134(u.nhomManh);
     var m0704 = mucNguong0134(u.nhomTiemNang);
     var m0802 = mucSangKien(u.sangkien);
+    var diemNhom05 = W2_NORM_05["05.01"]*diem(m0501) + W2_NORM_05["05.02"]*diem(m0502) + W2_NORM_05["05.03"]*diem(m0503);
     var diemNhom07 = W2_NORM_07["07.03"]*diem(m0703) + W2_NORM_07["07.04"]*diem(m0704);
     var diemNhom08 = W2_NORM_08["08.02"]*diem(m0802);
-    var S = 1000 * (W1_NORM.KHCN07*diemNhom07 + W1_NORM.KHCN08*diemNhom08);
+    var S = 1000 * (W1_NORM.KHCN05*diemNhom05 + W1_NORM.KHCN07*diemNhom07 + W1_NORM.KHCN08*diemNhom08);
     S = Math.max(0, S - (DIEM_TRU_LIEM_CHINH[u.id]||0));
-    return {S:S, m0703:m0703, m0704:m0704, m0802:m0802};
+    return {S:S, m0501:m0501, m0502:m0502, m0503:m0503, m0703:m0703, m0704:m0704, m0802:m0802};
   }
 
   var officialRanked = UNITS.map(function(u){ return Object.assign({}, u, {score: officialScore(u)}); })
     .sort(function(a,b){ return b.score.S - a.score.S; });
   document.getElementById("officialRankingTable").innerHTML =
     '<table class="score-table"><thead><tr><th>#</th><th>Đơn vị</th>'+
+    '<th style="text-align:center">KHCN.05.01<br><span style="font-weight:400;font-size:11px;">bài trong nước</span></th>'+
+    '<th style="text-align:center">KHCN.05.02<br><span style="font-weight:400;font-size:11px;">báo cáo ISBN</span></th>'+
+    '<th style="text-align:center">KHCN.05.03<br><span style="font-weight:400;font-size:11px;">WoS/Scopus/GV</span></th>'+
     '<th style="text-align:center">KHCN.07.03<br><span style="font-weight:400;font-size:11px;">nhóm mạnh</span></th>'+
     '<th style="text-align:center">KHCN.07.04<br><span style="font-weight:400;font-size:11px;">nhóm tiềm năng</span></th>'+
     '<th style="text-align:center">KHCN.08.02<br><span style="font-weight:400;font-size:11px;">sáng kiến</span></th>'+
     '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000 (tạm tính)</span></th></tr></thead><tbody>'+
     officialRanked.map(function(u,i){
       return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+'</td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0501+'">'+u.score.m0501+'</span></td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0502+'">'+u.score.m0502+'</span></td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0503+'">'+u.score.m0503+'</span></td>'+
         '<td style="text-align:center"><span class="mucbadge m'+u.score.m0703+'">'+u.score.m0703+'</span></td>'+
         '<td style="text-align:center"><span class="mucbadge m'+u.score.m0704+'">'+u.score.m0704+'</span></td>'+
         '<td style="text-align:center"><span class="mucbadge m'+u.score.m0802+'">'+u.score.m0802+'</span></td>'+
