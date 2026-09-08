@@ -189,7 +189,8 @@
   .metric-panel.active{display:block;}
 
   /* ---------- Heatmap ---------- */
-  .heatmap{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-raised);}
+  #officialRankingTable{overflow-x:auto;}
+  .heatmap{border:1px solid var(--line); border-radius:12px; overflow-x:auto; overflow-y:hidden; background:var(--paper-raised);}
   .heatmap table{width:100%; border-collapse:collapse; font-size:13px;}
   .heatmap th, .heatmap td{padding:10px 12px; text-align:center; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
   .heatmap th:first-child, .heatmap td:first-child{text-align:left; position:sticky; left:0; background:var(--paper-raised);}
@@ -396,10 +397,12 @@
       <div class="eyebrow" style="margin-bottom:6px;">KHCN.08.02</div>
       <h3 style="font-size:19px;">Số lượng sáng kiến cấp trên cơ sở</h3>
       <div class="score-formula" id="scoreFormula"></div>
+      <div style="overflow-x:auto;">
       <table class="score-table">
         <thead><tr><th>Đơn vị</th><th style="text-align:right">Số sáng kiến</th><th>Mức (1-5)</th><th style="text-align:right">Điểm chuẩn hoá S</th></tr></thead>
         <tbody id="scoreBody"></tbody>
       </table>
+      </div>
       <p style="font-size:12.5px; color:var(--ink-faint); margin-top:14px;">* Dùng số liệu "sáng kiến cấp Đại học được công nhận" (số liệu sơ bộ NH 2025-2026) làm ước lượng cho "cấp trên cơ sở" — cần Ban KHCN&amp;ĐMST xác nhận đúng phạm vi trước khi dùng làm căn cứ chính thức. Công thức: S = 1.000 × w1 × w2 × ((mức−1)/4), w1=0,05, w2=0,4.</p>
     </div>
   </div>
