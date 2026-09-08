@@ -1,0 +1,920 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Hoạt động KHCN&ĐMST của HaUI</title>
+<meta name="description" content="Bức tranh hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo của Đại học Công nghiệp Hà Nội — chạy thử Bộ tiêu chí đánh giá v42.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;
+    --paper-raised:#FFFFFF;
+    --ink:#1C2333;
+    --ink-dim:#5D6472;
+    --ink-faint:#8A8F9A;
+    --line:rgba(28,35,51,.12);
+    --line-strong:rgba(28,35,51,.22);
+    --accent:#AD7A2C;
+    --accent-soft:#F1E4CC;
+    --accent-ink:#6B4A17;
+    --teal:#2B6F62;
+    --teal-soft:#DCEEE9;
+    --teal-ink:#1B4D43;
+    --brick:#A0402E;
+    --brick-soft:#F3DFD9;
+    --khoi-a:#2B6F62;
+    --khoi-a-soft:#DCEEE9;
+    --khoi-b:#7A4A6B;
+    --khoi-b-soft:#EEE0E8;
+    --shadow:0 1px 2px rgba(28,35,51,.06), 0 8px 24px rgba(28,35,51,.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#161A22;
+      --paper-raised:#1E232D;
+      --ink:#EDEAE1;
+      --ink-dim:#A6ACB6;
+      --ink-faint:#767C87;
+      --line:rgba(237,234,225,.14);
+      --line-strong:rgba(237,234,225,.24);
+      --accent:#DDAA5F;
+      --accent-soft:#3A2E17;
+      --accent-ink:#F1D9A8;
+      --teal:#68B7A5;
+      --teal-soft:#1B342F;
+      --teal-ink:#AEE0D2;
+      --brick:#E08972;
+      --brick-soft:#3A2320;
+      --khoi-a:#68B7A5;
+      --khoi-a-soft:#1B342F;
+      --khoi-b:#C79BB8;
+      --khoi-b-soft:#332430;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#161A22;
+    --paper-raised:#1E232D;
+    --ink:#EDEAE1;
+    --ink-dim:#A6ACB6;
+    --ink-faint:#767C87;
+    --line:rgba(237,234,225,.14);
+    --line-strong:rgba(237,234,225,.24);
+    --accent:#DDAA5F;
+    --accent-soft:#3A2E17;
+    --accent-ink:#F1D9A8;
+    --teal:#68B7A5;
+    --teal-soft:#1B342F;
+    --teal-ink:#AEE0D2;
+    --brick:#E08972;
+    --brick-soft:#3A2320;
+    --khoi-a:#68B7A5;
+    --khoi-a-soft:#1B342F;
+    --khoi-b:#C79BB8;
+    --khoi-b-soft:#332430;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  /* Flex/grid children default to min-width:auto and refuse to shrink below their content —
+     this makes long Vietnamese unit names/sentences overflow their box instead of wrapping.
+     Force them to respect the track/flex-basis instead. */
+  .kpi-grid > *, .rank-row > div, .readiness-grid > *, .nq57-grid > *, .congbo-stats-grid > *,
+  .barrow > div, .section-head > div, .metric-panel, .caveat > div { min-width: 0; }
+  h1,h2,h3,p,.desc,.lede,.lbl,.ten,.target,.haui,.t,.name,.stat-line { overflow-wrap: break-word; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    font-size:15px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif; text-wrap:balance; margin:0; color:var(--ink);}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+  a{color:var(--accent-ink);}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--accent-ink); font-weight:600;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px;
+    font-size:12px; font-weight:600; letter-spacing:.02em; white-space:nowrap;
+  }
+  .badge.proxy{background:var(--accent-soft); color:var(--accent-ink);}
+  .badge.official{background:var(--teal-soft); color:var(--teal-ink);}
+  .badge.warn{background:var(--brick-soft); color:var(--brick);}
+  .badge .dot{width:7px; height:7px; border-radius:50%; background:currentColor;}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:64px 0 48px; border-bottom:1px solid var(--line);}
+  header.hero .eyebrow{margin-bottom:14px; display:block;}
+  header.hero h1{font-size:clamp(30px,4.2vw,48px); font-weight:600; max-width:16ch;}
+  header.hero p.lede{max-width:62ch; color:var(--ink-dim); font-size:17px; margin-top:16px;}
+  .status-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
+
+  /* ---------- Sections ---------- */
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:28px; flex-wrap:wrap;}
+  .section-head h2{font-size:26px; font-weight:600;}
+  .section-head .desc{color:var(--ink-dim); font-size:14px; max-width:56ch; margin-top:6px;}
+
+  /* ---------- KPI grid ---------- */
+  .kpi-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  .kpi{background:var(--paper-raised); padding:22px 20px;}
+  .kpi .lbl{font-size:12.5px; color:var(--ink-dim); font-weight:600; letter-spacing:.01em; min-height:32px;}
+  .kpi .num{font-size:30px; font-weight:600; margin-top:8px; letter-spacing:-.01em;}
+  .kpi .sub{font-size:12.5px; color:var(--ink-faint); margin-top:4px;}
+  .kpi .delta{font-size:13px; font-weight:600; margin-top:6px; display:flex; align-items:center; gap:4px;}
+  .kpi .delta.up{color:var(--teal);}
+
+  /* ---------- Trend card ---------- */
+  .trend-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:28px 28px 22px; box-shadow:var(--shadow);}
+  .trend-bars{display:flex; align-items:flex-end; gap:34px; height:140px; margin:24px 0 10px; padding-left:4px;}
+  .trend-bar-col{display:flex; flex-direction:column; align-items:center; gap:8px; width:88px;}
+  .trend-bar{width:56px; border-radius:6px 6px 3px 3px; background:var(--ink-faint);}
+  .trend-bar.now{background:var(--teal);}
+  .trend-bar-col .yr{font-size:12.5px; color:var(--ink-dim); font-weight:600;}
+  .trend-bar-col .val{font-size:13px; font-weight:600;}
+
+  /* ---------- Multi-year line charts ---------- */
+  .trend-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:18px;}
+  .linechart-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:24px 26px; box-shadow:var(--shadow);}
+  .linechart-card h3{font-size:17px; font-weight:600; margin-bottom:2px;}
+  .linechart-card .stat-line{font-size:13px; color:var(--ink-dim); margin-top:2px;}
+  .linechart-card svg{width:100%; height:auto; margin-top:12px; overflow:visible;}
+  .lc-axis-label{font-family:"IBM Plex Mono",monospace; font-size:11px; fill:var(--ink-faint);}
+  .lc-value-label{font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; fill:var(--ink);}
+  .lc-future-label{font-family:"Inter",sans-serif; font-size:11px; fill:var(--ink-faint); font-style:italic;}
+
+  /* ---------- Congbo stats ---------- */
+  .congbo-stats-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:18px;}
+  @media (max-width:800px){ .congbo-stats-grid{grid-template-columns:1fr;} }
+
+  /* ---------- NQ57 grid ---------- */
+  .nq57-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  .nq57-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
+  .nq57-card .target{font-size:12.5px; color:var(--ink-dim); line-height:1.4;}
+  .nq57-card .target b{color:var(--ink); font-family:"IBM Plex Mono",monospace;}
+  .nq57-card .haui{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-size:13px;}
+  .nq57-card .haui .val{font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--teal);}
+
+  /* ---------- Ranking table ---------- */
+  .rank-list{display:flex; flex-direction:column; gap:2px;}
+  .rank-row{display:grid; grid-template-columns:40px 1fr 200px 84px; align-items:center; gap:14px; padding:12px 14px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; margin-bottom:8px;}
+  .rank-medal{font-family:"Fraunces",serif; font-size:20px; font-weight:600; color:var(--ink-faint); text-align:center;}
+  .rank-row:nth-child(1) .rank-medal{color:var(--accent-ink);}
+  .rank-row .name{font-size:14px; font-weight:600;}
+  .rank-row .khoi{font-size:11.5px; color:var(--ink-faint); font-weight:400;}
+  .rank-row .idx-bar{background:var(--line); border-radius:5px; height:10px; position:relative; overflow:hidden;}
+  .rank-row .idx-fill{height:100%; background:var(--accent); border-radius:5px 0 0 5px;}
+  .rank-row .idx-num{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-dim); margin-top:4px;}
+
+  /* ---------- Unit bar chart ---------- */
+  .barchart{display:flex; flex-direction:column; gap:10px;}
+  .barrow{display:grid; grid-template-columns:200px 1fr 64px; align-items:center; gap:12px;}
+  .barrow .name{font-size:13px; color:var(--ink); font-weight:500; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .barrow .track{background:var(--line); border-radius:5px; height:20px; position:relative; overflow:hidden;}
+  .barrow .fill{height:100%; border-radius:5px 0 0 5px; background:var(--khoi-a);}
+  .barrow.khoi-b .fill{background:var(--khoi-b);}
+  .barrow .val{font-size:13px; font-weight:600; text-align:left;}
+  .rank-badge{display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:var(--accent-soft); color:var(--accent-ink); font-size:11px; font-weight:700; margin-right:6px;}
+
+  .metric-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px;}
+  .metric-tab{padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:var(--paper-raised); font-size:13px; font-weight:600; color:var(--ink-dim); cursor:pointer;}
+  .metric-tab.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .metric-panel{display:none;}
+  .metric-panel.active{display:block;}
+
+  /* ---------- Heatmap ---------- */
+  .heatmap{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-raised);}
+  .heatmap table{width:100%; border-collapse:collapse; font-size:13px;}
+  .heatmap th, .heatmap td{padding:10px 12px; text-align:center; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+  .heatmap th:first-child, .heatmap td:first-child{text-align:left; position:sticky; left:0; background:var(--paper-raised);}
+  .heatmap thead th{font-size:11.5px; color:var(--ink-dim); font-weight:600; text-transform:uppercase; letter-spacing:.02em; vertical-align:bottom;}
+  .heatmap tr:last-child td{border-bottom:none;}
+  .heatmap td:last-child, .heatmap th:last-child{border-right:none;}
+  .heatcell{font-family:"IBM Plex Mono",monospace; font-weight:600;}
+
+  /* ---------- Legend ---------- */
+  .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-dim); margin-top:14px;}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  /* ---------- Score demo ---------- */
+  .score-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:24px; box-shadow:var(--shadow);}
+  .score-formula{font-family:"IBM Plex Mono",monospace; font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin:14px 0; color:var(--ink-dim); overflow-x:auto; white-space:pre;}
+  .score-table{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:12px;}
+  .score-table th, .score-table td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
+  .score-table th{font-size:11.5px; text-transform:uppercase; letter-spacing:.02em; color:var(--ink-dim); font-weight:600;}
+  .score-table td.num{font-family:"IBM Plex Mono",monospace; text-align:right;}
+  .mucbadge{display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px; padding:0 6px; border-radius:6px; font-size:12px; font-weight:700; font-family:"IBM Plex Mono",monospace;}
+  .mucbadge.m1{background:var(--brick-soft); color:var(--brick);}
+  .mucbadge.m2{background:var(--brick-soft); color:var(--brick); opacity:.75;}
+  .mucbadge.m3{background:var(--accent-soft); color:var(--accent-ink);}
+  .mucbadge.m4{background:var(--teal-soft); color:var(--teal-ink); opacity:.8;}
+  .mucbadge.m5{background:var(--teal-soft); color:var(--teal-ink);}
+
+  /* ---------- Readiness grid ---------- */
+  .readiness-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px;}
+  .readiness-item{border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--paper-raised);}
+  .readiness-item .ma{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-faint); font-weight:600;}
+  .readiness-item .ten{font-size:13.5px; font-weight:600; margin-top:4px; line-height:1.35;}
+  .readiness-item .stat{margin-top:10px;}
+
+  /* ---------- Caveats ---------- */
+  .caveat-list{display:flex; flex-direction:column; gap:0;}
+  .caveat{display:grid; grid-template-columns:36px 1fr; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);}
+  .caveat:last-child{border-bottom:none;}
+  .caveat .n{font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--accent-ink); font-size:15px;}
+  .caveat .t{font-size:14px; color:var(--ink-dim);}
+  .caveat .t b{color:var(--ink); font-weight:600;}
+
+  /* ---------- Edit panel ---------- */
+  details.ban-group{border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:var(--paper-raised); overflow:hidden;}
+  details.ban-group summary{padding:14px 18px; cursor:pointer; font-weight:600; font-size:14px; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  details.ban-group summary::-webkit-details-marker{display:none;}
+  details.ban-group summary .chev{transition:transform .15s; color:var(--ink-faint);}
+  details.ban-group[open] summary .chev{transform:rotate(90deg);}
+  .edit-table-wrap{overflow-x:auto; border-top:1px solid var(--line);}
+  table.edit-table{border-collapse:collapse; width:100%; font-size:12.5px; min-width:900px;}
+  table.edit-table th, table.edit-table td{border-bottom:1px solid var(--line); border-right:1px solid var(--line); padding:6px 8px;}
+  table.edit-table th{background:var(--paper); font-weight:600; color:var(--ink-dim); text-align:center; font-size:11px; white-space:normal; max-width:110px;}
+  table.edit-table td:first-child, table.edit-table th:first-child{position:sticky; left:0; background:var(--paper-raised); text-align:left; z-index:1; min-width:220px; max-width:260px; font-weight:500;}
+  table.edit-table input{width:64px; padding:4px 5px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:right;}
+  table.edit-table input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .save-flash{font-size:11px; color:var(--teal); margin-left:6px; opacity:0; transition:opacity .3s;}
+  .save-flash.show{opacity:1;}
+  .db-status{font-size:12.5px; color:var(--ink-dim); margin-bottom:14px;}
+
+  footer{padding:40px 0 60px; color:var(--ink-faint); font-size:12.5px;}
+  footer a{color:var(--ink-dim);}
+
+  @media (max-width:640px){
+    .barrow{grid-template-columns:120px 1fr 50px;}
+    table.edit-table td:first-child, table.edit-table th:first-child{min-width:150px;}
+  }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Bộ tiêu chí đánh giá hoạt động KHCN&amp;ĐMST — Dự thảo v42</span>
+    <h1>Báo cáo hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo — Đại học Công nghiệp Hà Nội (2024-2026)</h1>
+    <p class="lede">Tổng hợp số liệu hoạt động KHCN&amp;ĐMST của 8 đơn vị thuộc diện đánh giá theo Phụ lục IV, đối chiếu với 57 tiêu chí trong dự thảo và với các mục tiêu của Nghị quyết 57-NQ/TW. Báo cáo cập nhật theo từng kỳ đánh giá — số liệu kỳ sau được bổ sung tiếp vào các bảng và biểu đồ dưới đây, không thay thế số liệu kỳ trước.</p>
+    <div class="status-row">
+      <span class="badge proxy"><span class="dot"></span>Đa số dữ liệu: sơ bộ năm học 2025-2026</span>
+      <span class="badge official"><span class="dot"></span>Thu KHCN: chuỗi chính thức 2 năm</span>
+      <span class="badge proxy"><span class="dot"></span>Công bố khoa học: chuỗi sơ bộ 3 năm</span>
+      <span class="badge warn"><span class="dot"></span>7 điểm cần làm rõ trong bản dự thảo</span>
+    </div>
+  </div>
+</header>
+
+<section id="kpi">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Số liệu toàn trường</h2>
+        <div class="desc">Tổng hợp từ dữ liệu đã thu thập được tính đến 07/9/2026. Ô có huy hiệu vàng là số liệu tạm; huy hiệu xanh là số liệu chính thức theo đúng mốc dương lịch của Quy định.</div>
+      </div>
+    </div>
+    <div class="kpi-grid" id="kpiGrid"></div>
+  </div>
+</section>
+
+<section id="trend">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Số liệu nhiều năm</h2>
+        <div class="desc">Biểu đồ thể hiện số liệu qua các kỳ. Kỳ đánh giá sau sẽ được bổ sung thêm vào cùng biểu đồ này, không thay bằng biểu đồ mới. Đường nét đứt đánh dấu vị trí chờ số liệu kỳ tiếp theo.</div>
+      </div>
+    </div>
+    <div class="trend-grid" id="trendGrid"></div>
+  </div>
+</section>
+
+<section id="congbo-stats">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Thống kê công bố khoa học</h2>
+        <div class="desc">Số liệu sơ bộ theo năm học, tổng hợp từ kê khai công trình khoa học toàn trường — tách riêng trong nước và quốc tế WoS/Scopus, kèm bảng chi tiết.</div>
+      </div>
+    </div>
+    <div class="congbo-stats-grid">
+      <div class="linechart-card" id="congboBarCard"></div>
+      <div class="linechart-card" style="overflow-x:auto;">
+        <h3 style="margin-bottom:12px;">Bảng chi tiết theo năm học</h3>
+        <table class="score-table" id="congboTable"></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nq57">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Đối chiếu với Nghị quyết 57-NQ/TW</h2>
+        <div class="desc">Nghị quyết 57-NQ/TW (Bộ Chính trị, 22/12/2024) đặt mục tiêu quốc gia đến 2030 cho khoa học, công nghệ, đổi mới sáng tạo. Nhóm tiêu chí <b>KHCN.12 — Hiệu quả hoạt động</b> của Bộ tiêu chí HaUI được thiết kế đúng dạng "tốc độ tăng trưởng năm sau/năm trước" để theo dõi hằng năm cùng loại chỉ tiêu này.</div>
+      </div>
+    </div>
+    <div class="nq57-grid" id="nq57Grid"></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:16px;">Nguồn mục tiêu quốc gia: Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị "Về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia". Các chỉ tiêu quốc gia (TFP, kinh tế số, R&amp;D/GDP) đo ở cấp toàn nền kinh tế, không có số tương ứng trực tiếp ở cấp một trường đại học — nêu ở đây để định vị mức độ đóng góp, không phải để so sánh trực tiếp.</p>
+  </div>
+</section>
+
+<section id="official-ranking">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Bảng xếp hạng thang điểm 1.000</h2>
+        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>2/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 10 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 10 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
+      </div>
+      <span class="badge official"><span class="dot"></span>Công thức chính thức</span>
+    </div>
+    <div id="officialRankingTable"></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Nhóm KHCN.07 tính trên KHCN.07.03 (nhóm nghiên cứu mạnh) + KHCN.07.04 (nhóm nghiên cứu tiềm năng), chưa gồm KHCN.07.01/07.02/07.05 (chưa có số liệu). Nhóm KHCN.08 tính trên KHCN.08.02 (sáng kiến cấp trên cơ sở, số liệu sơ bộ), chưa gồm KHCN.08.01/08.03/08.04. Số liệu nhóm nghiên cứu 2025 chưa gồm 1 nhóm vừa quy đổi lại từ Viện Công nghệ (chưa xác nhận về đơn vị nào) — xem Excel đối soát trên Drive.</p>
+  </div>
+</section>
+
+<section id="ranking">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Xếp hạng hoạt động 8 đơn vị</h2>
+        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, bao gồm cả các nhóm chưa tính được điểm chính thức ở trên (công bố, đề án, hội thảo). <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
+      </div>
+    </div>
+    <div id="rankingTable"></div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>So sánh 8 đơn vị</h2>
+        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — chưa quy đổi thành điểm 0-1.000 vì còn thiếu mẫu số nhân sự. Màu cột phân theo khối ngành.</div>
+      </div>
+    </div>
+    <div class="metric-tabs" id="metricTabs"></div>
+    <div id="metricPanels"></div>
+    <div class="legend" style="margin-top:20px;">
+      <span><i style="background:var(--khoi-a)"></i>Khối Kỹ thuật, công nghệ và tự nhiên</span>
+      <span><i style="background:var(--khoi-b)"></i>Khối Khoa học xã hội và nhân văn</span>
+    </div>
+  </div>
+</section>
+
+<section id="heatmap-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>So sánh nhiều chỉ số theo đơn vị</h2>
+        <div class="desc">Mỗi cột chuẩn hoá 0–100% theo giá trị cao nhất trong cột đó (không phải điểm chính thức). Đậm màu = đang dẫn đầu chỉ số đó.</div>
+      </div>
+    </div>
+    <div class="heatmap" id="heatmapWrap"></div>
+  </div>
+</section>
+
+<section id="score-demo">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Minh hoạ cách tính điểm</h2>
+        <div class="desc">Công thức chấm điểm 57 tiêu chí đã dựng xong đúng theo Phụ lục II. Dưới đây là tiêu chí <b>duy nhất</b> có đủ dữ liệu tạm để chạy thử toàn bộ quy trình — từ giá trị đo → mức 1–5 → điểm chuẩn hoá.</div>
+      </div>
+      <span class="badge proxy"><span class="dot"></span>Ước tính minh hoạ</span>
+    </div>
+    <div class="score-card">
+      <div class="eyebrow" style="margin-bottom:6px;">KHCN.08.02</div>
+      <h3 style="font-size:19px;">Số lượng sáng kiến cấp trên cơ sở</h3>
+      <div class="score-formula" id="scoreFormula"></div>
+      <table class="score-table">
+        <thead><tr><th>Đơn vị</th><th style="text-align:right">Số sáng kiến</th><th>Mức (1-5)</th><th style="text-align:right">Điểm chuẩn hoá S</th></tr></thead>
+        <tbody id="scoreBody"></tbody>
+      </table>
+      <p style="font-size:12.5px; color:var(--ink-faint); margin-top:14px;">* Dùng số liệu "sáng kiến cấp Đại học được công nhận" (số liệu sơ bộ NH 2025-2026) làm ước lượng cho "cấp trên cơ sở" — cần Ban KHCN&amp;ĐMST xác nhận đúng phạm vi trước khi dùng làm căn cứ chính thức. Công thức: S = 1.000 × w1 × w2 × ((mức−1)/4), w1=0,05, w2=0,4.</p>
+    </div>
+  </div>
+</section>
+
+<section id="readiness">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Bộ tiêu chí đã sẵn sàng đến đâu</h2>
+        <div class="desc">57 tiêu chí cấp 2, chia 12 nhóm cấp 1. Trạng thái dữ liệu hiện tại theo từng nhóm — phần lớn còn chờ số liệu nhân sự (Ban Tổ chức - Nhân sự) làm mẫu số.</div>
+      </div>
+    </div>
+    <div class="readiness-grid" id="readinessGrid"></div>
+  </div>
+</section>
+
+<section id="caveats">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Cần làm rõ trước khi ban hành</h2>
+        <div class="desc">7 điểm mâu thuẫn/hạn chế phát hiện được ngay trong chính văn bản dự thảo v42 — không phải lỗi khi tổng hợp dữ liệu. Ban KHCN&amp;ĐMST cần chốt trước khi lập trình chấm điểm chính thức.</div>
+      </div>
+    </div>
+    <div class="caveat-list" id="caveatList"></div>
+  </div>
+</section>
+
+<section id="edit">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Cập nhật số liệu</h2>
+        <div class="desc">Sửa trực tiếp — lưu tự động khi rời khỏi ô. Số liệu tại đây là nguồn cho toàn bộ tính toán ở trên.</div>
+      </div>
+    </div>
+    <div class="db-status" id="dbStatus">Đang kết nối cơ sở dữ liệu…</div>
+    <div id="banGroups"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Nguồn: đối soát nội bộ từ dữ liệu Google Drive InnovationOffice (kê khai công trình khoa học 2025-2026, biểu TC-NS, sổ liệu tổng hợp KHCN&amp;ĐMST…) và văn bản dự thảo "Bo tieu chi (ban sach) v42.docx". Cập nhật lần gần nhất: 07/9/2026.
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var UNITS = [
+    {id:"co-khi-o-to", ten:"Trường Cơ khí - Ô tô", khoi:"a", kN:1, giangvien:131,
+      congbo:217, sangkien:14, nhomNC:3, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:415, hoithao:1},
+    {id:"dien-dien-tu", ten:"Trường Điện - Điện tử", khoi:"a", kN:1, giangvien:133,
+      congbo:182, sangkien:6, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0},
+    {id:"kinh-te", ten:"Trường Kinh tế", khoi:"b", kN:1, giangvien:162,
+      congbo:334, sangkien:10, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:1, deanKP:735, hoithao:1},
+    {id:"ngoai-ngu-du-lich", ten:"Trường Ngoại ngữ - Du lịch", khoi:"b", kN:1, giangvien:247,
+      congbo:347, sangkien:7, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:0, deanKP:0, hoithao:1},
+    {id:"cntt-tt", ten:"Trường Công nghệ thông tin và Truyền thông", khoi:"a", kN:1, giangvien:88,
+      congbo:96, sangkien:27, nhomNC:2, nhomManh:1, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0},
+    {id:"cong-nghe-hoa", ten:"Khoa Công nghệ Hóa", khoi:"a", kN:1, giangvien:45,
+      congbo:87, sangkien:3, nhomNC:2, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:685, hoithao:0},
+    {id:"cong-nghe-may", ten:"Khoa Công nghệ may và Thiết kế thời trang", khoi:"a", kN:1, giangvien:29,
+      congbo:35, sangkien:2, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:0},
+    {id:"giao-duc-dai-cuong", ten:"Khoa Giáo dục đại cương", khoi:"b", kN:1.2, giangvien:85,
+      congbo:175, sangkien:14, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1}
+  ];
+  UNITS.forEach(function(u){ u.congboPerGV = Math.round((u.congbo/u.giangvien)*100)/100; });
+
+  var TOAN_TRUONG = {
+    thu2024:41147, thu2025:113333, // triệu đồng, CHÍNH THỨC mốc 31/12
+    shtt:19, cgcnSoHD:4, cgcnTien:666.6, nvCapBoSL:11, nvCapBoTien:44227, deanTrongDiem:39
+  };
+
+  // Chuỗi 3 năm học liên tiếp, toàn trường, proxy (nguồn: 14. Tong hop cong trinh khoa hoc + 02. So lieu tong hop)
+  var CONGBO_SERIES = {
+    nhan: ["NH 2023-2024","NH 2024-2025","NH 2025-2026"],
+    trongNuoc: [762, 620, 635],
+    quocTe: [718, 1014, 765]
+  };
+
+  var THU_SERIES = { nhan:["2024","2025"], gia_tri:[TOAN_TRUONG.thu2024, TOAN_TRUONG.thu2025] };
+
+  // Nghị quyết 57-NQ/TW (22/12/2024) — mục tiêu quốc gia đến 2030
+  var NQ57_TARGETS = [
+    {ten:"Công bố khoa học quốc tế", muctieu:"tăng trung bình ≥10%/năm", haui:"Số liệu sơ bộ 3 năm học: +41% rồi −25% (biến động, chưa phải xu hướng ổn định — xem thống kê chi tiết bên dưới)", tieuchi:"KHCN.12.05"},
+    {ten:"Đơn đăng ký/văn bằng sáng chế", muctieu:"tăng trung bình 16–18%/năm, khai thác thương mại 8-10%", haui:"HaUI đo bằng KHCN.04, KHCN.12.08 — chưa đủ chuỗi năm để tính tốc độ tăng trưởng", tieuchi:"KHCN.04 / KHCN.12.08"},
+    {ten:"Chi cho R&D", muctieu:"đạt 2% GDP quốc gia, ≥60% từ xã hội", haui:"Cấp trường đo bằng KHCN.11.01 (kinh phí KHCN&ĐMST/tổng thu) — đang chờ số liệu Ban Kế hoạch - Tài chính", tieuchi:"KHCN.11.01"},
+    {ten:"Ngân sách cho KHCN&ĐMST&CĐS", muctieu:"≥3% tổng chi ngân sách hằng năm", haui:"Tương ứng phần đầu tư nội bộ của Đại học cho KHCN&ĐMST (KHCN.11)", tieuchi:"KHCN.11"},
+    {ten:"Đóng góp TFP vào tăng trưởng", muctieu:">55%", haui:"Chỉ tiêu cấp nền kinh tế, không có số tương ứng trực tiếp ở cấp trường", tieuchi:"—"},
+    {ten:"Kinh tế số", muctieu:"tối thiểu 30% GDP (2030)", haui:"HaUI đóng góp gián tiếp qua đào tạo nhân lực số + khởi nghiệp ĐMST (KHCN.09)", tieuchi:"KHCN.09"}
+  ];
+
+  var METRICS = [
+    {key:"congbo", label:"Công bố khoa học", unit:"công trình"},
+    {key:"sangkien", label:"Sáng kiến cấp trên cơ sở", unit:"sáng kiến"},
+    {key:"nhomNC", label:"Nhóm nghiên cứu mạnh + tiềm năng", unit:"nhóm"},
+    {key:"deanSL", label:"Đề án trọng điểm cấp ĐH", unit:"đề án"},
+    {key:"hoithao", label:"Hội thảo khoa học chủ trì", unit:"hội thảo"}
+  ];
+
+  var NHOM_CAP1 = [
+    {ma:"KHCN.01", ten:"Nhân lực KHCN&ĐMST", w1:0.10, trangthai:"none", ghichu:"Cần tổng số giảng viên/viên chức, tiến sĩ theo đơn vị (Ban Tổ chức - Nhân sự) — chưa có nguồn."},
+    {ma:"KHCN.02", ten:"Thực hiện nhiệm vụ KHCN&ĐMST", w1:0.10, trangthai:"none", ghichu:"Cần số nhiệm vụ cấp cơ sở/trên cơ sở theo đơn vị — chưa tách được theo đơn vị."},
+    {ma:"KHCN.03", ten:"Hợp tác về KHCN&ĐMST", w1:0.09, trangthai:"none", ghichu:"Dữ liệu đoàn ra/vào chỉ có đến 2018-2021, chưa có 2024-2025 theo đơn vị."},
+    {ma:"KHCN.04", ten:"Sở hữu trí tuệ", w1:0.09, trangthai:"partial", ghichu:"Có 19 kết quả SHTT toàn trường (NH25-26) nhưng chưa tách theo đơn vị."},
+    {ma:"KHCN.05", ten:"Công bố khoa học", w1:0.10, trangthai:"partial", ghichu:"Có tổng số công trình theo đơn vị (số liệu sơ bộ, gộp mọi loại) và đã có số giảng viên theo đơn vị sinh hoạt chuyên môn làm mẫu số — còn thiếu tách đúng theo hạng KHCN.05.01-05.04."},
+    {ma:"KHCN.06", ten:"Thu từ hoạt động KHCN&ĐMST", w1:0.20, trangthai:"partial", ghichu:"Có số CHÍNH THỨC toàn trường (2024: 41,1 tỷ; 2025: 113,3 tỷ) nhưng chưa tách theo đơn vị."},
+    {ma:"KHCN.07", ten:"Tiềm lực KHCN&ĐMST", w1:0.10, trangthai:"partial", ghichu:"Có số nhóm NC mạnh+tiềm năng theo đơn vị (gộp, sơ bộ) — chưa tách riêng mạnh/tiềm năng nên chưa chấm được KHCN.07.03/07.04 riêng."},
+    {ma:"KHCN.08", ten:"Sáng kiến, giải thưởng KHCN&ĐMST", w1:0.05, trangthai:"demo", ghichu:"KHCN.08.02 đã có minh hoạ chấm điểm (xem mục trên) — KHCN.08.01/08.03/08.04 chưa có nguồn."},
+    {ma:"KHCN.09", ten:"Khởi nghiệp ĐMST", w1:0.09, trangthai:"none", ghichu:"Chưa tìm thấy nguồn dữ liệu nào."},
+    {ma:"KHCN.10", ten:"Liêm chính học thuật và đạo đức nghiên cứu", w1:0.08, trangthai:"none", ghichu:"Có hồ sơ họp Hội đồng liêm chính học thuật nhưng chưa tổng hợp theo đơn vị/mốc."},
+    {ma:"KHCN.11", ten:"Đầu tư phát triển tiềm lực (cấp Đại học)", w1:0.10, trangthai:"partial", ghichu:"Có số liệu toàn trường một phần (chi hỗ trợ công bố+SHTT ~16 tỷ) nhưng chưa đúng định nghĩa mẫu số Điều 18."},
+    {ma:"KHCN.12", ten:"Hiệu quả hoạt động KHCN&ĐMST (cấp Đại học)", w1:0.10, trangthai:"partial", ghichu:"Tính được tốc độ tăng trưởng thu KHCN 2024→2025 (chính thức); các chỉ số tăng trưởng khác cần dữ liệu 2 kỳ liên tiếp."}
+  ];
+
+  var CAVEATS = [
+    "KHCN.01.01/01.03/02.01: Điều 8-9 dùng mẫu số \"viên chức, người lao động\" nhưng Phụ lục I lại gọi tên tiêu chí là \"giảng viên\" — hai đối tượng có thể khác số lượng, cần chốt trước khi tính.",
+    "KHCN.02.08/02.09: Điều 9 định nghĩa là công thức %, nhưng Phụ lục I/II lại dùng đơn vị \"người học\" với ngưỡng là số tuyệt đối, không phải mốc phần trăm.",
+    "KHCN.11.01/11.02: Điều 18 dùng mẫu số \"tổng nguồn thu của Đại học\", Phụ lục II lại ghi \"tổng nguồn thu TỪ HỌC PHÍ\" — hai khái niệm khác nhau.",
+    "Phụ lục III: chú thích cuối bảng ghi \"62 tham số\" nhưng bảng liệt kê thực tế có 64 dòng.",
+    "Điều 21 nhảy từ khoản 4 sang khoản 6, không có khoản 5 — lỗi đánh số trong bản gốc.",
+    "Điều 21 khoản 2 nêu nguyên tắc \"tiêu chí chuẩn hoá theo số giảng viên\" nhưng không liệt kê tường minh danh mục mã tiêu chí thuộc diện này.",
+    "KHCN.05.03: ngưỡng 5 mức hiện chỉ tính từ 8 quan sát (8 đơn vị × 1 năm) — bản thân Phụ lục II tự ghi chú cần điều chỉnh khi có số liệu chính thức nhiều năm hơn."
+  ];
+
+  // Phụ lục III — 64 tham số, gộp theo Ban chủ trì cho khung nhập liệu
+  var THAM_SO = [{"tt":1,"ten":"Tổng số giảng viên","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.01","KHCN.02.01","KHCN.05.03"]},{"tt":2,"ten":"Số giảng viên tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.01.01"]},{"tt":3,"ten":"Tổng số người học","dvt":"Người","chu_tri":"Ban Đào tạo","tc":["KHCN.01.02"]},{"tt":4,"ten":"Số người học tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.01.02"]},{"tt":5,"ten":"Số giảng viên có học vị tiến sĩ","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.03"]},{"tt":6,"ten":"Số nữ viên chức, người lao động tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":7,"ten":"Tổng số viên chức, người lao động tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":8,"ten":"Tổng số nữ viên chức, người lao động thuộc đơn vị","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":9,"ten":"Tổng số viên chức, người lao động thuộc đơn vị","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":10,"ten":"Số nhiệm vụ KHCN&ĐMST cấp cơ sở phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.01"]},{"tt":11,"ten":"Số nhiệm vụ KHCN&ĐMST cấp Bộ phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.02"]},{"tt":12,"ten":"Số nhiệm vụ KHCN&ĐMST cấp Quốc gia phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.03"]},{"tt":13,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp cơ sở nghiệm thu đúng hạn","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.04"]},{"tt":14,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp trên cơ sở nghiệm thu đúng hạn","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.05"]},{"tt":15,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp cơ sở được ứng dụng","dvt":"%","chu_tri":"Ban Đào tạo","tc":["KHCN.02.06"]},{"tt":16,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp trên cơ sở được ứng dụng","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.07"]},{"tt":17,"ten":"Số người được đào tạo qua nhiệm vụ KHCN&ĐMST cấp cơ sở","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.08"]},{"tt":18,"ten":"Số người được đào tạo qua nhiệm vụ KHCN&ĐMST cấp trên cơ sở","dvt":"Người","chu_tri":"Ban Đào tạo","tc":["KHCN.02.09"]},{"tt":19,"ten":"Số nhiệm vụ KHCN&ĐMST hợp tác quốc tế","dvt":"Nhiệm vụ","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.01"]},{"tt":20,"ten":"Số tác giả nước ngoài tham gia nghiên cứu chung","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.02"]},{"tt":21,"ten":"Số đoàn ra","dvt":"Đoàn","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.03"]},{"tt":22,"ten":"Số đoàn vào","dvt":"Đoàn","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.04"]},{"tt":23,"ten":"Số lượt báo cáo tại hội thảo quốc tế","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.05"]},{"tt":24,"ten":"Số lượt báo cáo mời quốc tế","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.06"]},{"tt":25,"ten":"Số đơn đăng ký quyền sở hữu trí tuệ","dvt":"Đơn","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.01"]},{"tt":26,"ten":"Số văn bằng bảo hộ","dvt":"Văn bằng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.02"]},{"tt":27,"ten":"Số đơn đăng ký quốc tế","dvt":"Đơn","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.03"]},{"tt":28,"ten":"Số hợp đồng chuyển giao công nghệ từ quyền sở hữu trí tuệ","dvt":"Hợp đồng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.04"]},{"tt":29,"ten":"Số bài báo khoa học trong nước thuộc danh mục do Bộ Khoa học và Công nghệ công bố","dvt":"Bài","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.01"]},{"tt":30,"ten":"Số báo cáo khoa học trong nước có ISBN","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.02"]},{"tt":31,"ten":"Số bài báo quốc tế WoS/Scopus","dvt":"Bài","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.03"]},{"tt":32,"ten":"Số báo cáo quốc tế thuộc WoS/Scopus","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.04"]},{"tt":33,"ten":"Tổng số trích dẫn","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.05"]},{"tt":34,"ten":"Tổng kinh phí thu từ nhiệm vụ cấp trên cơ sở","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.01"]},{"tt":35,"ten":"Tổng kinh phí thu từ hợp đồng chuyển giao công nghệ","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.02"]},{"tt":36,"ten":"Tổng kinh phí thu từ dịch vụ KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.03"]},{"tt":37,"ten":"Tổng kinh phí thu từ hoạt động KHCN&ĐMST khác","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.04"]},{"tt":38,"ten":"Số phòng thí nghiệm phục vụ nghiên cứu","dvt":"Phòng","chu_tri":"Ban Cơ sở vật chất","tc":["KHCN.07.01"]},{"tt":39,"ten":"Số không gian nghiên cứu chung","dvt":"Không gian","chu_tri":"Ban Cơ sở vật chất","tc":["KHCN.07.02"]},{"tt":40,"ten":"Số nhóm nghiên cứu mạnh","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.03"]},{"tt":41,"ten":"Số nhóm nghiên cứu tiềm năng","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.04"]},{"tt":42,"ten":"Số nhóm nghiên cứu chuyên môn","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.05"]},{"tt":43,"ten":"Số sáng kiến cấp cơ sở","dvt":"Sáng kiến","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.01"]},{"tt":44,"ten":"Số sáng kiến cấp trên cơ sở","dvt":"Sáng kiến","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.02"]},{"tt":45,"ten":"Số giải thưởng KHCN&ĐMST của giảng viên","dvt":"Giải","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.03"]},{"tt":46,"ten":"Số giải thưởng KHCN&ĐMST của người học","dvt":"Giải","chu_tri":"Ban Hỗ trợ người học","tc":["KHCN.08.04"]},{"tt":47,"ten":"Số doanh nghiệp/dự án/sản phẩm của giảng viên được hỗ trợ","dvt":"Số lượng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.09.01"]},{"tt":48,"ten":"Số doanh nghiệp/dự án/sản phẩm của người học được hỗ trợ","dvt":"Số lượng","chu_tri":"Ban Hỗ trợ người học","tc":["KHCN.09.02"]},{"tt":49,"ten":"Số công trình vi phạm liêm chính học thuật","dvt":"Công trình","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.10.01"]},{"tt":50,"ten":"Tỷ lệ công trình được kiểm tra liêm chính học thuật (trùng lặp) và đánh giá đạo đức (nếu thuộc diện) trước khi công bố/nghiệm thu","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.10.02"]},{"tt":51,"ten":"Tổng kinh phí chi cho KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.01"]},{"tt":52,"ten":"Tổng nguồn thu của Đại học","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.01","KHCN.11.02"]},{"tt":53,"ten":"Tổng kinh phí chi đào tạo, bồi dưỡng, thu hút nhân lực chất lượng cao","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.02"]},{"tt":54,"ten":"Tổng số nhóm nghiên cứu mạnh được công nhận","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.11.03"]},{"tt":55,"ten":"Tổng thu từ hoạt động triển khai nhiệm vụ KHCN&ĐMST cấp trên cơ sở và nhiệm vụ có đối ứng bằng kinh phí","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.01"]},{"tt":56,"ten":"Tổng thu từ hoạt động chuyển giao công nghệ, dịch vụ KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.02"]},{"tt":57,"ten":"Tổng kinh phí thu từ hoạt động KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.03"]},{"tt":58,"ten":"Tổng kinh phí thu của Đại học","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.03"]},{"tt":59,"ten":"Tổng số bài báo khoa học trong nước","dvt":"Bài báo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.04"]},{"tt":60,"ten":"Tổng số bài báo khoa học quốc tế","dvt":"Bài báo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.05"]},{"tt":61,"ten":"Tổng số báo cáo khoa học quốc tế","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.06"]},{"tt":62,"ten":"Tổng số báo cáo khoa học trong nước","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.07"]},{"tt":63,"ten":"Tổng số sản phẩm sở hữu trí tuệ","dvt":"Sản phẩm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.08"]},{"tt":64,"ten":"Chỉ số FWCI của Đại học","dvt":"Chỉ số","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.09"]}];
+
+  var BAN_ORDER = ["Ban Tổ chức - Nhân sự","Ban Đào tạo","Ban Hợp tác đối ngoại","Ban Kế hoạch - Tài chính","Ban Cơ sở vật chất","Ban Hỗ trợ người học","Ban Khoa học, Công nghệ và Đổi mới sáng tạo"];
+  function banCuaThamSo(t){
+    var c = t.chu_tri || "";
+    for (var i=0;i<BAN_ORDER.length;i++){ if (c.indexOf(BAN_ORDER[i])===0) return BAN_ORDER[i]; }
+    return "Ban Khoa học, Công nghệ và Đổi mới sáng tạo";
+  }
+
+  var fmt = new Intl.NumberFormat("vi-VN");
+  function n(x){ return (x===null||x===undefined||isNaN(x)) ? "—" : fmt.format(x); }
+
+  // ---------- KPI ----------
+  var kpiGrid = document.getElementById("kpiGrid");
+  var totalCongbo=0, totalSangkien=0, totalNhomNC=0;
+  UNITS.forEach(function(u){ totalCongbo+=u.congbo; totalSangkien+=u.sangkien; totalNhomNC+=u.nhomNC; });
+  var kpis = [
+    {lbl:"Thu từ hoạt động KHCN&ĐMST · 2025", num:n(TOAN_TRUONG.thu2025)+" tr.đ", sub:"2024: "+n(TOAN_TRUONG.thu2024)+" tr.đ", delta:"+175% so với 2024", badge:"official"},
+    {lbl:"Công bố khoa học · toàn trường", num:n(totalCongbo), sub:"8 đơn vị · năm học 2025-2026", badge:"proxy"},
+    {lbl:"Sáng kiến cấp trên cơ sở", num:n(totalSangkien), sub:"đã công nhận · NH 2025-2026", badge:"proxy"},
+    {lbl:"Nhóm NC mạnh + tiềm năng", num:n(totalNhomNC), sub:"toàn trường · 2025", badge:"proxy"},
+    {lbl:"Sở hữu trí tuệ", num:n(TOAN_TRUONG.shtt), sub:"toàn trường, chưa tách đơn vị", badge:"proxy"},
+    {lbl:"Hợp đồng CGCN/dịch vụ", num:n(TOAN_TRUONG.cgcnSoHD), sub:n(TOAN_TRUONG.cgcnTien)+" triệu đồng", badge:"proxy"},
+    {lbl:"Nhiệm vụ cấp Bộ trở lên", num:n(TOAN_TRUONG.nvCapBoSL), sub:n(TOAN_TRUONG.nvCapBoTien)+" triệu đồng", badge:"proxy"},
+    {lbl:"Đề tài trọng điểm cấp ĐH", num:n(TOAN_TRUONG.deanTrongDiem), sub:"đợt 15/10/2025, toàn trường", badge:"proxy"}
+  ];
+  kpiGrid.innerHTML = kpis.map(function(k){
+    return '<div class="kpi"><div class="lbl">'+k.lbl+' <span class="badge '+k.badge+'" style="padding:1px 7px;font-size:10px;"><span class="dot"></span>'+(k.badge==='official'?'chính thức':'sơ bộ')+'</span></div>'+
+      '<div class="num mono">'+k.num+'</div><div class="sub">'+k.sub+'</div>'+
+      (k.delta?'<div class="delta up">▲ '+k.delta+'</div>':'')+'</div>';
+  }).join("");
+
+  // ---------- Multi-year line chart (built to keep growing) ----------
+  function lineChartSVG(cfg){
+    var W=560,H=190,padL=48,padR=30,padT=18,padB=28;
+    var numPts = cfg.years.length, slots = numPts+1;
+    var innerW=W-padL-padR, innerH=H-padT-padB;
+    var allVals=[]; cfg.series.forEach(function(s){allVals=allVals.concat(s.values);});
+    var maxV = Math.max.apply(null,allVals)*1.22; if(!(maxV>0)) maxV=1;
+    function xAt(i){ return padL + innerW*(i/(slots-1)); }
+    function yAt(v){ return padT + innerH - (v/maxV)*innerH; }
+    var svg = '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+    for (var g=0; g<=3; g++){
+      var gy = yAt(maxV/3*g);
+      svg += '<line x1="'+padL+'" y1="'+gy.toFixed(1)+'" x2="'+(W-padR)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+    }
+    cfg.series.forEach(function(s){
+      var pts = s.values.map(function(v,i){ return xAt(i).toFixed(1)+","+yAt(v).toFixed(1); });
+      svg += '<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+s.color+'" stroke-width="2.5"/>';
+      var lastX=xAt(numPts-1), lastY=yAt(s.values[numPts-1]);
+      var futX=xAt(numPts);
+      svg += '<line x1="'+lastX.toFixed(1)+'" y1="'+lastY.toFixed(1)+'" x2="'+futX.toFixed(1)+'" y2="'+lastY.toFixed(1)+'" stroke="'+s.color+'" stroke-width="2" stroke-dasharray="3,4" opacity="0.45"/>';
+      svg += '<circle cx="'+futX.toFixed(1)+'" cy="'+lastY.toFixed(1)+'" r="4" fill="none" stroke="'+s.color+'" stroke-width="1.5" stroke-dasharray="2,2"/>';
+      s.values.forEach(function(v,i){
+        svg += '<circle cx="'+xAt(i).toFixed(1)+'" cy="'+yAt(v).toFixed(1)+'" r="4" fill="'+s.color+'"/>';
+      });
+    });
+    // Value labels: computed per x-index so close points never overlap (min 13px vertical gap)
+    for (var i=0; i<numPts; i++){
+      var labels = cfg.series.map(function(s){ return {y: yAt(s.values[i])-10, text:n(s.values[i]), color:s.color}; });
+      labels.sort(function(a,b){ return a.y-b.y; });
+      for (var k=1; k<labels.length; k++){
+        if (labels[k].y - labels[k-1].y < 13) labels[k].y = labels[k-1].y + 13;
+      }
+      labels.forEach(function(lb){
+        svg += '<text x="'+xAt(i).toFixed(1)+'" y="'+lb.y.toFixed(1)+'" text-anchor="middle" class="lc-value-label" style="fill:'+lb.color+'">'+lb.text+'</text>';
+      });
+    }
+    cfg.years.forEach(function(y,i){
+      svg += '<text x="'+xAt(i).toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle" class="lc-axis-label">'+y+'</text>';
+    });
+    svg += '<text x="'+xAt(numPts).toFixed(1)+'" y="'+(H-6)+'" text-anchor="middle" class="lc-future-label">kỳ tới</text>';
+    svg += '</svg>';
+    return svg;
+  }
+
+  var trendGrid = document.getElementById("trendGrid");
+
+  var card1 = document.createElement("div"); card1.className="linechart-card";
+  card1.innerHTML = '<span class="badge official" style="margin-bottom:8px;"><span class="dot"></span>Chính thức · mốc 31/12</span>'+
+    '<h3>Thu từ hoạt động KHCN&ĐMST</h3>'+
+    '<div class="stat-line">Toàn trường · triệu đồng · tăng <b style="color:var(--teal)">+175%</b> từ 2024 sang 2025</div>'+
+    lineChartSVG({years:THU_SERIES.nhan, series:[{label:"Thu KHCN", color:"var(--teal)", values:THU_SERIES.gia_tri}]});
+  trendGrid.appendChild(card1);
+
+  // ---------- Thống kê công bố khoa học (bar chart nhóm + bảng chi tiết) ----------
+  function groupedBarSVG(cfg){
+    // cfg: {cats:[...], series:[{label,color,values}]}
+    var W=520,H=210,padL=44,padR=16,padT=16,padB=30;
+    var innerW=W-padL-padR, innerH=H-padT-padB;
+    var nCat=cfg.cats.length, nSer=cfg.series.length;
+    var allVals=[]; cfg.series.forEach(function(s){allVals=allVals.concat(s.values);});
+    var maxV=Math.max.apply(null,allVals)*1.18; if(!(maxV>0)) maxV=1;
+    var groupW = innerW/nCat;
+    var barW = Math.min(34, groupW/nSer*0.7);
+    var gap = 6;
+    function yAt(v){ return padT+innerH-(v/maxV)*innerH; }
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+    for (var g=0; g<=3; g++){
+      var gy=yAt(maxV/3*g);
+      svg+='<line x1="'+padL+'" y1="'+gy.toFixed(1)+'" x2="'+(W-padR)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';
+    }
+    for (var c=0; c<nCat; c++){
+      var groupCenter = padL + groupW*(c+0.5);
+      var totalBarsW = nSer*barW + (nSer-1)*gap;
+      var startX = groupCenter - totalBarsW/2;
+      for (var s=0; s<nSer; s++){
+        var v = cfg.series[s].values[c];
+        var bx = startX + s*(barW+gap);
+        var by = yAt(v);
+        var bh = (padT+innerH) - by;
+        svg += '<rect x="'+bx.toFixed(1)+'" y="'+by.toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="3" fill="'+cfg.series[s].color+'"/>';
+        svg += '<text x="'+(bx+barW/2).toFixed(1)+'" y="'+(by-6).toFixed(1)+'" text-anchor="middle" class="lc-value-label" style="fill:'+cfg.series[s].color+'">'+n(v)+'</text>';
+      }
+      svg += '<text x="'+groupCenter.toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" class="lc-axis-label">'+cfg.cats[c]+'</text>';
+    }
+    svg+='</svg>';
+    return svg;
+  }
+  document.getElementById("congboBarCard").innerHTML =
+    '<span class="badge proxy" style="margin-bottom:8px;"><span class="dot"></span>Sơ bộ · năm học</span>'+
+    '<h3>So sánh trong nước &amp; quốc tế theo năm</h3>'+
+    '<div class="stat-line">Biến động qua 3 năm học — chưa thành xu hướng ổn định</div>'+
+    groupedBarSVG({cats:CONGBO_SERIES.nhan, series:[
+      {label:"Trong nước", color:"var(--accent)", values:CONGBO_SERIES.trongNuoc},
+      {label:"Quốc tế WoS/Scopus", color:"var(--teal)", values:CONGBO_SERIES.quocTe}
+    ]})+
+    '<div class="legend"><span><i style="background:var(--accent)"></i>Trong nước</span><span><i style="background:var(--teal)"></i>Quốc tế WoS/Scopus</span></div>';
+
+  var congboRows = CONGBO_SERIES.nhan.map(function(y,i){
+    var tn=CONGBO_SERIES.trongNuoc[i], qt=CONGBO_SERIES.quocTe[i], tong=tn+qt;
+    return '<tr><td>'+y+'</td><td class="num mono">'+n(tn)+'</td><td class="num mono">'+n(qt)+'</td>'+
+      '<td class="num mono">'+n(tong)+'</td><td class="num mono">'+Math.round(qt/tong*1000)/10+'%</td></tr>';
+  });
+  var tongTN = CONGBO_SERIES.trongNuoc.reduce(function(a,b){return a+b;},0);
+  var tongQT = CONGBO_SERIES.quocTe.reduce(function(a,b){return a+b;},0);
+  var tongAll = tongTN+tongQT;
+  congboRows.push('<tr style="font-weight:700;"><td>Cộng 3 năm</td><td class="num mono">'+n(tongTN)+'</td><td class="num mono">'+n(tongQT)+'</td><td class="num mono">'+n(tongAll)+'</td><td class="num mono">'+Math.round(tongQT/tongAll*1000)/10+'%</td></tr>');
+  document.getElementById("congboTable").innerHTML =
+    '<thead><tr><th>Năm học</th><th style="text-align:right">Trong nước</th><th style="text-align:right">Quốc tế WoS/Scopus</th><th style="text-align:right">Tổng</th><th style="text-align:right">% Quốc tế</th></tr></thead>'+
+    '<tbody>'+congboRows.join("")+'</tbody>';
+
+  // ---------- NQ57 ----------
+  document.getElementById("nq57Grid").innerHTML = NQ57_TARGETS.map(function(t){
+    return '<div class="nq57-card"><div class="target"><b>'+t.ten+'</b><br>Mục tiêu quốc gia đến 2030: '+t.muctieu+'</div>'+
+      '<div class="haui"><span class="val">'+t.tieuchi+'</span> — '+t.haui+'</div></div>';
+  }).join("");
+
+  // ---------- Bảng xếp hạng thang điểm 1.000 (CHÍNH THỨC, công thức Phụ lục II) ----------
+  // Mức chung cho công thức ngưỡng dạng "0 / 1 / 2 / 3 / ≥4" (KHCN.07.03, 07.04)
+  function mucNguong0134(x){ if(x<=0) return 1; if(x===1) return 2; if(x===2) return 3; if(x===3) return 4; return 5; }
+  function diem(muc){ return (muc-1)/4; }
+
+  // Trọng số gốc theo Phụ lục I/II
+  var W1_GOC = {KHCN07: 0.10, KHCN08: 0.05};
+  var W2_GOC = {"07.03": 0.5, "07.04": 0.2, "08.02": 0.4};
+  // Chỉ 07.03+07.04 có dữ liệu trong nhóm 07 (tổng w2 gốc 0.7) → chuẩn hoá lại còn 2 tiêu chí này = 1.0
+  var W2_NORM_07 = { "07.03": W2_GOC["07.03"]/(W2_GOC["07.03"]+W2_GOC["07.04"]), "07.04": W2_GOC["07.04"]/(W2_GOC["07.03"]+W2_GOC["07.04"]) };
+  // Chỉ 08.02 có dữ liệu trong nhóm 08 → nhận trọn 1.0
+  var W2_NORM_08 = { "08.02": 1.0 };
+  // Chỉ 2 nhóm KHCN.07/08 có dữ liệu trong toàn bộ 10 nhóm cấp 1 → chuẩn hoá lại w1
+  var W1_NORM = { KHCN07: W1_GOC.KHCN07/(W1_GOC.KHCN07+W1_GOC.KHCN08), KHCN08: W1_GOC.KHCN08/(W1_GOC.KHCN07+W1_GOC.KHCN08) };
+
+  function officialScore(u){
+    var m0703 = mucNguong0134(u.nhomManh);
+    var m0704 = mucNguong0134(u.nhomTiemNang);
+    var m0802 = mucSangKien(u.sangkien);
+    var diemNhom07 = W2_NORM_07["07.03"]*diem(m0703) + W2_NORM_07["07.04"]*diem(m0704);
+    var diemNhom08 = W2_NORM_08["08.02"]*diem(m0802);
+    var S = 1000 * (W1_NORM.KHCN07*diemNhom07 + W1_NORM.KHCN08*diemNhom08);
+    return {S:S, m0703:m0703, m0704:m0704, m0802:m0802};
+  }
+
+  var officialRanked = UNITS.map(function(u){ return Object.assign({}, u, {score: officialScore(u)}); })
+    .sort(function(a,b){ return b.score.S - a.score.S; });
+  document.getElementById("officialRankingTable").innerHTML =
+    '<table class="score-table"><thead><tr><th>#</th><th>Đơn vị</th>'+
+    '<th style="text-align:center">KHCN.07.03<br><span style="font-weight:400;font-size:11px;">nhóm mạnh</span></th>'+
+    '<th style="text-align:center">KHCN.07.04<br><span style="font-weight:400;font-size:11px;">nhóm tiềm năng</span></th>'+
+    '<th style="text-align:center">KHCN.08.02<br><span style="font-weight:400;font-size:11px;">sáng kiến</span></th>'+
+    '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000 (tạm tính)</span></th></tr></thead><tbody>'+
+    officialRanked.map(function(u,i){
+      return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+'</td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0703+'">'+u.score.m0703+'</span></td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0704+'">'+u.score.m0704+'</span></td>'+
+        '<td style="text-align:center"><span class="mucbadge m'+u.score.m0802+'">'+u.score.m0802+'</span></td>'+
+        '<td class="num mono" style="font-weight:700;">'+u.score.S.toFixed(1)+'</td></tr>';
+    }).join("")+'</tbody></table>';
+
+  // ---------- Ranking (chỉ số hoạt động tổng hợp, KHÔNG phải điểm chính thức) ----------
+  var RANK_W = {congbo:0.30, sangkien:0.25, nhomNC:0.20, deanSL:0.15, hoithao:0.10};
+  var rankMax = {};
+  METRICS.forEach(function(m){ rankMax[m.key] = Math.max.apply(null, UNITS.map(function(u){return u[m.key];})) || 1; });
+  var ranked = UNITS.map(function(u){
+    var idx = 0;
+    Object.keys(RANK_W).forEach(function(k){ idx += (u[k]/rankMax[k]) * RANK_W[k]; });
+    return Object.assign({}, u, {idx: idx});
+  }).sort(function(a,b){ return b.idx-a.idx; });
+  var maxIdx = ranked[0].idx || 1;
+  var q = Math.ceil(ranked.length/4);
+  var MUC_LABEL = ["Dẫn đầu","Khá nổi bật","Trung bình","Mới bắt đầu"];
+  var MEDAL = ["①","②","③"];
+  document.getElementById("rankingTable").innerHTML =
+    '<div class="rank-list">'+ranked.map(function(u,i){
+      var quartile = Math.min(3, Math.floor(i/q));
+      var pct = Math.round(u.idx/maxIdx*100);
+      return '<div class="rank-row"><div class="rank-medal">'+(MEDAL[i]||(i+1))+'</div>'+
+        '<div><div class="name">'+u.ten+'</div><div class="khoi">'+(u.khoi==="a"?"Kỹ thuật, công nghệ và tự nhiên":"Khoa học xã hội và nhân văn")+'</div></div>'+
+        '<div><div class="idx-bar"><div class="idx-fill" style="width:'+pct+'%"></div></div><div class="idx-num">chỉ số '+u.idx.toFixed(2)+'</div></div>'+
+        '<div class="badge '+(quartile===0?"official":quartile===3?"warn":"proxy")+'" style="justify-self:end;">'+MUC_LABEL[quartile]+'</div></div>';
+    }).join("")+'</div>';
+
+  // ---------- Compare tabs ----------
+  var tabsEl = document.getElementById("metricTabs");
+  var panelsEl = document.getElementById("metricPanels");
+  METRICS.forEach(function(m,i){
+    var tab = document.createElement("div");
+    tab.className = "metric-tab"+(i===0?" active":"");
+    tab.textContent = m.label;
+    tab.onclick = function(){
+      document.querySelectorAll(".metric-tab").forEach(function(t){t.classList.remove("active");});
+      document.querySelectorAll(".metric-panel").forEach(function(p){p.classList.remove("active");});
+      tab.classList.add("active");
+      document.getElementById("panel-"+m.key).classList.add("active");
+    };
+    tabsEl.appendChild(tab);
+
+    var sorted = UNITS.slice().sort(function(a,b){ return b[m.key]-a[m.key]; });
+    var max = Math.max.apply(null, sorted.map(function(u){return u[m.key];})) || 1;
+    var panel = document.createElement("div");
+    panel.className = "metric-panel"+(i===0?" active":"");
+    panel.id = "panel-"+m.key;
+    var chart = document.createElement("div"); chart.className="barchart";
+    sorted.forEach(function(u,idx){
+      var row = document.createElement("div");
+      row.className = "barrow"+(u.khoi==="b"?" khoi-b":"");
+      var pct = Math.round(u[m.key]/max*100);
+      var extra = (m.key==="deanSL" && u.deanKP) ? " · "+n(u.deanKP)+" tr.đ" : "";
+      row.innerHTML = '<div class="name"><span class="rank-badge">'+(idx+1)+'</span>'+u.ten+'</div>'+
+        '<div class="track"><div class="fill" style="width:'+pct+'%"></div></div>'+
+        '<div class="val mono">'+n(u[m.key])+extra+'</div>';
+      chart.appendChild(row);
+    });
+    panel.appendChild(chart);
+    panelsEl.appendChild(panel);
+  });
+
+  // ---------- Heatmap ----------
+  var hm = document.getElementById("heatmapWrap");
+  var maxByMetric = {};
+  METRICS.forEach(function(m){ maxByMetric[m.key] = Math.max.apply(null, UNITS.map(function(u){return u[m.key];})) || 1; });
+  function heatColor(pct){
+    // interpolate paper-raised -> accent
+    var a = Math.round(20 + pct*0.65);
+    return "background:color-mix(in srgb, var(--accent) "+a+"%, var(--paper-raised));";
+  }
+  var html = '<table><thead><tr><th>Đơn vị</th>';
+  METRICS.forEach(function(m){ html += '<th>'+m.label+'</th>'; });
+  html += '</tr></thead><tbody>';
+  UNITS.forEach(function(u){
+    html += '<tr><td>'+u.ten+'</td>';
+    METRICS.forEach(function(m){
+      var pct = Math.round(u[m.key]/maxByMetric[m.key]*100);
+      html += '<td class="heatcell" style="'+heatColor(pct)+'">'+n(u[m.key])+'</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  hm.innerHTML = html;
+
+  // ---------- Score demo (KHCN.08.02) ----------
+  document.getElementById("scoreFormula").textContent =
+    "muc(x): 0→1  |  1→2  |  2→3  |  3→4  |  ≥4→5\nS = 1.000 × w1 × w2 × ((muc − 1) / 4)   [w1=0,05  w2=0,4]";
+  function mucSangKien(x){
+    if (x<=0) return 1; if (x===1) return 2; if (x===2) return 3; if (x===3) return 4; return 5;
+  }
+  var sbody = document.getElementById("scoreBody");
+  UNITS.slice().sort(function(a,b){return b.sangkien-a.sangkien;}).forEach(function(u){
+    var muc = mucSangKien(u.sangkien);
+    var S = Math.round(1000*0.05*0.4*((muc-1)/4)*10)/10;
+    sbody.innerHTML += '<tr><td>'+u.ten+'</td><td class="num mono">'+u.sangkien+'</td>'+
+      '<td><span class="mucbadge m'+muc+'">'+muc+'</span></td><td class="num mono">'+S.toFixed(1)+'</td></tr>';
+  });
+
+  // ---------- Readiness ----------
+  var rg = document.getElementById("readinessGrid");
+  var STAT_LABEL = {none:"Chưa có dữ liệu", partial:"Có một phần", demo:"Có minh hoạ chấm điểm"};
+  var STAT_BADGE = {none:"warn", partial:"proxy", demo:"official"};
+  rg.innerHTML = NHOM_CAP1.map(function(g){
+    return '<div class="readiness-item"><div class="ma">'+g.ma+' · w1='+g.w1.toFixed(2)+'</div>'+
+      '<div class="ten">'+g.ten+'</div>'+
+      '<div class="stat"><span class="badge '+STAT_BADGE[g.trangthai]+'"><span class="dot"></span>'+STAT_LABEL[g.trangthai]+'</span></div>'+
+      '<div style="font-size:12px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">'+g.ghichu+'</div></div>';
+  }).join("");
+
+  // ---------- Caveats ----------
+  document.getElementById("caveatList").innerHTML = CAVEATS.map(function(c,i){
+    return '<div class="caveat"><div class="n">'+String(i+1).padStart(2,"0")+'</div><div class="t">'+c+'</div></div>';
+  }).join("");
+
+  // ---------- Edit panel (grouped by Ban) ----------
+  var groups = {};
+  THAM_SO.forEach(function(t){ var b=banCuaThamSo(t); (groups[b]=groups[b]||[]).push(t); });
+  var banGroupsEl = document.getElementById("banGroups");
+  var inputRefs = {}; // unitId -> tt -> input el
+
+  BAN_ORDER.forEach(function(ban){
+    var items = groups[ban]; if(!items) return;
+    var det = document.createElement("details");
+    det.className = "ban-group";
+    var summary = document.createElement("summary");
+    summary.innerHTML = '<span>'+ban+' <span style="color:var(--ink-faint);font-weight:400;">('+items.length+' tham số)</span></span><span class="chev">›</span>';
+    det.appendChild(summary);
+    var wrap = document.createElement("div"); wrap.className="edit-table-wrap";
+    var table = document.createElement("table"); table.className="edit-table";
+    var thead = "<thead><tr><th>Tham số</th>";
+    UNITS.forEach(function(u){ thead += "<th>"+u.ten.replace("Trường ","").replace("Khoa ","")+"</th>"; });
+    thead += "</tr></thead>";
+    var tbody = "<tbody>";
+    items.forEach(function(t){
+      tbody += '<tr><td>'+t.tt+'. '+t.ten+' <span style="color:var(--ink-faint)">('+t.dvt+')</span></td>';
+      UNITS.forEach(function(u){
+        tbody += '<td><input type="number" step="any" data-unit="'+u.id+'" data-tt="'+t.tt+'"><span class="save-flash">✓</span></td>';
+      });
+      tbody += '</tr>';
+    });
+    tbody += "</tbody>";
+    table.innerHTML = thead+tbody;
+    wrap.appendChild(table);
+    det.appendChild(wrap);
+    banGroupsEl.appendChild(det);
+  });
+
+  // ---------- DB wiring ----------
+  var dbStatusEl = document.getElementById("dbStatus");
+  var dbRef = null;
+
+  function slugName(u){ return u.ten; }
+
+  function applyDocToInputs(unitId, data){
+    if (!data || !data.tham_so) return;
+    document.querySelectorAll('input[data-unit="'+unitId+'"]').forEach(function(inp){
+      var tt = inp.getAttribute("data-tt");
+      if (data.tham_so[tt]!==undefined && data.tham_so[tt]!==null && document.activeElement!==inp){
+        inp.value = data.tham_so[tt];
+      }
+    });
+  }
+
+  document.addEventListener("blur", function(e){
+    var el = e.target;
+    if (!el.matches || !el.matches('input[data-unit][data-tt]')) return;
+    var unitId = el.getAttribute("data-unit");
+    var tt = el.getAttribute("data-tt");
+    var val = el.value === "" ? null : Number(el.value);
+    var flash = el.nextElementSibling;
+    if (!dbRef){ return; }
+    var patch = { tham_so: {} };
+    patch.tham_so[tt] = val;
+    dbRef.collection("don_vi").doc(unitId).update(patch).catch(function(err){
+      if (err && err.code === "invalid_argument"){
+        // doc chưa tồn tại — tạo mới với đầy đủ tên đơn vị + tham số vừa sửa
+        var unitMeta = UNITS.filter(function(u){return u.id===unitId;})[0] || {};
+        dbRef.collection("don_vi").doc(unitId).set({ ten: unitMeta.ten, tham_so: patch.tham_so }).catch(function(){});
+      }
+    });
+    if (flash){ flash.classList.add("show"); setTimeout(function(){flash.classList.remove("show");}, 1200); }
+  }, true);
+
+  (async function initDb(){
+    try{
+      if (!window.claude || !window.claude.use){ dbStatusEl.textContent = "Chỉnh sửa ở đây cần mở trang trong Claude — hiện chưa kết nối được cơ sở dữ liệu, số liệu hiển thị phía trên vẫn là số liệu đã đối soát gần nhất."; return; }
+      dbRef = await window.claude.use("db");
+      if (!dbRef){ dbStatusEl.textContent = "Không dùng được cơ sở dữ liệu trong chế độ xem này — số liệu hiển thị phía trên là số liệu đã đối soát gần nhất, chưa chỉnh sửa được ở đây."; return; }
+      dbStatusEl.textContent = "Đã kết nối — sửa số liệu, tự lưu khi rời khỏi ô.";
+      UNITS.forEach(function(u){
+        dbRef.collection("don_vi").doc(u.id).onSnapshot(function(snap){
+          if (snap.exists) applyDocToInputs(u.id, snap.data());
+        }, function(){});
+      });
+    }catch(e){
+      dbStatusEl.textContent = "Không kết nối được cơ sở dữ liệu — số liệu hiển thị phía trên là số liệu đã đối soát gần nhất.";
+    }
+  })();
+
+})();
+</script>
+
+</body></html>
