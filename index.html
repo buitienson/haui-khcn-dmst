@@ -110,7 +110,7 @@
   /* ---------- Hero ---------- */
   header.hero{padding:64px 0 48px; border-bottom:1px solid var(--line);}
   header.hero .eyebrow{margin-bottom:14px; display:block;}
-  header.hero h1{font-size:clamp(30px,4.2vw,48px); font-weight:600; max-width:16ch;}
+  header.hero h1{font-size:clamp(30px,4.2vw,48px); font-weight:600; max-width:min(26ch,100%);}
   header.hero p.lede{max-width:62ch; color:var(--ink-dim); font-size:17px; margin-top:16px;}
   .status-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
 
@@ -255,6 +255,7 @@
   @media (max-width:640px){
     .barrow{grid-template-columns:120px 1fr 50px;}
     table.edit-table td:first-child, table.edit-table th:first-child{min-width:150px;}
+    header.hero h1{max-width:none;}
   }
 </style>
 
@@ -358,7 +359,7 @@
     <div class="section-head">
       <div>
         <h2>So sánh 8 đơn vị</h2>
-        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — chưa quy đổi thành điểm 0-1.000 vì còn thiếu mẫu số nhân sự. Màu cột phân theo khối ngành.</div>
+        <div class="desc">Số liệu hoạt động thực tế (sơ bộ, năm học 2025-2026) — số thô để so sánh nhanh, không phải điểm 0-1.000. Nhóm nghiên cứu và sáng kiến đã có điểm chính thức ở bảng trên; công bố, đề án, hội thảo còn chờ chuẩn hoá theo mẫu số nhân sự (N_TVC — đang đối chiếu 2 nguồn số liệu, chưa chốt). Màu cột phân theo khối ngành.</div>
       </div>
     </div>
     <div class="metric-tabs" id="metricTabs"></div>
