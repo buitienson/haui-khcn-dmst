@@ -110,8 +110,8 @@
   /* ---------- Hero ---------- */
   header.hero{padding:64px 0 48px; border-bottom:1px solid var(--line);}
   header.hero .eyebrow{margin-bottom:14px; display:block;}
-  header.hero h1{font-size:clamp(28px,3.2vw,38px); font-weight:600; max-width:44ch;}
-  header.hero p.lede{max-width:62ch; color:var(--ink-dim); font-size:17px; margin-top:16px;}
+  header.hero h1{font-size:clamp(28px,3.2vw,38px); font-weight:600; max-width:none;}
+  header.hero p.lede{max-width:none; color:var(--ink-dim); font-size:17px; margin-top:16px;}
   .status-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
 
   /* ---------- Sections ---------- */
@@ -119,7 +119,7 @@
   section:last-of-type{border-bottom:none;}
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:28px; flex-wrap:wrap;}
   .section-head h2{font-size:26px; font-weight:600;}
-  .section-head .desc{color:var(--ink-dim); font-size:14px; max-width:56ch; margin-top:6px;}
+  .section-head .desc{color:var(--ink-dim); font-size:14px; max-width:none; margin-top:6px;}
 
   /* ---------- KPI grid ---------- */
   .kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
@@ -154,7 +154,7 @@
   @media (max-width:800px){ .congbo-stats-grid{grid-template-columns:1fr;} }
 
   /* ---------- NQ57 grid ---------- */
-  .nq57-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  .nq57-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
   .nq57-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
   .nq57-card .target{font-size:12.5px; color:var(--ink-dim); line-height:1.4;}
   .nq57-card .target b{color:var(--ink); font-family:"IBM Plex Mono",monospace;}
@@ -246,6 +246,7 @@
 
   @media (max-width:900px){
     .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .nq57-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:640px){
     .barrow{grid-template-columns:120px 1fr 50px;}
@@ -253,6 +254,7 @@
     header.hero h1{max-width:none;}
     .rank-row{grid-template-columns:24px 1fr 90px 52px; gap:8px; padding:10px 12px;}
     .kpi-grid{grid-template-columns:1fr;}
+    .nq57-grid{grid-template-columns:1fr;}
   }
 </style>
 
@@ -279,6 +281,31 @@
       </div>
     </div>
     <div class="kpi-grid" id="kpiGrid"></div>
+  </div>
+</section>
+
+<section id="official-ranking">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Bảng xếp hạng thang điểm 1.000 <span class="badge official" style="vertical-align:middle;"><span class="dot"></span>Công thức chính thức</span></h2>
+        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>3/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.05 — Công bố khoa học; KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 9 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 9 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
+      </div>
+    </div>
+    <div id="officialRankingTable"></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Nhóm KHCN.05 tính trên KHCN.05.01 (bài trong nước) + 05.02 (báo cáo trong nước ISBN) + 05.03 (bài WoS/Scopus quy đổi/giảng viên — Q1 top 2%/2-5% tính hệ số 4, Q1 còn lại 3, Q2=2, Q3=1,5, Q4=1; "WoS/Scopus chưa xếp hạng" tạm gộp vào Q4, GIẢ ĐỊNH chưa xác nhận), chưa gồm 05.04 (thiếu dữ liệu hạng hội thảo CORE A*/A/B/C) và 05.05 (thiếu số liệu trích dẫn). Một số bài/báo cáo (quốc tế không xếp hạng WoS/Scopus, "chưa phân loại"...) không xếp được vào 4 mục trên nên bị loại khỏi tính điểm — xem mục thống kê chi tiết bên dưới. Mẫu số giảng viên (NTGV) của 05.03 lấy đúng theo đơn vị sinh hoạt chuyên môn (báo cáo "Công nhận công trình NCKH theo đơn vị SHCM", 08.9.2026), và ngưỡng mức 1-5 của 05.03 trong Phụ lục II tự ghi chú chỉ tính từ 8 quan sát (1 năm) — điểm nhóm 05 có thể còn thay đổi khi có thêm số liệu nhiều năm. Nhóm KHCN.07 tính trên KHCN.07.03 (nhóm nghiên cứu mạnh) + KHCN.07.04 (nhóm nghiên cứu tiềm năng), chưa gồm KHCN.07.01/07.02/07.05 (chưa có số liệu). Nhóm KHCN.08 tính trên KHCN.08.02 (sáng kiến cấp trên cơ sở, số liệu sơ bộ), chưa gồm KHCN.08.01/08.03/08.04. Số liệu nhóm nghiên cứu 2025 chưa gồm 1 nhóm vừa quy đổi lại từ Viện Công nghệ (chưa xác nhận về đơn vị nào) — xem Excel đối soát trên Drive.</p>
+  </div>
+</section>
+
+<section id="ranking">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Xếp hạng hoạt động 8 đơn vị</h2>
+        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, dùng số công bố GỘP (chưa tách hạng) khác với điểm KHCN.05 chính thức ở bảng trên, và còn 2 chỉ số (đề án, hội thảo) chưa tính được điểm chính thức. <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
+      </div>
+    </div>
+    <div id="rankingTable"></div>
   </div>
 </section>
 
@@ -322,9 +349,9 @@
     <div class="section-head">
       <div>
         <h2>Nhiệm vụ KHCN&amp;ĐMST theo cấp (2024-2025)</h2>
-        <div class="desc">Trích từ phiếu khảo sát Bộ Công Thương "T01_PhieuDuLieu_2021_2025" — 359 đề tài riêng lẻ toàn trường, đã suy đơn vị theo chủ nhiệm (93% khớp với roster). Đếm theo năm BẮT ĐẦU đề tài; cấp Tỉnh/thành phố tính tương đương cấp Bộ theo xác nhận 08.9.2026.</div>
+        <div class="desc">Tổng hợp từ phiếu khảo sát Bộ Công Thương "T01_PhieuDuLieu_2021_2025", theo 8 đơn vị. Cấp Tỉnh/thành phố tính tương đương cấp Bộ.</div>
       </div>
-      <span class="badge proxy"><span class="dot"></span>Sơ bộ, mới đào 08.9</span>
+      <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
     </div>
     <div style="overflow-x:auto;"><table class="score-table" id="nhiemVuTable"></table></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Cấp cơ sở = KHCN.02.01, cấp Bộ (gồm cả cấp Tỉnh/Sở KH&amp;CN) = KHCN.02.02. Không đề tài nào trong 359 đề tài ghi cấp Quốc gia/NAFOSTED, nên KHCN.02.03 = 0 toàn bộ 8 đơn vị cả 2 năm. Kinh phí (KHCN.06.01) là tổng kinh phí cả vòng đời đề tài nhóm cấp Bộ, gán vào năm bắt đầu — chưa tách theo năm giải ngân thực tế. Tỷ lệ nghiệm thu đúng hạn (KHCN.02.04/02.05) CHƯA có — nguồn không ghi ngày nghiệm thu gốc để so hạn.</p>
@@ -341,32 +368,6 @@
     </div>
     <div class="nq57-grid" id="nq57Grid"></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:16px;">Nguồn mục tiêu quốc gia: Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị "Về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia". Các chỉ tiêu quốc gia (TFP, kinh tế số, R&amp;D/GDP) đo ở cấp toàn nền kinh tế, không có số tương ứng trực tiếp ở cấp một trường đại học — nêu ở đây để định vị mức độ đóng góp, không phải để so sánh trực tiếp.</p>
-  </div>
-</section>
-
-<section id="official-ranking">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Bảng xếp hạng thang điểm 1.000</h2>
-        <div class="desc">Điểm CHÍNH THỨC theo đúng công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>3/12 nhóm tiêu chí hiện đã đủ dữ liệu</b> (KHCN.05 — Công bố khoa học; KHCN.07 — Tiềm lực; KHCN.08 — Sáng kiến). 9 nhóm còn lại LOẠI khỏi phép tính do chưa có số liệu, trọng số w1/w2 đã CHUẨN HOÁ LẠI trong phạm vi này — đúng cơ chế Điều 6 khoản 2 khi tiêu chí "dữ liệu không thu thập được". Điểm sẽ đổi nhiều khi có đủ 9 nhóm còn lại — đọc như một lát cắt tạm, không phải kết quả cuối.</div>
-      </div>
-      <span class="badge official"><span class="dot"></span>Công thức chính thức</span>
-    </div>
-    <div id="officialRankingTable"></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Nhóm KHCN.05 tính trên KHCN.05.01 (bài trong nước) + 05.02 (báo cáo trong nước ISBN) + 05.03 (bài WoS/Scopus quy đổi/giảng viên — Q1 top 2%/2-5% tính hệ số 4, Q1 còn lại 3, Q2=2, Q3=1,5, Q4=1; "WoS/Scopus chưa xếp hạng" tạm gộp vào Q4, GIẢ ĐỊNH chưa xác nhận), chưa gồm 05.04 (thiếu dữ liệu hạng hội thảo CORE A*/A/B/C) và 05.05 (thiếu số liệu trích dẫn). Một số bài/báo cáo (quốc tế không xếp hạng WoS/Scopus, "chưa phân loại"...) không xếp được vào 4 mục trên nên bị loại khỏi tính điểm — xem mục thống kê chi tiết bên dưới. Mẫu số giảng viên (NTGV) của 05.03 lấy đúng theo đơn vị sinh hoạt chuyên môn (báo cáo "Công nhận công trình NCKH theo đơn vị SHCM", 08.9.2026), và ngưỡng mức 1-5 của 05.03 trong Phụ lục II tự ghi chú chỉ tính từ 8 quan sát (1 năm) — điểm nhóm 05 có thể còn thay đổi khi có thêm số liệu nhiều năm. Nhóm KHCN.07 tính trên KHCN.07.03 (nhóm nghiên cứu mạnh) + KHCN.07.04 (nhóm nghiên cứu tiềm năng), chưa gồm KHCN.07.01/07.02/07.05 (chưa có số liệu). Nhóm KHCN.08 tính trên KHCN.08.02 (sáng kiến cấp trên cơ sở, số liệu sơ bộ), chưa gồm KHCN.08.01/08.03/08.04. Số liệu nhóm nghiên cứu 2025 chưa gồm 1 nhóm vừa quy đổi lại từ Viện Công nghệ (chưa xác nhận về đơn vị nào) — xem Excel đối soát trên Drive.</p>
-  </div>
-</section>
-
-<section id="ranking">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Xếp hạng hoạt động 8 đơn vị</h2>
-        <div class="desc">Chỉ số hoạt động tổng hợp (phụ, tham khảo) — chuẩn hoá và cộng có trọng số 5 chỉ số sơ bộ hiện có, dùng số công bố GỘP (chưa tách hạng) khác với điểm KHCN.05 chính thức ở bảng trên, và còn 2 chỉ số (đề án, hội thảo) chưa tính được điểm chính thức. <b>KHÔNG dùng công thức Phụ lục II</b> — chỉ để nhìn nhanh hoạt động tổng thể trong lúc chờ đủ dữ liệu cho bảng thang 1.000. Mức xếp loại chia theo tứ phân vị trong chính 8 đơn vị này.</div>
-      </div>
-    </div>
-    <div id="rankingTable"></div>
   </div>
 </section>
 
@@ -426,7 +427,7 @@
 
 <footer>
   <div class="wrap">
-    Nguồn: đối soát nội bộ từ dữ liệu Google Drive InnovationOffice (kê khai công trình khoa học 2025-2026, biểu TC-NS, sổ liệu tổng hợp KHCN&amp;ĐMST…) và văn bản dự thảo "Bo tieu chi (ban sach) v42.docx". Cập nhật lần gần nhất: 07/9/2026.
+    Nguồn: đối soát nội bộ từ dữ liệu Google Drive InnovationOffice (kê khai công trình khoa học 2025-2026, biểu TC-NS, sổ liệu tổng hợp KHCN&amp;ĐMST…) và văn bản dự thảo "Bo tieu chi (ban sach) v42.docx". Cập nhật lần gần nhất: 08/9/2026.
   </div>
 </footer>
 
