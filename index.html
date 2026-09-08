@@ -81,7 +81,7 @@
   /* Flex/grid children default to min-width:auto and refuse to shrink below their content —
      this makes long Vietnamese unit names/sentences overflow their box instead of wrapping.
      Force them to respect the track/flex-basis instead. */
-  .kpi-grid > *, .rank-row > div, .readiness-grid > *, .nq57-grid > *, .congbo-stats-grid > *,
+  .kpi-grid > *, .rank-row > div, .nq57-grid > *, .congbo-stats-grid > *,
   .barrow > div, .section-head > div, .metric-panel, .caveat > div { min-width: 0; }
   h1,h2,h3,p,.desc,.lede,.lbl,.ten,.target,.haui,.t,.name,.stat-line { overflow-wrap: break-word; }
   body{
@@ -204,9 +204,7 @@
   .legend span{display:inline-flex; align-items:center; gap:6px;}
   .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
 
-  /* ---------- Score demo ---------- */
-  .score-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:24px; box-shadow:var(--shadow);}
-  .score-formula{font-family:"IBM Plex Mono",monospace; font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin:14px 0; color:var(--ink-dim); overflow-x:auto; white-space:pre;}
+  /* ---------- Score table (dung chung: congbo, xep hang chinh thuc) ---------- */
   .score-table{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:12px;}
   .score-table th, .score-table td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
   .score-table th{font-size:11.5px; text-transform:uppercase; letter-spacing:.02em; color:var(--ink-dim); font-weight:600;}
@@ -217,13 +215,6 @@
   .mucbadge.m3{background:var(--accent-soft); color:var(--accent-ink);}
   .mucbadge.m4{background:var(--teal-soft); color:var(--teal-ink); opacity:.8;}
   .mucbadge.m5{background:var(--teal-soft); color:var(--teal-ink);}
-
-  /* ---------- Readiness grid ---------- */
-  .readiness-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px;}
-  .readiness-item{border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--paper-raised);}
-  .readiness-item .ma{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-faint); font-weight:600;}
-  .readiness-item .ten{font-size:13.5px; font-weight:600; margin-top:4px; line-height:1.35;}
-  .readiness-item .stat{margin-top:10px;}
 
   /* ---------- Caveats ---------- */
   .caveat-list{display:flex; flex-direction:column; gap:0;}
@@ -385,42 +376,6 @@
   </div>
 </section>
 
-<section id="score-demo">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Minh hoạ cách tính điểm</h2>
-        <div class="desc">Công thức chấm điểm 57 tiêu chí đã dựng xong đúng theo Phụ lục II. Dưới đây là tiêu chí <b>duy nhất</b> có đủ dữ liệu tạm để chạy thử toàn bộ quy trình — từ giá trị đo → mức 1–5 → điểm chuẩn hoá.</div>
-      </div>
-      <span class="badge proxy"><span class="dot"></span>Ước tính minh hoạ</span>
-    </div>
-    <div class="score-card">
-      <div class="eyebrow" style="margin-bottom:6px;">KHCN.08.02</div>
-      <h3 style="font-size:19px;">Số lượng sáng kiến cấp trên cơ sở</h3>
-      <div class="score-formula" id="scoreFormula"></div>
-      <div style="overflow-x:auto;">
-      <table class="score-table">
-        <thead><tr><th>Đơn vị</th><th style="text-align:right">Số sáng kiến</th><th>Mức (1-5)</th><th style="text-align:right">Điểm chuẩn hoá S</th></tr></thead>
-        <tbody id="scoreBody"></tbody>
-      </table>
-      </div>
-      <p style="font-size:12.5px; color:var(--ink-faint); margin-top:14px;">* Dùng số liệu "sáng kiến cấp Đại học được công nhận" (số liệu sơ bộ NH 2025-2026) làm ước lượng cho "cấp trên cơ sở" — cần Ban KHCN&amp;ĐMST xác nhận đúng phạm vi trước khi dùng làm căn cứ chính thức. Công thức: S = 1.000 × w1 × w2 × ((mức−1)/4), w1=0,05, w2=0,4.</p>
-    </div>
-  </div>
-</section>
-
-<section id="readiness">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Bộ tiêu chí đã sẵn sàng đến đâu</h2>
-        <div class="desc">57 tiêu chí cấp 2, chia 12 nhóm cấp 1. Trạng thái dữ liệu hiện tại theo từng nhóm — phần lớn còn chờ số liệu nhân sự (Ban Tổ chức - Nhân sự) làm mẫu số.</div>
-      </div>
-    </div>
-    <div class="readiness-grid" id="readinessGrid"></div>
-  </div>
-</section>
-
 <section id="caveats">
   <div class="wrap">
     <div class="section-head">
@@ -506,21 +461,6 @@
     {key:"nhomNC", label:"Nhóm nghiên cứu mạnh + tiềm năng", unit:"nhóm"},
     {key:"deanSL", label:"Đề án trọng điểm cấp ĐH", unit:"đề án"},
     {key:"hoithao", label:"Hội thảo khoa học chủ trì", unit:"hội thảo"}
-  ];
-
-  var NHOM_CAP1 = [
-    {ma:"KHCN.01", ten:"Nhân lực KHCN&ĐMST", w1:0.10, trangthai:"none", ghichu:"Cần tổng số giảng viên/viên chức, tiến sĩ theo đơn vị (Ban Tổ chức - Nhân sự) — chưa có nguồn."},
-    {ma:"KHCN.02", ten:"Thực hiện nhiệm vụ KHCN&ĐMST", w1:0.10, trangthai:"none", ghichu:"Cần số nhiệm vụ cấp cơ sở/trên cơ sở theo đơn vị — chưa tách được theo đơn vị."},
-    {ma:"KHCN.03", ten:"Hợp tác về KHCN&ĐMST", w1:0.09, trangthai:"none", ghichu:"Dữ liệu đoàn ra/vào chỉ có đến 2018-2021, chưa có 2024-2025 theo đơn vị."},
-    {ma:"KHCN.04", ten:"Sở hữu trí tuệ", w1:0.09, trangthai:"partial", ghichu:"Có 19 kết quả SHTT toàn trường (NH25-26) nhưng chưa tách theo đơn vị."},
-    {ma:"KHCN.05", ten:"Công bố khoa học", w1:0.10, trangthai:"partial", ghichu:"Có tổng số công trình theo đơn vị (số liệu sơ bộ, gộp mọi loại) và đã có số giảng viên theo đơn vị sinh hoạt chuyên môn làm mẫu số — còn thiếu tách đúng theo hạng KHCN.05.01-05.04."},
-    {ma:"KHCN.06", ten:"Thu từ hoạt động KHCN&ĐMST", w1:0.20, trangthai:"partial", ghichu:"Có số CHÍNH THỨC toàn trường (2024: 41,1 tỷ; 2025: 113,3 tỷ) nhưng chưa tách theo đơn vị."},
-    {ma:"KHCN.07", ten:"Tiềm lực KHCN&ĐMST", w1:0.10, trangthai:"partial", ghichu:"Có số nhóm NC mạnh+tiềm năng theo đơn vị (gộp, sơ bộ) — chưa tách riêng mạnh/tiềm năng nên chưa chấm được KHCN.07.03/07.04 riêng."},
-    {ma:"KHCN.08", ten:"Sáng kiến, giải thưởng KHCN&ĐMST", w1:0.05, trangthai:"demo", ghichu:"KHCN.08.02 đã có minh hoạ chấm điểm (xem mục trên) — KHCN.08.01/08.03/08.04 chưa có nguồn."},
-    {ma:"KHCN.09", ten:"Khởi nghiệp ĐMST", w1:0.09, trangthai:"none", ghichu:"Chưa tìm thấy nguồn dữ liệu nào."},
-    {ma:"KHCN.10", ten:"Liêm chính học thuật và đạo đức nghiên cứu", w1:0.08, trangthai:"none", ghichu:"Có hồ sơ họp Hội đồng liêm chính học thuật nhưng chưa tổng hợp theo đơn vị/mốc."},
-    {ma:"KHCN.11", ten:"Đầu tư phát triển tiềm lực (cấp Đại học)", w1:0.10, trangthai:"partial", ghichu:"Có số liệu toàn trường một phần (chi hỗ trợ công bố+SHTT ~16 tỷ) nhưng chưa đúng định nghĩa mẫu số Điều 18."},
-    {ma:"KHCN.12", ten:"Hiệu quả hoạt động KHCN&ĐMST (cấp Đại học)", w1:0.10, trangthai:"partial", ghichu:"Tính được tốc độ tăng trưởng thu KHCN 2024→2025 (chính thức); các chỉ số tăng trưởng khác cần dữ liệu 2 kỳ liên tiếp."}
   ];
 
   var CAVEATS = [
@@ -804,30 +744,9 @@
   html += '</tbody></table>';
   hm.innerHTML = html;
 
-  // ---------- Score demo (KHCN.08.02) ----------
-  document.getElementById("scoreFormula").textContent =
-    "muc(x): 0→1  |  1→2  |  2→3  |  3→4  |  ≥4→5\nS = 1.000 × w1 × w2 × ((muc − 1) / 4)   [w1=0,05  w2=0,4]";
   function mucSangKien(x){
     if (x<=0) return 1; if (x===1) return 2; if (x===2) return 3; if (x===3) return 4; return 5;
   }
-  var sbody = document.getElementById("scoreBody");
-  UNITS.slice().sort(function(a,b){return b.sangkien-a.sangkien;}).forEach(function(u){
-    var muc = mucSangKien(u.sangkien);
-    var S = Math.round(1000*0.05*0.4*((muc-1)/4)*10)/10;
-    sbody.innerHTML += '<tr><td>'+u.ten+'</td><td class="num mono">'+u.sangkien+'</td>'+
-      '<td><span class="mucbadge m'+muc+'">'+muc+'</span></td><td class="num mono">'+S.toFixed(1)+'</td></tr>';
-  });
-
-  // ---------- Readiness ----------
-  var rg = document.getElementById("readinessGrid");
-  var STAT_LABEL = {none:"Chưa có dữ liệu", partial:"Có một phần", demo:"Có minh hoạ chấm điểm"};
-  var STAT_BADGE = {none:"warn", partial:"proxy", demo:"official"};
-  rg.innerHTML = NHOM_CAP1.map(function(g){
-    return '<div class="readiness-item"><div class="ma">'+g.ma+' · w1='+g.w1.toFixed(2)+'</div>'+
-      '<div class="ten">'+g.ten+'</div>'+
-      '<div class="stat"><span class="badge '+STAT_BADGE[g.trangthai]+'"><span class="dot"></span>'+STAT_LABEL[g.trangthai]+'</span></div>'+
-      '<div style="font-size:12px;color:var(--ink-faint);margin-top:8px;line-height:1.4;">'+g.ghichu+'</div></div>';
-  }).join("");
 
   // ---------- Caveats ----------
   document.getElementById("caveatList").innerHTML = CAVEATS.map(function(c,i){
