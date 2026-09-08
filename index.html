@@ -383,7 +383,21 @@
       <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
     </div>
     <div style="overflow-x:auto;"><table class="score-table" id="nhiemVuTable"></table></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Cấp cơ sở = KHCN.02.01, cấp Bộ (gồm cấp Tỉnh/Sở KH&amp;CN) = KHCN.02.02. KHCN.02.03 (cấp Quốc gia) = 0. KHCN.06.01: kinh phí cả vòng đời đề tài, gán vào năm bắt đầu. KHCN.02.04/02.05 chưa có. KHCN.04.01/04.02 chỉ có năm 2025 (2023/2024 chưa tách được theo năm — quy đổi đơn vị qua roster SHCM, không phải bảng đối soát riêng).</p>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Cấp cơ sở = KHCN.02.01, cấp Bộ (gồm cấp Tỉnh/Sở KH&amp;CN) = KHCN.02.02. KHCN.02.03 (cấp Quốc gia) = 0. KHCN.06.01: kinh phí cả vòng đời đề tài, gán vào năm bắt đầu. KHCN.02.04/02.05 chưa có. KHCN.04.01/04.02 chỉ có năm 2025 (2023/2024 chưa tách được theo năm — quy đổi đơn vị qua roster SHCM, không phải bảng đối soát riêng). KHCN.04.04 (chuyển giao công nghệ từ quyền SHTT) = 0 cho cả 8 đơn vị, đã gộp đủ 3 đợt kê khai (NH2023-2024/2024-2025/2025-2026) — 3 bản ghi tìm được đều thuộc Viện Công nghệ - HaUI (ngoài diện đánh giá Phụ lục IV), thiếu hẳn báo cáo NH2024-2025 nên không loại trừ tuyệt đối khả năng có phát sinh mà chưa thu thập được.</p>
+  </div>
+</section>
+
+<section id="daihoc-stats">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Cộng dồn cấp Đại học (KHCN.12)</h2>
+        <div class="desc">Cộng dồn trực tiếp từ số liệu 8 đơn vị ở các mục trên, năm 2025 — phục vụ nhóm tiêu chí KHCN.12 (Hiệu quả hoạt động, đối chiếu Nghị quyết 57-NQ/TW), không cần nguồn dữ liệu mới.</div>
+      </div>
+      <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
+    </div>
+    <div class="kpi-grid" id="daihocGrid"></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.12.06 (báo cáo quốc tế) là số RAW CHƯA quy đổi hạng CORE — cùng hạn chế đã ghi cho KHCN.05.04 theo đơn vị, chỉ tham khảo. KHCN.12.08 chỉ tính văn bằng SHTT ĐÃ ĐƯỢC CẤP trong kỳ (không gồm đơn đăng ký đang xét) — khác quy ước KPI "Sở hữu trí tuệ" ở đầu trang (gộp cả đơn ĐK). KHCN.12.09 (FWCI) chưa có nguồn nào trong toàn bộ dự án — cần cơ sở dữ liệu trích dẫn quốc tế (Scopus/SciVal) mà HaUI hiện chưa xác nhận có quyền truy cập.</p>
   </div>
 </section>
 
@@ -771,6 +785,37 @@
       '<th rowspan="2" style="vertical-align:bottom;">KHCN.04.02<br><span style="font-weight:400;font-size:11px;">văn bằng, 2025</span></th></tr>'+
       '<tr><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th></tr></thead>'+
       '<tbody>'+rowsNV.join("")+'</tbody>';
+  })();
+
+  // ---------- Cộng dồn cấp Đại học (KHCN.12, thêm 08.9.2026 tiếp) ----------
+  // #59-62 (KHCN.12.04-12.07): cộng dồn trực tiếp từ UNITS[].c0501/c0502/q1a+q1b+q2q+q3q+q4q/c0504
+  // đã seed cho KHCN.05.01-05.04 theo đơn vị (năm 2025) — không cần nguồn mới, đúng bằng tổng cột
+  // trong bảng "Tách theo hạng KHCN.05.01-05.04" ở mục Thống kê công bố khoa học phía trên.
+  // #63 (KHCN.12.08): CHỈ tính shttVanBang25 (văn bằng ĐÃ ĐƯỢC CẤP) — khác TOAN_TRUONG.shtt=11
+  // vốn gộp cả đơn ĐK, theo đúng lựa chọn người dùng xác nhận 08.9.2026 (tên tham số Phụ lục III
+  // ghi "văn bằng bảo hộ... được cấp", đơn đăng ký đang xét không tính).
+  // #64 (KHCN.12.09, FWCI): xác nhận KHÔNG có nguồn nào trong 2026.70/2026.81/2026.84 — để "—".
+  (function(){
+    var sum59=0, sum60=0, sum61=0, sum62=0, sum63=0;
+    UNITS.forEach(function(u){
+      sum59 += u.c0501;
+      sum60 += (u.q1a+u.q1b+u.q2q+u.q3q+u.q4q);
+      sum61 += u.c0504;
+      sum62 += u.c0502;
+      sum63 += u.shttVanBang25;
+    });
+    var daihocKpis = [
+      {lbl:"KHCN.12.04 · Bài báo trong nước", num:n(sum59), sub:"8 đơn vị · năm 2025", badge:"proxy", badgeTxt:"sơ bộ"},
+      {lbl:"KHCN.12.05 · Bài báo quốc tế WoS/Scopus", num:n(sum60), sub:"8 đơn vị · năm 2025", badge:"proxy", badgeTxt:"sơ bộ"},
+      {lbl:"KHCN.12.06 · Báo cáo quốc tế", num:n(sum61), sub:"RAW, chưa quy đổi hạng CORE", badge:"proxy", badgeTxt:"sơ bộ"},
+      {lbl:"KHCN.12.07 · Báo cáo trong nước ISBN", num:n(sum62), sub:"8 đơn vị · năm 2025", badge:"proxy", badgeTxt:"sơ bộ"},
+      {lbl:"KHCN.12.08 · Văn bằng SHTT được cấp", num:n(sum63), sub:"chỉ văn bằng, không gồm đơn ĐK", badge:"proxy", badgeTxt:"sơ bộ"},
+      {lbl:"KHCN.12.09 · Chỉ số FWCI", num:"—", sub:"chưa có nguồn (cần Scopus/SciVal)", badge:"warn", badgeTxt:"chưa có"}
+    ];
+    document.getElementById("daihocGrid").innerHTML = daihocKpis.map(function(k){
+      return '<div class="kpi"><div class="lbl">'+k.lbl+' <span class="badge '+k.badge+'" style="padding:1px 7px;font-size:10px;"><span class="dot"></span>'+k.badgeTxt+'</span></div>'+
+        '<div class="num mono">'+k.num+'</div><div class="sub">'+k.sub+'</div></div>';
+    }).join("");
   })();
 
   // ---------- NQ57 ----------
