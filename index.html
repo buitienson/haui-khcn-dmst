@@ -313,6 +313,20 @@
   </div>
 </section>
 
+<section id="nhiemvu-stats">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Nhiệm vụ KHCN&amp;ĐMST theo cấp (2024-2025)</h2>
+        <div class="desc">Trích từ phiếu khảo sát Bộ Công Thương "T01_PhieuDuLieu_2021_2025" — 359 đề tài riêng lẻ toàn trường, đã suy đơn vị theo chủ nhiệm (93% khớp với roster). Đếm theo năm BẮT ĐẦU đề tài; cấp Tỉnh/thành phố tính tương đương cấp Bộ theo xác nhận 08.9.2026.</div>
+      </div>
+      <span class="badge proxy"><span class="dot"></span>Sơ bộ, mới đào 08.9</span>
+    </div>
+    <div style="overflow-x:auto;"><table class="score-table" id="nhiemVuTable"></table></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Cấp cơ sở = KHCN.02.01, cấp Bộ (gồm cả cấp Tỉnh/Sở KH&amp;CN) = KHCN.02.02. Không đề tài nào trong 359 đề tài ghi cấp Quốc gia/NAFOSTED, nên KHCN.02.03 = 0 toàn bộ 8 đơn vị cả 2 năm. Kinh phí (KHCN.06.01) là tổng kinh phí cả vòng đời đề tài nhóm cấp Bộ, gán vào năm bắt đầu — chưa tách theo năm giải ngân thực tế. Tỷ lệ nghiệm thu đúng hạn (KHCN.02.04/02.05) CHƯA có — nguồn không ghi ngày nghiệm thu gốc để so hạn.</p>
+  </div>
+</section>
+
 <section id="nq57">
   <div class="wrap">
     <div class="section-head">
@@ -418,30 +432,57 @@
 
   var UNITS = [
     {id:"co-khi-o-to", ten:"Trường Cơ khí - Ô tô", khoi:"a", kN:1, giangvien:248, tienSi:82,
+      thamGiaKHCN:139, nuThamGia:13, nuTong:17,
+      nv10_2024:9, nv10_2025:18, nv11_2024:1, nv11_2025:1, kp34_2024:2.8, kp34_2025:0.7,
       congbo:217, sangkien:14, nhomNC:3, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:415, hoithao:1,
       c0501:37, c0502:1, q1a:2, q1b:26, q2q:47, q3q:36, q4q:40, c0504:18, cKhac05:10},
     {id:"dien-dien-tu", ten:"Trường Điện - Điện tử", khoi:"a", kN:1, giangvien:193, tienSi:55,
+      thamGiaKHCN:129, nuThamGia:32, nuTong:34,
+      nv10_2024:17, nv10_2025:13, nv11_2024:1, nv11_2025:2, kp34_2024:2.75, kp34_2025:4.44,
       congbo:182, sangkien:6, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
       c0501:30, c0502:28, q1a:1, q1b:6, q2q:18, q3q:29, q4q:22, c0504:38, cKhac05:10},
     {id:"kinh-te", ten:"Trường Kinh tế", khoi:"b", kN:1, giangvien:210, tienSi:73,
+      thamGiaKHCN:160, nuThamGia:99, nuTong:132,
+      nv10_2024:13, nv10_2025:12, nv11_2024:0, nv11_2025:0, kp34_2024:0, kp34_2025:0,
       congbo:334, sangkien:10, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:1, deanKP:735, hoithao:1,
       c0501:156, c0502:64, q1a:2, q1b:6, q2q:2, q3q:16, q4q:21, c0504:24, cKhac05:43},
     {id:"ngoai-ngu-du-lich", ten:"Trường Ngoại ngữ - Du lịch", khoi:"b", kN:1, giangvien:291, tienSi:49,
+      thamGiaKHCN:285, nuThamGia:146, nuTong:148,
+      nv10_2024:10, nv10_2025:11, nv11_2024:0, nv11_2025:0, kp34_2024:0, kp34_2025:0,
       congbo:347, sangkien:7, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:0, deanKP:0, hoithao:1,
       c0501:145, c0502:10, q1a:4, q1b:17, q2q:6, q3q:1, q4q:5, c0504:145, cKhac05:14},
     {id:"cntt-tt", ten:"Trường Công nghệ thông tin và Truyền thông", khoi:"a", kN:1, giangvien:117, tienSi:32,
+      thamGiaKHCN:97, nuThamGia:24, nuTong:27,
+      nv10_2024:7, nv10_2025:7, nv11_2024:0, nv11_2025:1, kp34_2024:0, kp34_2025:2.225,
       congbo:96, sangkien:27, nhomNC:2, nhomManh:1, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
       c0501:27, c0502:16, q1a:0, q1b:6, q2q:6, q3q:7, q4q:22, c0504:8, cKhac05:4},
     {id:"cong-nghe-hoa", ten:"Khoa Công nghệ Hóa", khoi:"a", kN:1, giangvien:63, tienSi:37,
+      thamGiaKHCN:48, nuThamGia:22, nuTong:28,
+      nv10_2024:6, nv10_2025:4, nv11_2024:6, nv11_2025:1, kp34_2024:10.04, kp34_2025:2.9,
       congbo:87, sangkien:3, nhomNC:2, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:685, hoithao:0,
       c0501:29, c0502:0, q1a:0, q1b:10, q2q:27, q3q:12, q4q:8, c0504:1, cKhac05:0},
     {id:"cong-nghe-may", ten:"Khoa Công nghệ may và Thiết kế thời trang", khoi:"a", kN:1, giangvien:39, tienSi:10,
+      thamGiaKHCN:30, nuThamGia:19, nuTong:25,
+      nv10_2024:2, nv10_2025:4, nv11_2024:0, nv11_2025:0, kp34_2024:0, kp34_2025:0,
       congbo:35, sangkien:2, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:0,
       c0501:17, c0502:4, q1a:0, q1b:0, q2q:1, q3q:1, q4q:5, c0504:4, cKhac05:3},
     {id:"giao-duc-dai-cuong", ten:"Khoa Giáo dục đại cương", khoi:"b", kN:1.2, giangvien:91, tienSi:34,
+      thamGiaKHCN:89, nuThamGia:51, nuTong:53,
+      nv10_2024:5, nv10_2025:5, nv11_2024:0, nv11_2025:0, kp34_2024:0, kp34_2025:0,
       congbo:175, sangkien:14, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1,
       c0501:91, c0502:38, q1a:0, q1b:9, q2q:5, q3q:8, q4q:0, c0504:14, cKhac05:10}
   ];
+  // nv10_20xx/nv11_20xx/kp34_20xx (thêm 08.9.2026): T01_PhieuDuLieu_2021_2025_v1.xlsm (phiếu Bộ
+  // Công Thương, 2026.70/2026.74) Biểu F2 "Danh mục nhiệm vụ KHCN 2021-2025" — 359 đề tài riêng
+  // lẻ, match chủ nhiệm với roster SHCM (334/359 = 93%) để suy đơn vị. nv10 = KHCN.02.01 (đề tài
+  // "cấp cơ sở", theo năm bắt đầu). nv11 = KHCN.02.02 (đề tài "Bộ Công Thương" + đề án DNVVN-BCT
+  // + TOÀN BỘ đề tài cấp Tỉnh/Sở KH&CN — người dùng xác nhận 08.9.2026: cấp Tỉnh/thành phố tính
+  // tương đương cấp Bộ). KHCN.02.03 (cấp Quốc gia) = 0 toàn trường, rà hết 359 đề tài không thấy
+  // đề tài NAFOSTED/Quỹ ĐMCN quốc gia nào, khớp với nguồn khác — không thêm field riêng vì luôn 0.
+  // kp34 = KHCN.06.01, tổng kinh phí (Tỷ đồng) của các đề tài nhóm nv11, theo năm bắt đầu — kinh
+  // phí trong file là TỔNG cả vòng đời đề tài, không tách theo năm giải ngân, nên có thể lệch nhẹ
+  // so với "kinh phí thu trong kỳ" đúng nghĩa. CHƯA có #13/14 (tỷ lệ nghiệm thu đúng hạn) — file
+  // không có ngày nghiệm thu gốc để so hạn, chỉ ước lượng thô rất yếu (không seed).
   // giangvien/tienSi: 01-nguon/Thống kê học vị và đơn vị sinh hoạt chuyên môn.xlsx (08.9.2026)
   // — báo cáo "Công nhận công trình NCKH theo đơn vị SHCM", TOÀN BỘ giảng viên/viên chức hiện có
   // theo đúng đơn vị SINH HOẠT CHUYÊN MÔN (không phải đơn vị công tác hành chính eGov) — người
@@ -450,6 +491,13 @@
   // cương = gộp 3 nhóm cũ Khoa Giáo dục đại cương + Khoa Khoa học cơ bản + Khoa Lý luận chính trị -
   // Pháp luật trong file nguồn (đúng quy tắc hợp nhất đã áp cho `congbo`). tienSi = số người có học
   // hàm/học vị bắt đầu "TS"/"PGS"/"GS" trong file — dùng được cho KHCN.01.03 khi cần.
+  // thamGiaKHCN/nuThamGia/nuTong (thêm 08.9.2026, cùng nguồn roster trên, KHCN.01.01/01.04):
+  // thamGiaKHCN = người có cột TỔNG GIỜ NĂM NAY > 0 (suy luận "có tham gia hoạt động KHCN&ĐMST"
+  // trong kỳ hiện tại — CHƯA xác nhận đúng khớp mốc 30/6 hay 31/12 của Quy định). nuThamGia/nuTong
+  // = số nữ trong nhóm tham gia / trong toàn bộ đơn vị, suy luận GIỚI TÍNH TỪ TÊN (có "Thị" ở tên
+  // đệm → nữ) vì file nguồn không có trường giới tính — CHƯA xác nhận, không dùng chấm điểm chính
+  // thức khi chưa rà lại. Chưa đưa vào officialScore()/mọi bảng hiển thị, để sẵn cho KHCN.01.01/
+  // 01.04 sau này (giống cách tienSi đã để sẵn cho KHCN.01.03).
   // Nguồn 05.01-05.04: 01-nguon/14. Tong hop cong trinh khoa hoc...xlsx sheet "Chi tiết công trình",
   // lọc Vị trí TG1="Trong trường", quy đổi đơn vị đúng phương pháp đã dùng cho `congbo` (khớp
   // 100% tổng 1473) — kiểm chứng lại 08.9.2026. c0501=Bài báo trong nước; c0502=Báo cáo trong
@@ -665,6 +713,30 @@
       '<th style="text-align:right">05.03<br><span style="font-weight:400;font-size:11px;">số bài (quy đổi/GV)</span></th>'+
       '<th style="text-align:right">05.04<br><span style="font-weight:400;font-size:11px;">báo cáo QT, RAW</span></th>'+
       '<th style="text-align:right">Khác</th><th style="text-align:right">Tổng</th></tr></thead><tbody>'+rows05.join("")+'</tbody>';
+  })();
+
+  // ---------- Nhiệm vụ KHCN&ĐMST theo cấp (T01, 2024-2025) ----------
+  (function(){
+    var sums = {c10_24:0,c10_25:0,c11_24:0,c11_25:0,kp_24:0,kp_25:0};
+    var rowsNV = UNITS.map(function(u){
+      sums.c10_24+=u.nv10_2024; sums.c10_25+=u.nv10_2025; sums.c11_24+=u.nv11_2024; sums.c11_25+=u.nv11_2025;
+      sums.kp_24+=u.kp34_2024; sums.kp_25+=u.kp34_2025;
+      return '<tr><td>'+u.ten+'</td>'+
+        '<td class="num mono">'+n(u.nv10_2024)+'</td><td class="num mono">'+n(u.nv10_2025)+'</td>'+
+        '<td class="num mono">'+n(u.nv11_2024)+'</td><td class="num mono">'+n(u.nv11_2025)+'</td>'+
+        '<td class="num mono">'+u.kp34_2024.toFixed(2)+'</td><td class="num mono">'+u.kp34_2025.toFixed(2)+'</td></tr>';
+    });
+    rowsNV.push('<tr style="font-weight:700;"><td>Tổng 8 đơn vị</td>'+
+      '<td class="num mono">'+n(sums.c10_24)+'</td><td class="num mono">'+n(sums.c10_25)+'</td>'+
+      '<td class="num mono">'+n(sums.c11_24)+'</td><td class="num mono">'+n(sums.c11_25)+'</td>'+
+      '<td class="num mono">'+sums.kp_24.toFixed(2)+'</td><td class="num mono">'+sums.kp_25.toFixed(2)+'</td></tr>');
+    document.getElementById("nhiemVuTable").innerHTML =
+      '<thead><tr><th rowspan="2" style="vertical-align:bottom;">Đơn vị</th>'+
+      '<th colspan="2">KHCN.02.01<br><span style="font-weight:400;font-size:11px;">cấp cơ sở, đề tài</span></th>'+
+      '<th colspan="2">KHCN.02.02<br><span style="font-weight:400;font-size:11px;">cấp Bộ/tương đương, đề tài</span></th>'+
+      '<th colspan="2">KHCN.06.01<br><span style="font-weight:400;font-size:11px;">kinh phí cấp Bộ, tỷ đồng</span></th></tr>'+
+      '<tr><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th></tr></thead>'+
+      '<tbody>'+rowsNV.join("")+'</tbody>';
   })();
 
   // ---------- NQ57 ----------
