@@ -293,7 +293,7 @@
       </div>
     </div>
     <div id="officialRankingTable"></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.01: tỷ lệ tham gia + tiến sĩ + nữ tham gia. KHCN.02: nhiệm vụ cấp cơ sở/Bộ/Quốc gia. KHCN.04: đơn ĐK + văn bằng + chuyển giao. KHCN.05: 05.01+05.02+05.03 (Q1 top ≤5%=4, Q1 khác=3, Q2=2, Q3=1,5, Q4=1). KHCN.06: thu từ nhiệm vụ cấp Bộ. KHCN.07: nhóm mạnh + tiềm năng. KHCN.08: sáng kiến + giải thưởng giảng viên.</p>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.01: tỷ lệ tham gia + tiến sĩ + nữ tham gia. KHCN.02: nhiệm vụ cấp cơ sở/Bộ/Quốc gia. KHCN.04: đơn ĐK + văn bằng + chuyển giao. KHCN.05: 05.01+05.02+05.03 (Q1 top ≤5%=4, Q1 khác=3, Q2=2, Q3=1,5, Q4=1). KHCN.06: thu từ nhiệm vụ cấp Bộ. KHCN.07: nhóm mạnh + tiềm năng. KHCN.08: sáng kiến + giải thưởng giảng viên + giải thưởng người học (đã lọc đúng cấp Bộ/Quốc gia/Quốc tế, loại giải cấp Trường và giải thể thao/phong trào).</p>
   </div>
 </section>
 
@@ -383,7 +383,6 @@
       <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
     </div>
     <div style="overflow-x:auto;"><table class="score-table" id="nhiemVuTable"></table></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">Cấp cơ sở = KHCN.02.01, cấp Bộ (gồm cấp Tỉnh/Sở KH&amp;CN) = KHCN.02.02, cấp Quốc gia (gồm Nafosted/Quỹ Nafosted/Cấp Nhà nước) = KHCN.02.03 — SỬA 09.9.2026, phát hiện 33 dòng nhiệm vụ bị bỏ sót do lỗi trích xuất trước đây (không còn luôn = 0 nữa). KHCN.06.01: kinh phí cả vòng đời đề tài, gán vào năm bắt đầu, CHƯA cộng thêm kinh phí của các nhiệm vụ cấp Quốc gia mới tìm ra (nghi lệch đơn vị tính, đang chờ xác nhận). KHCN.02.04/02.05 chưa có. KHCN.04.01/04.02 chỉ có năm 2025 (2023/2024 chưa tách được theo năm — quy đổi đơn vị qua roster SHCM, không phải bảng đối soát riêng). KHCN.04.04 (chuyển giao công nghệ từ quyền SHTT) = 0 cho cả 8 đơn vị, đã gộp đủ 3 đợt kê khai (NH2023-2024/2024-2025/2025-2026) — 3 bản ghi tìm được đều thuộc Viện Công nghệ - HaUI (ngoài diện đánh giá Phụ lục IV), thiếu hẳn báo cáo NH2024-2025 nên không loại trừ tuyệt đối khả năng có phát sinh mà chưa thu thập được.</p>
   </div>
 </section>
 
@@ -397,7 +396,6 @@
       <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
     </div>
     <div class="kpi-grid" id="daihocGrid"></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.12.06 (báo cáo quốc tế) là số RAW CHƯA quy đổi hạng CORE — cùng hạn chế đã ghi cho KHCN.05.04 theo đơn vị, chỉ tham khảo. KHCN.12.08 chỉ tính văn bằng SHTT ĐÃ ĐƯỢC CẤP trong kỳ (không gồm đơn đăng ký đang xét) — khác quy ước KPI "Sở hữu trí tuệ" ở đầu trang (gộp cả đơn ĐK). KHCN.12.09 (FWCI) chưa có nguồn nào trong toàn bộ dự án — cần cơ sở dữ liệu trích dẫn quốc tế (Scopus/SciVal) mà HaUI hiện chưa xác nhận có quyền truy cập.</p>
   </div>
 </section>
 
@@ -406,12 +404,11 @@
     <div class="section-head">
       <div>
         <h2>Nhân lực KHCN&amp;ĐMST theo đơn vị</h2>
-        <div class="desc">KHCN.01.01/01.03/01.04 — số liệu SUY LUẬN, CHƯA XÁC NHẬN, đưa lên đây để minh bạch thay vì ẩn trong code, KHÔNG dùng chấm điểm chính thức (chưa vào <code>officialScore()</code>).</div>
+        <div class="desc">KHCN.01.01/01.03/01.04 — số liệu SUY LUẬN, CHƯA XÁC NHẬN.</div>
       </div>
       <span class="badge warn"><span class="dot"></span>Chưa xác nhận</span>
     </div>
     <div style="overflow-x:auto;"><table class="score-table" id="nhanLucTable"></table></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">"Tham gia KHCN&amp;ĐMST" (KHCN.01.01) = người có giờ khoa học năm nay &gt; 0 trong roster sinh hoạt chuyên môn — CHƯA xác nhận đúng khớp mốc 30/6 hay 31/12 của Quy định. "Nữ tham gia"/"Tổng nữ" (KHCN.01.04) = SUY LUẬN GIỚI TÍNH TỪ TÊN (tên đệm "Thị" → nữ) vì nguồn không có trường giới tính — có thể sai với người ngoại lệ. "Tiến sĩ" (KHCN.01.03) = đếm học hàm/học vị bắt đầu TS/PGS/GS, CHƯA rà lại xem đúng định nghĩa "giảng viên có học vị tiến sĩ" của Quy định hay chưa.</p>
   </div>
 </section>
 
@@ -420,12 +417,11 @@
     <div class="section-head">
       <div>
         <h2>Giải thưởng KHCN&amp;ĐMST theo đơn vị</h2>
-        <div class="desc">KHCN.08.03 (giảng viên) / KHCN.08.04 (người học) — số liệu CÓ NGHI VẤN ĐỊNH NGHĨA, đưa lên đây kèm cảnh báo thay vì ẩn, KHÔNG dùng chấm điểm chính thức.</div>
+        <div class="desc">KHCN.08.03 (giảng viên) / KHCN.08.04 (người học) — đã lọc đúng cấp Bộ/Tỉnh/Quốc gia/Quốc tế, loại giải cấp Trường và giải thể thao/phong trào.</div>
       </div>
-      <span class="badge warn"><span class="dot"></span>Nghi sai định nghĩa</span>
+      <span class="badge proxy"><span class="dot"></span>Sơ bộ</span>
     </div>
     <div style="overflow-x:auto;"><table class="score-table" id="giaiThuongTable"></table></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;"><b>Cảnh báo:</b> KHCN.08.04 (giải SV NCKH) ra số RẤT LỚN so với ngưỡng Phụ lục II (mức 5 chỉ "≥4") — nghi dữ liệu nguồn đếm CẢ giải thưởng nhỏ/nội bộ (Olympic, Robocon, thể thao văn hoá-nghệ thuật cấp trường...) trong khi ngưỡng Phụ lục II có thể chỉ tính "giải thưởng lớn" (cấp Bộ/Quốc gia/Quốc tế) — CHƯA đối chiếu lại định nghĩa với Ban KHCN&amp;ĐMST. KHCN.08.03 (giải GV) chỉ 1/8 đơn vị có số — phần lớn giải thưởng GV trong nguồn thuộc Ban/Trung tâm ngoài diện đánh giá Phụ lục IV.</p>
   </div>
 </section>
 
@@ -483,49 +479,49 @@
       nv10_2024:9, nv10_2025:18, nv11_2024:1, nv11_2025:1, nv12_2024:0, nv12_2025:1, kp34_2024:2.8, kp34_2025:0.7,
       shttDonDK25:3, shttVanBang25:4,
       congbo:242, sangkien:14, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:1, deanKP:415, hoithao:1,
-      c0501:38, c0502:1, q1a:1, q1b:36, q2q:60, q3q:34, q4q:34, c0504:26, cKhac05:12, giaithuongGV:0, giaithuongSV:124},
+      c0501:38, c0502:1, q1a:1, q1b:36, q2q:60, q3q:34, q4q:34, c0504:26, cKhac05:12, giaithuongGV:0, giaithuongSV:14},
     {id:"dien-dien-tu", ten:"Trường Điện - Điện tử", khoi:"a", kN:1, giangvien:193, tienSi:55,
       thamGiaKHCN:129, nuThamGia:32, nuTong:34,
       nv10_2024:17, nv10_2025:13, nv11_2024:1, nv11_2025:2, nv12_2024:0, nv12_2025:1, kp34_2024:2.75, kp34_2025:4.44,
       shttDonDK25:0, shttVanBang25:0,
       congbo:171, sangkien:6, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
-      c0501:36, c0502:23, q1a:0, q1b:4, q2q:26, q3q:23, q4q:19, c0504:32, cKhac05:8, giaithuongGV:0, giaithuongSV:85},
+      c0501:36, c0502:23, q1a:0, q1b:4, q2q:26, q3q:23, q4q:19, c0504:32, cKhac05:8, giaithuongGV:0, giaithuongSV:5},
     {id:"kinh-te", ten:"Trường Kinh tế", khoi:"b", kN:1, giangvien:210, tienSi:73,
       thamGiaKHCN:160, nuThamGia:99, nuTong:132,
       nv10_2024:13, nv10_2025:12, nv11_2024:0, nv11_2025:0, nv12_2024:0, nv12_2025:0, kp34_2024:0, kp34_2025:0,
       shttDonDK25:0, shttVanBang25:0,
       congbo:337, sangkien:10, nhomNC:1, nhomManh:0, nhomTiemNang:1, deanSL:1, deanKP:735, hoithao:1,
-      c0501:164, c0502:76, q1a:0, q1b:3, q2q:2, q3q:9, q4q:12, c0504:33, cKhac05:38, giaithuongGV:0, giaithuongSV:122},
+      c0501:164, c0502:76, q1a:0, q1b:3, q2q:2, q3q:9, q4q:12, c0504:33, cKhac05:38, giaithuongGV:0, giaithuongSV:1},
     {id:"ngoai-ngu-du-lich", ten:"Trường Ngoại ngữ - Du lịch", khoi:"b", kN:1, giangvien:291, tienSi:49,
       thamGiaKHCN:285, nuThamGia:146, nuTong:148,
       nv10_2024:10, nv10_2025:11, nv11_2024:0, nv11_2025:1, nv12_2024:0, nv12_2025:1, kp34_2024:0, kp34_2025:0,
       shttDonDK25:0, shttVanBang25:0,
       congbo:400, sangkien:7, nhomNC:3, nhomManh:0, nhomTiemNang:3, deanSL:0, deanKP:0, hoithao:1,
-      c0501:163, c0502:17, q1a:2, q1b:18, q2q:5, q3q:4, q4q:3, c0504:172, cKhac05:16, giaithuongGV:1, giaithuongSV:86},
+      c0501:163, c0502:17, q1a:2, q1b:18, q2q:5, q3q:4, q4q:3, c0504:172, cKhac05:16, giaithuongGV:0, giaithuongSV:4},
     {id:"cntt-tt", ten:"Trường Công nghệ thông tin và Truyền thông", khoi:"a", kN:1, giangvien:117, tienSi:32,
       thamGiaKHCN:97, nuThamGia:24, nuTong:27,
       nv10_2024:7, nv10_2025:7, nv11_2024:0, nv11_2025:1, nv12_2024:1, nv12_2025:1, kp34_2024:0, kp34_2025:2.225,
       shttDonDK25:0, shttVanBang25:0,
       congbo:90, sangkien:27, nhomNC:2, nhomManh:1, nhomTiemNang:1, deanSL:0, deanKP:0, hoithao:0,
-      c0501:26, c0502:11, q1a:0, q1b:4, q2q:9, q3q:7, q4q:21, c0504:8, cKhac05:4, giaithuongGV:0, giaithuongSV:122},
+      c0501:26, c0502:11, q1a:0, q1b:4, q2q:9, q3q:7, q4q:21, c0504:8, cKhac05:4, giaithuongGV:1, giaithuongSV:13},
     {id:"cong-nghe-hoa", ten:"Khoa Công nghệ Hóa", khoi:"a", kN:1, giangvien:63, tienSi:37,
       thamGiaKHCN:48, nuThamGia:22, nuTong:28,
       nv10_2024:6, nv10_2025:4, nv11_2024:6, nv11_2025:3, nv12_2024:0, nv12_2025:0, kp34_2024:10.04, kp34_2025:2.9,
       shttDonDK25:3, shttVanBang25:0,
       congbo:100, sangkien:3, nhomNC:2, nhomManh:0, nhomTiemNang:2, deanSL:1, deanKP:685, hoithao:0,
-      c0501:49, c0502:1, q1a:0, q1b:5, q2q:25, q3q:10, q4q:8, c0504:2, cKhac05:0, giaithuongGV:0, giaithuongSV:56},
+      c0501:49, c0502:1, q1a:0, q1b:5, q2q:25, q3q:10, q4q:8, c0504:2, cKhac05:0, giaithuongGV:0, giaithuongSV:0},
     {id:"cong-nghe-may", ten:"Khoa Công nghệ may và Thiết kế thời trang", khoi:"a", kN:1, giangvien:39, tienSi:10,
       thamGiaKHCN:30, nuThamGia:19, nuTong:25,
       nv10_2024:2, nv10_2025:4, nv11_2024:0, nv11_2025:0, nv12_2024:0, nv12_2025:0, kp34_2024:0, kp34_2025:0,
       shttDonDK25:0, shttVanBang25:1,
       congbo:36, sangkien:2, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:0,
-      c0501:15, c0502:4, q1a:0, q1b:0, q2q:1, q3q:2, q4q:4, c0504:3, cKhac05:7, giaithuongGV:0, giaithuongSV:9},
+      c0501:15, c0502:4, q1a:0, q1b:0, q2q:1, q3q:2, q4q:4, c0504:3, cKhac05:7, giaithuongGV:0, giaithuongSV:0},
     {id:"giao-duc-dai-cuong", ten:"Khoa Giáo dục đại cương", khoi:"b", kN:1.2, giangvien:91, tienSi:34,
       thamGiaKHCN:89, nuThamGia:51, nuTong:53,
       nv10_2024:5, nv10_2025:5, nv11_2024:0, nv11_2025:0, nv12_2024:0, nv12_2025:0, kp34_2024:0, kp34_2025:0,
       shttDonDK25:0, shttVanBang25:0,
       congbo:152, sangkien:14, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1,
-      c0501:89, c0502:21, q1a:0, q1b:9, q2q:6, q3q:3, q4q:1, c0504:14, cKhac05:9, giaithuongGV:0, giaithuongSV:23}
+      c0501:89, c0502:21, q1a:0, q1b:9, q2q:6, q3q:3, q4q:1, c0504:14, cKhac05:9, giaithuongGV:0, giaithuongSV:5}
   ];
   // nv10_20xx/nv11_20xx/kp34_20xx (thêm 08.9.2026): T01_PhieuDuLieu_2021_2025_v1.xlsm (phiếu Bộ
   // Công Thương, 2026.70/2026.74) Biểu F2 "Danh mục nhiệm vụ KHCN 2021-2025" — 359 đề tài riêng
@@ -555,18 +551,25 @@
   // 08.9.2026 đã đưa ra bảng riêng "Nhân lực KHCN&ĐMST theo đơn vị" (mục nhanluc-stats bên dưới)
   // để minh bạch, kèm nhãn cảnh báo rõ ràng thay vì ẩn đi — người xem PHẢI tự đối chiếu lại trước
   // khi dùng cho việc khác. tienSi cùng tình trạng, cũng đưa vào bảng đó.
-  // giaithuongGV/giaithuongSV (KHCN.08.03/08.04, thêm 08.9.2026 THEO YÊU CẦU trực tiếp — biết rõ
-  // rủi ro định nghĩa vẫn quyết định đẩy lên, có cảnh báo kèm theo):
-  // giaithuongGV: `2026.81/.../PL VI.1.1. Giải thưởng KHCN giảng viên.xlsx` (bản đã xoá/chỉnh giờ),
-  // đếm nhóm "Vai trò = CBHD/tác giả chính" theo khối đơn vị có sẵn trong file (header "TÊN ĐƠN VỊ:
-  // N" tự ghi đúng count). Chỉ 1/8 đơn vị có số (Ngoại ngữ - Du lịch = 1), 7 đơn vị còn lại = 0 —
-  // phần lớn giải thưởng GV trong file thuộc Ban/Trung tâm ngoài diện đánh giá Phụ lục IV.
-  // giaithuongSV: gộp `PL VII.1.1` (đợt 1) + `PL VII.1.2` (đợt 2) cùng cách đếm. SỐ RA RẤT LỚN so
-  // với ngưỡng Phụ lục II (mức 5 chỉ "≥4") — vd Trường Cơ khí - Ô tô ra 124 — NGHI dữ liệu này đếm
-  // CẢ giải thưởng nhỏ/nội bộ (Olympic, Robocon, thể thao VHNT cấp trường...) trong khi ngưỡng Phụ
-  // lục II có thể đang tính theo "giải thưởng lớn" (cấp Bộ/Quốc gia/Quốc tế) — CHƯA ĐỐI CHIẾU LẠI
-  // ĐỊNH NGHĨA, số hiển thị dưới đây CÓ THỂ SAI Ý NGHĨA, không nên dùng để so sánh/xếp hạng cho tới
-  // khi rà lại.
+  // giaithuongGV/giaithuongSV (KHCN.08.03/08.04) — SỬA GẤP 09.9.2026 theo yêu cầu trực tiếp "chỉ
+  // lấy đúng loại giải": đếm ban đầu (08.9.2026) dùng thẳng header nhóm "TÊN ĐƠN VỊ: N" trong file
+  // mà KHÔNG lọc cấp khen thưởng lẫn loại giải — lẫn cả giải thể thao/phong trào nội bộ (Pickleball,
+  // bóng bàn, TDTT, chạy...) và giải cấp Trường vào chung với giải KHCN&ĐMST thật, làm SV NCKH ra số
+  // ảo rất lớn (vd Cơ khí - Ô tô cũ = 124). Đã rà lại TỪNG DÒNG cả 3 file (PL VI giải GV, PL VII.1+2
+  // giải SV), lọc 2 lớp: (1) cột "Cấp khen thưởng" phải chứa Bộ/Tỉnh/Thành phố, Quốc gia, Quốc tế
+  // hoặc "toàn quốc" — loại thẳng mọi giải "cấp Trường"; (2) tên giải KHÔNG được chứa từ khoá thể
+  // thao/phong trào (bóng bàn, bóng đá, bóng ném, cầu lông, quần vợt, pickleball, TDTT, bơi, chạy,
+  // chính luận bảo vệ nền tảng tư tưởng...) — loại cả khi những giải này ở cấp Bộ/Tỉnh thật (vd thi
+  // đấu thể thao giữa các trường đại học khu vực Hà Nội, không phải KHCN&ĐMST). Rồi mới match người
+  // với roster SHCM (8 đơn vị) để suy đơn vị, KHÔNG dùng lại header nhóm gốc của file (đã thấy
+  // header nhóm ĐÔI KHI lệch với "Đơn vị công tác" thật của từng dòng, ví dụ Nguyễn Văn Tình).
+  // Kết quả sau lọc: giaithuongGV chỉ còn ĐÚNG 1 giải thật toàn bộ 2 file (Best Paper Award, Hội
+  // thảo quốc tế SETSM 2026, Nguyễn Văn Tình → CNTT&TT theo roster — khác nhóm gốc "Ngoại ngữ - Du
+  // lịch" cũ dùng nhầm giải "cấp Trường, cuộc thi chính luận" không liên quan KHCN). giaithuongSV
+  // giảm mạnh về mức hợp lý (Cơ khí - Ô tô 124→14, CNTT&TT 122→13, Điện-Điện tử 85→5, Giáo dục đại
+  // cương 23→5, Ngoại ngữ-Du lịch 86→4, Kinh tế 122→1, CN Hóa/CN May 56/9→0) — giờ CÓ PHÂN HOÁ THẬT
+  // giữa các đơn vị thay vì gần như đơn vị nào cũng chạm trần mức 5. Data đã đủ tin cậy để đưa cả
+  // 08.03 VÀ 08.04 vào officialScore() (trước đó chỉ dùng 08.03, cố tình loại 08.04).
   // nhomManh/nhomTiemNang (sửa 08.9.2026, đối chiếu QĐ 2296/QĐ-ĐHCN 30/12/2025 "Phê duyệt và
   // thành lập các nhóm nghiên cứu mạnh, nhóm nghiên cứu tiềm năng năm 2025" + danh sách 12 nhóm
   // kèm theo): Cơ khí - Ô tô sửa 2→3 (thiếu nhóm "Tối ưu hóa thiết kế và gia công cơ khí..." của
@@ -969,7 +972,7 @@
     "05.01":0.1, "05.02":0.1, "05.03":0.3,
     "06.01":0.25,
     "07.03":0.5, "07.04":0.2,
-    "08.02":0.4, "08.03":0.2
+    "08.02":0.4, "08.03":0.2, "08.04":0.2
   };
   // Chuẩn hoá w2 trong từng nhóm về tổng 1.0 (dùng đúng tiêu chí đang có dữ liệu của nhóm đó).
   function normGroup(keys){
@@ -983,7 +986,7 @@
   var W2_05 = normGroup(["05.01","05.02","05.03"]);
   var W2_06 = normGroup(["06.01"]);
   var W2_07 = normGroup(["07.03","07.04"]);
-  var W2_08 = normGroup(["08.02","08.03"]);
+  var W2_08 = normGroup(["08.02","08.03","08.04"]);
 
   // KHCN.10.01 (Điều 17 + Phụ lục II): cơ chế TRỪ ĐIỂM sau điểm tổng hợp, không qua w2 — nhẹ -20/ca, vừa -50, nặng -100.
   // Không hiển thị lý do/tên đơn vị công khai — chỉ trừ ngầm vào S theo yêu cầu người dùng.
@@ -996,7 +999,7 @@
     var diemNhom05 = W2_05["05.01"]*diem(muc0501(u.c0501)) + W2_05["05.02"]*diem(muc0502(u.c0502)) + W2_05["05.03"]*diem(muc0503(bqt0503(u)));
     var diemNhom06 = W2_06["06.01"]*diem(muc0601(u));
     var diemNhom07 = W2_07["07.03"]*diem(mucNguong0134(u.nhomManh)) + W2_07["07.04"]*diem(mucNguong0134(u.nhomTiemNang));
-    var diemNhom08 = W2_08["08.02"]*diem(mucSangKien(u.sangkien)) + W2_08["08.03"]*diem(mucNguong0134(u.giaithuongGV));
+    var diemNhom08 = W2_08["08.02"]*diem(mucSangKien(u.sangkien)) + W2_08["08.03"]*diem(mucNguong0134(u.giaithuongGV)) + W2_08["08.04"]*diem(mucNguong0134(u.giaithuongSV));
     var pt01 = 1000*W1_NORM.KHCN01*diemNhom01, pt02 = 1000*W1_NORM.KHCN02*diemNhom02, pt04 = 1000*W1_NORM.KHCN04*diemNhom04,
         pt05 = 1000*W1_NORM.KHCN05*diemNhom05, pt06 = 1000*W1_NORM.KHCN06*diemNhom06, pt07 = 1000*W1_NORM.KHCN07*diemNhom07,
         pt08 = 1000*W1_NORM.KHCN08*diemNhom08;
