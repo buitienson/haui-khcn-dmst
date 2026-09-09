@@ -597,7 +597,7 @@
   // CN Hóa 3... - xem bảng) + 8 văn bằng (Cơ khí - Ô tô 4, CN may 1...).
 
   var TOAN_TRUONG = {
-    thu2024:41147, thu2025:113333, // triệu đồng, CHÍNH THỨC mốc 31/12 — LƯU Ý: đây thực ra là #52
+    thu2024:41147, thu2025:113333, // triệu đồng (hiển thị đổi sang tỷ đồng ở KPI/biểu đồ toàn trường theo yêu cầu 09.9.2026 — số gốc giữ nguyên triệu đồng), CHÍNH THỨC mốc 31/12 — LƯU Ý: đây thực ra là #52
     // "Tổng nguồn thu của Đại học" (mẫu số KHCN.11.01/11.02), khớp CHÍNH XÁC với T01 sheet
     // D_TaiChinh dòng "A TỔNG NGUỒN THU" — KHÔNG PHẢI KHCN.12.03 (Tổng kinh phí thu TỪ HOẠT ĐỘNG
     // KHCN&ĐMST, tiêu chí này vẫn "Chưa có") dù nhãn KPI phía dưới đang ghi "Thu từ hoạt động
@@ -617,7 +617,7 @@
     quocTe: [210, 444, 700]
   };
 
-  var THU_SERIES = { nhan:["2024","2025"], gia_tri:[TOAN_TRUONG.thu2024, TOAN_TRUONG.thu2025] };
+  var THU_SERIES = { nhan:["2024","2025"], gia_tri:[Math.round(TOAN_TRUONG.thu2024/1000*100)/100, Math.round(TOAN_TRUONG.thu2025/1000*100)/100] }; // tỷ đồng
 
   // Nghị quyết 57-NQ/TW (22/12/2024) — mục tiêu quốc gia đến 2030
   var NQ57_TARGETS = [
@@ -659,19 +659,22 @@
 
   var fmt = new Intl.NumberFormat("vi-VN");
   function n(x){ return (x===null||x===undefined||isNaN(x)) ? "—" : fmt.format(x); }
+  // Số toàn trường gốc lưu triệu đồng — hiển thị đổi sang tỷ đồng cho dễ đọc (yêu cầu 09.9.2026),
+  // số theo đơn vị (nhỏ hơn) vẫn giữ triệu đồng, không đổi.
+  function tyd(x){ return (x===null||x===undefined||isNaN(x)) ? "—" : (Math.round(x/1000*100)/100).toLocaleString("vi-VN"); }
 
   // ---------- KPI ----------
   var kpiGrid = document.getElementById("kpiGrid");
   var totalCongbo=0, totalSangkien=0, totalNhomNC=0;
   UNITS.forEach(function(u){ totalCongbo+=u.congbo; totalSangkien+=u.sangkien; totalNhomNC+=u.nhomNC; });
   var kpis = [
-    {lbl:"Thu từ hoạt động KHCN&ĐMST · 2025", num:n(TOAN_TRUONG.thu2025)+" tr.đ", sub:"2024: "+n(TOAN_TRUONG.thu2024)+" tr.đ", delta:"+175% so với 2024", badge:"official"},
+    {lbl:"Thu từ hoạt động KHCN&ĐMST · 2025", num:tyd(TOAN_TRUONG.thu2025)+" tỷ đ", sub:"2024: "+tyd(TOAN_TRUONG.thu2024)+" tỷ đ", delta:"+175% so với 2024", badge:"official"},
     {lbl:"Công bố khoa học · toàn trường", num:n(totalCongbo), sub:"8 đơn vị · năm 2025", badge:"proxy"},
     {lbl:"Sáng kiến cấp trên cơ sở", num:n(totalSangkien), sub:"đã công nhận · NH 2025-2026", badge:"proxy"},
     {lbl:"Nhóm NC mạnh + tiềm năng", num:n(totalNhomNC), sub:"toàn trường · 2025", badge:"proxy"},
     {lbl:"Sở hữu trí tuệ", num:n(TOAN_TRUONG.shtt), sub:"đơn ĐK + văn bằng, 2025, theo đơn vị bên dưới", badge:"proxy"},
-    {lbl:"Hợp đồng CGCN/dịch vụ", num:n(TOAN_TRUONG.cgcnSoHD), sub:n(TOAN_TRUONG.cgcnTien)+" triệu đồng", badge:"proxy"},
-    {lbl:"Nhiệm vụ cấp Bộ trở lên", num:n(TOAN_TRUONG.nvCapBoSL), sub:n(TOAN_TRUONG.nvCapBoTien)+" triệu đồng", badge:"proxy"},
+    {lbl:"Hợp đồng CGCN/dịch vụ", num:n(TOAN_TRUONG.cgcnSoHD), sub:tyd(TOAN_TRUONG.cgcnTien)+" tỷ đồng", badge:"proxy"},
+    {lbl:"Nhiệm vụ cấp Bộ trở lên", num:n(TOAN_TRUONG.nvCapBoSL), sub:tyd(TOAN_TRUONG.nvCapBoTien)+" tỷ đồng", badge:"proxy"},
     {lbl:"Đề tài trọng điểm cấp ĐH", num:n(TOAN_TRUONG.deanTrongDiem), sub:"đợt 15/10/2025, toàn trường", badge:"proxy"},
     {lbl:"Đoàn ra · KHCN.03.03", num:n(TOAN_TRUONG.doanRa2025), sub:"2024: "+n(TOAN_TRUONG.doanRa2024)+" · toàn trường, chưa tách đơn vị", badge:"proxy"},
     {lbl:"Đoàn vào · KHCN.03.04", num:n(TOAN_TRUONG.doanVao2025), sub:"2024: "+n(TOAN_TRUONG.doanVao2024)+" · toàn trường, chưa tách đơn vị", badge:"proxy"}
@@ -731,7 +734,7 @@
   var card1 = document.createElement("div"); card1.className="linechart-card";
   card1.innerHTML = '<span class="badge official" style="margin-bottom:8px;"><span class="dot"></span>Chính thức · mốc 31/12</span>'+
     '<h3>Thu từ hoạt động KHCN&ĐMST</h3>'+
-    '<div class="stat-line">Toàn trường · triệu đồng · tăng <b style="color:var(--teal)">+175%</b> từ 2024 sang 2025</div>'+
+    '<div class="stat-line">Toàn trường · tỷ đồng · tăng <b style="color:var(--teal)">+175%</b> từ 2024 sang 2025</div>'+
     lineChartSVG({years:THU_SERIES.nhan, series:[{label:"Thu KHCN", color:"var(--teal)", values:THU_SERIES.gia_tri}]});
   trendGrid.appendChild(card1);
 
