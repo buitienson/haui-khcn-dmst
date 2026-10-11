@@ -294,11 +294,21 @@
   .score-table th.g08{color:var(--c08);}
   .ptbar{display:block; height:4px; border-radius:2px; margin-top:4px; background:var(--line); overflow:hidden;}
   .ptbar i{display:block; height:100%; border-radius:2px;}
-  .score-table tbody tr:nth-child(1) td:first-child{color:#B45309; font-weight:800;}
-  .score-table tbody tr:nth-child(2) td:first-child{color:#64748B; font-weight:800;}
-  .score-table tbody tr:nth-child(3) td:first-child{color:#9A3412; font-weight:800;}
+  #officialRankingTable .score-table tbody tr:nth-child(1) td:first-child{color:#B45309; font-weight:800;}
+  #officialRankingTable .score-table tbody tr:nth-child(2) td:first-child{color:#64748B; font-weight:800;}
+  #officialRankingTable .score-table tbody tr:nth-child(3) td:first-child{color:#9A3412; font-weight:800;}
   .stot{display:inline-block; min-width:64px; padding:3px 10px; border-radius:999px; color:#fff; font-weight:700;
     background:linear-gradient(120deg,var(--hero-b),var(--c05));}
+
+  .ds-tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center; padding:14px 0 6px;}
+  .ds-tools input, .ds-tools select{font:inherit; font-size:13.5px; padding:7px 10px; border:1px solid var(--line-strong); border-radius:8px; background:var(--paper-raised); color:var(--ink);}
+  .ds-tools input{flex:1 1 220px; min-width:0;}
+  .ds-tools select{flex:0 1 220px; min-width:0;}
+  .ds-tools .dem{font-size:12.5px; color:var(--ink-dim); margin-left:auto;}
+  .ds-body th.sortable{cursor:pointer; user-select:none; white-space:nowrap;}
+  .ds-body th.sortable:hover{color:var(--c01);}
+  .ds-body th .mui{font-size:10px; margin-left:4px; opacity:.45;}
+  .ds-body th.asc .mui, .ds-body th.desc .mui{opacity:1; color:var(--c01);}
   .ds-modal{position:fixed; inset:0; z-index:50; display:none; align-items:flex-start; justify-content:center;
     background:rgba(11,22,48,.55); padding:40px 16px; overflow-y:auto;}
   .ds-modal.open{display:flex;}
@@ -535,7 +545,49 @@
   function moDanhSach(title, sub, head, rows){
     document.getElementById("dsTitle").textContent = title;
     document.getElementById("dsSub").textContent = sub;
-    document.getElementById("dsBody").innerHTML = '<table class="score-table"><thead><tr>'+head.map(function(c){ return '<th>'+c+'</th>'; }).join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>';
+    var LOC_COT = ["Đơn vị","Cấp","Loại","Căn cứ"];
+    var body = document.getElementById("dsBody");
+    body.innerHTML = '<div class="ds-tools"><input type="search" id="dsTim" placeholder="Tìm theo tên, người, số hiệu…" aria-label="Tìm trong danh sách"><span id="dsLoc"></span><span class="dem" id="dsDem"></span></div>'+
+      '<table class="score-table"><thead><tr>'+head.map(function(c,i){ return '<th class="sortable" data-i="'+i+'">'+c+'<span class="mui">▲▼</span></th>'; }).join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>';
+    var tb = body.querySelector("tbody"), tr = Array.prototype.slice.call(tb.rows);
+    function oText(r,i){ var c=r.cells[i]; if(!c) return ""; var t=c.querySelector(".ds-tag"); return (t?t.textContent:c.textContent).trim(); }
+    var locs = [];
+    head.forEach(function(c,i){
+      if (LOC_COT.indexOf(c)<0) return;
+      var vals = {}; tr.forEach(function(r){ var v=oText(r,i); if(v) vals[v]=1; });
+      var ks = Object.keys(vals).sort(function(a,b){ return a.localeCompare(b,"vi"); });
+      if (ks.length<2) return;
+      var s = document.createElement("select"); s.setAttribute("aria-label","Lọc theo "+c);
+      s.innerHTML = '<option value="">'+c+': tất cả</option>'+ks.map(function(k){ return '<option>'+escH(k)+'</option>'; }).join("");
+      s.dataset.i = i; locs.push(s); document.getElementById("dsLoc").appendChild(s);
+    });
+    document.getElementById("dsLoc").style.cssText = "display:contents";
+    function loc(){
+      var q = document.getElementById("dsTim").value.trim().toLowerCase(), n = 0;
+      tr.forEach(function(r){
+        var ok = !q || r.textContent.toLowerCase().indexOf(q)>=0;
+        locs.forEach(function(s){ if (ok && s.value && oText(r, +s.dataset.i)!==s.value) ok = false; });
+        r.style.display = ok ? "" : "none"; if (ok) n++;
+      });
+      document.getElementById("dsDem").textContent = "Hiển thị "+n+"/"+tr.length;
+    }
+    document.getElementById("dsTim").addEventListener("input", loc);
+    locs.forEach(function(s){ s.addEventListener("change", loc); });
+    body.querySelectorAll("th.sortable").forEach(function(th){
+      th.addEventListener("click", function(){
+        var i = +th.dataset.i, asc = !th.classList.contains("asc");
+        body.querySelectorAll("th.sortable").forEach(function(x){ x.classList.remove("asc","desc"); x.querySelector(".mui").textContent="▲▼"; });
+        th.classList.add(asc?"asc":"desc"); th.querySelector(".mui").textContent = asc?"▲":"▼";
+        function key(r){ var t = r.cells[i] ? r.cells[i].textContent.trim() : "";
+          var m = t.match(/^-?[\d.]+(,\d+)?/); var num = m ? parseFloat(m[0].replace(/\./g,"").replace(",",".")) : NaN;
+          return isNaN(num) || /[a-zA-ZÀ-ỹ]/.test(t.slice(0,3)) ? t : num; }
+        tr.sort(function(a,b){ var x=key(a), y=key(b), c;
+          if (typeof x==="number" && typeof y==="number") c = x-y; else c = String(x).localeCompare(String(y),"vi",{numeric:true});
+          return asc ? c : -c; });
+        tr.forEach(function(r){ tb.appendChild(r); });
+      });
+    });
+    loc();
     document.getElementById("dsModal").classList.add("open");
   }
   function dongDanhSach(){ document.getElementById("dsModal").classList.remove("open"); }
