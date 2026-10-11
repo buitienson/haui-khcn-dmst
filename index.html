@@ -335,6 +335,10 @@
   .ds-tools .sx{flex:0 1 220px;}
   .pa-info{width:30px; height:30px; border-radius:50%; border:1.5px solid var(--c01); background:var(--paper-raised); color:var(--c01); font:italic 700 15px Georgia,serif; cursor:pointer; align-self:center;}
   .pa-info:hover{background:var(--c01); color:#fff;}
+  .ds-pager{display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; padding:14px 0 4px;}
+  .ds-pager button{font:inherit; font-size:13px; padding:6px 12px; border-radius:8px; border:1px solid var(--line-strong); background:var(--paper-raised); color:var(--ink); cursor:pointer;}
+  .ds-pager button[disabled]{opacity:.4; cursor:default;}
+  .ds-pager span{font-size:13px; color:var(--ink-dim);}
   .ds-modal{position:fixed; inset:0; z-index:50; display:none; align-items:flex-start; justify-content:center;
     background:rgba(11,22,48,.55); padding:40px 16px; overflow-y:auto;}
   .ds-modal.open{display:flex;}
@@ -408,6 +412,7 @@
         <div class="desc">Chỉ số tổng hợp, trọng số 5 chỉ số sơ bộ (công bố, sáng kiến, nhóm nghiên cứu, nhiệm vụ KHCN&ĐMST trọng điểm, hội thảo). Công bố dùng số gộp, khác điểm KHCN.05 chính thức ở bảng trên. <b>Không dùng công thức Phụ lục II.</b> Mức xếp loại theo tứ phân vị trong 8 đơn vị.</div>
       </div>
     </div>
+    <div id="nangSuatPA" class="badge official" style="margin-bottom:12px;"></div>
     <div id="rankingTable"></div>
   </div>
 </section>
@@ -561,7 +566,7 @@
   }
   new MutationObserver(function(){ ganNhan(); }).observe(document.body, {childList:true, subtree:true});
 
-  var APP_VERSION = "20261011-215518";
+  var APP_VERSION = "20261011-215916";
   (function(){
     var pill = document.getElementById("updPill");
     function kiem(){
@@ -589,7 +594,7 @@
     var LOC_COT = ["Đơn vị","Cấp","Loại","Căn cứ"];
     var body = document.getElementById("dsBody");
     body.innerHTML = '<div class="ds-tools"><input type="search" id="dsTim" placeholder="Tìm theo tên, người, số hiệu…" aria-label="Tìm trong danh sách"><span id="dsLoc"></span><select class="sx" id="dsSx" aria-label="Sắp xếp"></select><span class="dem" id="dsDem"></span></div>'+
-      '<table class="score-table"><thead><tr>'+head.map(function(c,i){ return '<th class="sortable" data-i="'+i+'">'+c+'<span class="mui">▲▼</span></th>'; }).join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>';
+      '<table class="score-table"><thead><tr>'+head.map(function(c,i){ return '<th class="sortable" data-i="'+i+'">'+c+'<span class="mui">▲▼</span></th>'; }).join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table><div class="ds-pager" id="dsPager"></div>';
     var tb = body.querySelector("tbody"), tr = Array.prototype.slice.call(tb.rows);
     function oText(r,i){ var c=r.cells[i]; if(!c) return ""; var t=c.querySelector(".ds-tag"); return (t?t.textContent:c.textContent).trim(); }
     var locs = [];
@@ -603,17 +608,33 @@
       s.dataset.i = i; locs.push(s); document.getElementById("dsLoc").appendChild(s);
     });
     document.getElementById("dsLoc").style.cssText = "display:contents";
+    var trang = 1, CO = 50;
     function loc(){
-      var q = document.getElementById("dsTim").value.trim().toLowerCase(), n = 0;
-      tr.forEach(function(r){
+      var q = document.getElementById("dsTim").value.trim().toLowerCase();
+      var hang = Array.prototype.slice.call(tb.rows), khop = [];
+      hang.forEach(function(r){
         var ok = !q || r.textContent.toLowerCase().indexOf(q)>=0;
         locs.forEach(function(s){ if (ok && s.value && oText(r, +s.dataset.i)!==s.value) ok = false; });
-        r.style.display = ok ? "" : "none"; if (ok) n++;
+        r.style.display = "none"; if (ok) khop.push(r);
       });
-      document.getElementById("dsDem").textContent = "Hiển thị "+n+"/"+tr.length;
+      var n = khop.length, so = Math.max(1, Math.ceil(n/CO)); if (trang>so) trang = so;
+      khop.slice((trang-1)*CO, trang*CO).forEach(function(r){ r.style.display = ""; });
+      var pg = document.getElementById("dsPager");
+      if (n>CO){
+        var tu = (trang-1)*CO+1, den = Math.min(n, trang*CO);
+        document.getElementById("dsDem").textContent = "Hiển thị "+tu+"-"+den+" trong "+n+(n<hang.length?" (tổng "+hang.length+")":"");
+        pg.innerHTML = '<button type="button" data-p="1"'+(trang===1?' disabled':'')+'>Đầu</button><button type="button" data-p="'+(trang-1)+'"'+(trang===1?' disabled':'')+'>Trước</button>'+
+          '<span>Trang '+trang+'/'+so+'</span><button type="button" data-p="'+(trang+1)+'"'+(trang===so?' disabled':'')+'>Sau</button><button type="button" data-p="'+so+'"'+(trang===so?' disabled':'')+'>Cuối</button>';
+      } else {
+        document.getElementById("dsDem").textContent = "Hiển thị "+n+"/"+hang.length; pg.innerHTML = "";
+      }
     }
-    document.getElementById("dsTim").addEventListener("input", loc);
-    locs.forEach(function(s){ s.addEventListener("change", loc); });
+    document.getElementById("dsPager").addEventListener("click", function(e){
+      var b = e.target.closest("button[data-p]"); if (!b || b.disabled) return;
+      trang = +b.getAttribute("data-p"); loc(); document.getElementById("dsModal").scrollTop = 0;
+    });
+    document.getElementById("dsTim").addEventListener("input", function(){ trang = 1; loc(); });
+    locs.forEach(function(s){ s.addEventListener("change", function(){ trang = 1; loc(); }); });
     body.querySelectorAll("th.sortable").forEach(function(th){
       th.addEventListener("click", function(){
         var i = +th.dataset.i, asc = !th.classList.contains("asc");
@@ -625,7 +646,7 @@
         tr.sort(function(a,b){ var x=key(a), y=key(b), c;
           if (typeof x==="number" && typeof y==="number") c = x-y; else c = String(x).localeCompare(String(y),"vi",{numeric:true});
           return asc ? c : -c; });
-        tr.forEach(function(r){ tb.appendChild(r); });
+        tr.forEach(function(r){ tb.appendChild(r); }); trang = 1; loc();
       });
     });
     var sx = document.getElementById("dsSx");
@@ -1158,6 +1179,7 @@
   };
   var PA_ADJ_ROWS = [];
   function renderOfficial(pa){
+    if (typeof renderNangSuat==="function") renderNangSuat(pa);
     var ranked = rankPA(pa), hang1 = {};
     rankPA(1).forEach(function(u,i){ hang1[u.id]=i+1; });
     document.getElementById("paDesc").textContent = PA_DESC[pa];
@@ -1200,10 +1222,12 @@
     });
   });
 
-  var RANK_W = {congbo:0.30, sangkien:0.25, nhomNC:0.20, deanSL:0.15, hoithao:0.10};
+  function renderNangSuat(pa){
+    var DS = unitsPA(pa).map(function(u){ return Object.assign({}, u, {sangkien:(u.skcs||0)+(u.skbo||0)}); });
+    var RANK_W = {congbo:0.30, sangkien:0.25, nhomNC:0.20, deanSL:0.15, hoithao:0.10};
   var rankMax = {};
-  METRICS.forEach(function(m){ rankMax[m.key] = Math.max.apply(null, UNITS.map(function(u){return u[m.key];})) || 1; });
-  var ranked = UNITS.map(function(u){
+  METRICS.forEach(function(m){ rankMax[m.key] = Math.max.apply(null, DS.map(function(u){return u[m.key];})) || 1; });
+  var ranked = DS.map(function(u){
     var idx = 0;
     Object.keys(RANK_W).forEach(function(k){ idx += (u[k]/rankMax[k]) * RANK_W[k]; });
     return Object.assign({}, u, {idx: idx});
@@ -1221,6 +1245,9 @@
         '<div><div class="idx-bar"><div class="idx-fill" style="width:'+pct+'%"></div></div><div class="idx-num">chỉ số '+u.idx.toFixed(2)+'</div></div>'+
         '<div class="badge '+(quartile===0?"official":quartile===3?"warn":"proxy")+'" style="justify-self:end;">'+MUC_LABEL[quartile]+'</div></div>';
     }).join("")+'</div>';
+    var nhan = document.getElementById("nangSuatPA"); if (nhan) nhan.textContent = pa===2 ? "Đang hiển thị theo PA1 (số liệu đã đối chiếu văn bản)." : "Đang hiển thị theo PA2 (số liệu đơn vị cung cấp).";
+  }
+
 
   var tabsEl = document.getElementById("metricTabs");
   var panelsEl = document.getElementById("metricPanels");
@@ -1229,7 +1256,7 @@
     tab.className = "metric-tab"+(i===0?" active":"");
     tab.textContent = m.label;
     tab.onclick = function(){
-      document.querySelectorAll(".metric-tab").forEach(function(t){t.classList.remove("active");});
+      document.querySelectorAll("#metricTabs .metric-tab").forEach(function(t){t.classList.remove("active");});
       document.querySelectorAll(".metric-panel").forEach(function(p){p.classList.remove("active");});
       tab.classList.add("active");
       document.getElementById("panel-"+m.key).classList.add("active");
