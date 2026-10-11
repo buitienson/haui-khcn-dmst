@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
-<title>Hoạt động KHCN&ĐMST của HaUI</title>
-<meta name="description" content="Số liệu hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo của Đại học Công nghiệp Hà Nội, chạy thử theo Bộ tiêu chí đánh giá v42.">
+<title>Đánh giá thử nghiệm KHCN&ĐMST HaUI</title>
+<meta name="description" content="Đánh giá thử nghiệm hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo theo Bộ tiêu chí — Đại học Công nghiệp Hà Nội (2024–2026).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -254,12 +254,74 @@
     .kpi-grid{grid-template-columns:1fr;}
     .nq57-grid{grid-template-columns:1fr;}
   }
+
+  :root{
+    --c01:#2563EB; --c02:#7C3AED; --c04:#C026D3; --c05:#0D9488; --c06:#D97706; --c07:#16A34A; --c08:#E11D48;
+    --hero-a:#0B2A6F; --hero-b:#1D4ED8; --hero-c:#0EA5A4;
+  }
+  body{background:linear-gradient(180deg,#EEF4FF 0,#F7F9FD 420px,#F7F9FD 100%);}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) body{background:var(--paper);} }
+  :root[data-theme="dark"] body{background:var(--paper);}
+  header.hero{position:relative; overflow:hidden; color:#fff; border-bottom:none;
+    background:radial-gradient(1200px 400px at 85% -10%, rgba(14,165,164,.55), transparent 60%),
+               radial-gradient(900px 380px at -10% 110%, rgba(225,29,72,.35), transparent 60%),
+               linear-gradient(120deg,var(--hero-a),var(--hero-b));}
+  header.hero::after{content:""; position:absolute; right:-80px; top:-80px; width:320px; height:320px; border-radius:50%;
+    border:46px solid rgba(255,255,255,.07);}
+  header.hero .wrap{position:relative; z-index:1;}
+  header.hero .eyebrow{color:#FCD34D;}
+  header.hero h1{color:#fff; font-size:clamp(26px,3.4vw,42px); font-weight:700; line-height:1.2;}
+  header.hero h1 .h1-sub{display:block; margin-top:10px; font-size:clamp(16px,1.6vw,20px); font-weight:600; color:#BFDBFE;}
+  header.hero p.lede{color:#DBEAFE;}
+  header.hero .badge.proxy{background:rgba(252,211,77,.18); color:#FDE68A;}
+  header.hero .badge.official{background:rgba(52,211,153,.18); color:#A7F3D0;}
+  header.hero .badge.warn{background:rgba(251,113,133,.2); color:#FECDD3;}
+  section{border-bottom:none;}
+  section:nth-of-type(even){background:rgba(37,99,235,.035);}
+  .section-head h2{position:relative; padding-left:16px;}
+  .section-head h2::before{content:""; position:absolute; left:0; top:4px; bottom:4px; width:5px; border-radius:3px;
+    background:linear-gradient(180deg,var(--c01),var(--c05));}
+  .kpi-grid{gap:14px; background:none; border:none; border-radius:0; overflow:visible;}
+  .kpi{border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow); position:relative; overflow:hidden;
+    border-top:4px solid var(--kc,var(--c01)); transition:transform .15s, box-shadow .15s;}
+  .kpi .num{color:var(--kc,var(--c01));}
+  .kpi.clickable{cursor:pointer;}
+  .kpi.clickable:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(29,78,216,.16);}
+  .kpi .more{margin-top:10px; font-size:12.5px; font-weight:700; color:var(--kc,var(--c01));}
+  .metric-tab.active{background:linear-gradient(120deg,var(--hero-b),var(--c05)); border-color:transparent; color:#fff;}
+  .score-table th.g01{color:var(--c01);} .score-table th.g02{color:var(--c02);} .score-table th.g04{color:var(--c04);}
+  .score-table th.g05{color:var(--c05);} .score-table th.g06{color:var(--c06);} .score-table th.g07{color:var(--c07);}
+  .score-table th.g08{color:var(--c08);}
+  .ptbar{display:block; height:4px; border-radius:2px; margin-top:4px; background:var(--line); overflow:hidden;}
+  .ptbar i{display:block; height:100%; border-radius:2px;}
+  .score-table tbody tr:nth-child(1) td:first-child{color:#B45309; font-weight:800;}
+  .score-table tbody tr:nth-child(2) td:first-child{color:#64748B; font-weight:800;}
+  .score-table tbody tr:nth-child(3) td:first-child{color:#9A3412; font-weight:800;}
+  .stot{display:inline-block; min-width:64px; padding:3px 10px; border-radius:999px; color:#fff; font-weight:700;
+    background:linear-gradient(120deg,var(--hero-b),var(--c05));}
+  .ds-modal{position:fixed; inset:0; z-index:50; display:none; align-items:flex-start; justify-content:center;
+    background:rgba(11,22,48,.55); padding:40px 16px; overflow-y:auto;}
+  .ds-modal.open{display:flex;}
+  .ds-box{background:var(--paper-raised); border-radius:16px; width:min(1100px,100%); box-shadow:0 30px 80px rgba(0,0,0,.35); overflow:hidden;}
+  .ds-head{padding:18px 22px; color:#fff; background:linear-gradient(120deg,var(--hero-a),var(--hero-b)); display:flex; justify-content:space-between; gap:12px; align-items:flex-start;}
+  .ds-head h3{color:#fff; font-size:18px;}
+  .ds-head .sub{font-size:13px; color:#BFDBFE; margin-top:4px;}
+  .ds-close{background:rgba(255,255,255,.15); color:#fff; border:none; border-radius:8px; padding:6px 12px; font-size:14px; cursor:pointer;}
+  .ds-body{padding:8px 22px 22px; overflow-x:auto;}
+  .ds-body table{min-width:760px;}
+  .ds-body td{vertical-align:top; font-size:13px;}
+  .ds-tag{display:inline-block; padding:2px 8px; border-radius:999px; font-size:11.5px; font-weight:700; white-space:nowrap;}
+  .ds-tag.vb{background:#DCFCE7; color:#166534;}
+  .ds-tag.ke{background:#FEF3C7; color:#92400E;}
+  .ds-tag.qg{background:#EDE9FE; color:#5B21B6;}
+  .ds-tag.bo{background:#DBEAFE; color:#1E40AF;}
+  @media (max-width:640px){ .ds-modal{padding:12px 8px;} .ds-head{padding:14px 16px;} .ds-body{padding:6px 12px 16px;} }
 </style>
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Bộ tiêu chí đánh giá hoạt động KHCN&amp;ĐMST, Dự thảo v42</span>
-    <h1>Báo cáo hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo tại Đại học Công nghiệp Hà Nội (2024-2026)</h1>
+    <span class="eyebrow">Ban Khoa học, Công nghệ và Đổi mới sáng tạo · Đánh giá thử nghiệm</span>
+    <h1>Đánh giá thử nghiệm hoạt động Khoa học, Công nghệ và Đổi mới sáng tạo theo Bộ tiêu chí<span class="h1-sub">Đại học Công nghiệp Hà Nội · 2024–2026</span></h1>
     <p class="lede">Tổng hợp số liệu hoạt động KHCN&amp;ĐMST của 8 đơn vị thuộc diện đánh giá theo Phụ lục IV, đối chiếu với 57 tiêu chí trong dự thảo và các mục tiêu của Nghị quyết 57-NQ/TW. Mỗi kỳ đánh giá sau sẽ bổ sung thêm vào các bảng và biểu đồ dưới đây, không thay số liệu kỳ trước.</p>
     <div class="status-row">
       <span class="badge proxy"><span class="dot"></span>Đa số dữ liệu: sơ bộ 2025</span>
@@ -296,6 +358,7 @@
     </div>
     <div id="paDesc" style="font-size:13px;color:var(--ink-dim);margin:-8px 0 14px;"></div>
     <div id="officialRankingTable"></div>
+    <div class="ds-modal" id="dsModal" role="dialog" aria-modal="true"><div class="ds-box"><div class="ds-head"><div><h3 id="dsTitle"></h3><div class="sub" id="dsSub"></div></div><button class="ds-close" id="dsClose" type="button">Đóng ✕</button></div><div class="ds-body" id="dsBody"></div></div></div>
     <div id="paAdjust" style="margin-top:18px;"></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.01: tỷ lệ tham gia + tiến sĩ + nữ tham gia. KHCN.02: nhiệm vụ cấp cơ sở/Bộ/Quốc gia. KHCN.04: đơn ĐK + văn bằng + chuyển giao. KHCN.05: 05.01+05.02+05.03 (Q1 top ≤5%=4, Q1 khác=3, Q2=2, Q3=1,5, Q4=1). KHCN.06: thu từ nhiệm vụ cấp trên cơ sở (Bộ, Tỉnh, Quốc gia, Nafosted). KHCN.07: nhóm mạnh + tiềm năng. KHCN.08: sáng kiến + giải thưởng giảng viên. Giải thưởng người học (KHCN.08.04) tạm loại khỏi phép tính vì số liệu vượt xa ngưỡng mức 5 của Phụ lục II.</p>
   </div>
@@ -464,6 +527,30 @@
 (function(){
   "use strict";
 
+  var NV_CAP_TREN = [{"u": "cntt-tt", "nam": 2024, "cap": "qg", "nguon": "Nafosted", "cn": "Lê Thị Anh", "ten": "Ứng dụng học máy và tối ưu hóa trong việc bảo mật cho hệ thống NOMA với sự hỗ trợ của IRS", "kp": 680.0, "tt": "Đang thực hiện", "vb": "HĐ 09/2024/102/HĐTN (01/8/2024); QĐ 55/QĐ-HĐQL-NAFOSTED"}, {"u": "co-khi-o-to", "nam": 2024, "cap": "bo", "nguon": "Sở KHCN Hà Nội", "cn": "Phạm Văn Đông", "ten": "Nghiên cứu công nghệ tạo lớp phủ TiAIN bằng phương pháp lắng đọng trong chân không (PVD) ứng dụng phủ trên dụng cụ cắt và khuôn đùn ép nhựa", "kp": 2800.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Bắc Ninh", "cn": "Nguyễn Đức Hải", "ten": "Hoàn thiện quy trình kỹ thuật nhân giống và trồng nấm bào ngư vàng (Pleurotus citrinopileatus) có giá trị y dược và dinh dưỡng cao tại thị xã Quế Võ, tỉnh Bắc Ninh.", "kp": 531.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Bắc Ninh", "cn": "Nguyễn Đức Hải", "ten": "Hoàn thiện quy trình kỹ thuật nhân giống và trồng nấm bào ngư vàng (Pleurotus citrinopileatus) có giá trị y dược và dinh dưỡng cao tại thị xã Quế Võ, tỉnh Bắc Ninh", "kp": 595.0, "tt": "Nghiệm thu", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Hưng Yên", "cn": "Vũ Thị Cương", "ten": "Ứng dụng tiến bộ khoa học và công nghệ trong nghiên cứu, chế tạo thiết bị nuôi trồng một số loại nấm ăn, nấm dược liệu và xây dựng mô hình, hoàn thiện quy trình sản xuất quy mô hộ gia đình trên địa bàn tỉnh Hưng Yên", "kp": 5666.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Bắc Ninh", "cn": "Vũ Thị Cương", "ten": "Nghiên cứu hoàn thiện quy trình Công nghệ sử dụng enzyme chế biến một số sản phẩm từ chuối tiêu hồng (Artocarpus interger) theo chuỗi giá trị và định hướng xuất khẩu tạ tỉnh Bắc Ninh", "kp": 1175.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Hải Dương", "cn": "Vũ Đình Giáp", "ten": "Xây dựng quy trình công nghệ sản xuất phân bón hữu cơ vi sinh đa lượng nhả chậm từ nguồn cơ chất hữu cơ tạo ra từ rác thải sinh hoạt trên địa bàn tỉnh Hải Dương", "kp": 700.0, "tt": "Hoàn thành", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2024, "cap": "bo", "nguon": "Tỉnh Hà Nam", "cn": "Đỗ Thị Cẩm Vân", "ten": "Nghiên cứu, xây dựng quy trình chế biến các sản phẩm từ quả chuối, nhằm hướng tới sản phẩm OCOP tỉnh Hà Nam", "kp": 1370.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "dien-dien-tu", "nam": 2024, "cap": "bo", "nguon": "Đề án hỗ trợ doanh nghiệp VVN - Bộ Công thương", "cn": "Kiều Xuân Thực", "ten": "Hỗ trợ tư vấn cho DNVVN về xây dựng thương hiệu, hệ thống quản lý chất lượng, tiết kiệm năng lượng và Hỗ trợ áp dụng các giải pháp chuyển đổi số, đào tạo về an toàn lao động và vệ sinh an toàn thực phẩm, mở rộng thị trường, áp dụng hệ thống quản lý chất lượng nhằm tham gia cụm liên kết ngành, chuỗi giá trị", "kp": 2750.0, "tt": "Hoàn thành", "vb": ""}, {"u": "cntt-tt", "nam": 2025, "cap": "qg", "nguon": "Quốc gia", "cn": "Đặng Trọng Hợp", "ten": "Nghiên cứu, thiết kế ứng dụng công nghệ của công nghiệp 4.0 để đánh giá kết quả học tập", "kp": 6432.0, "tt": "Đang thực hiện", "vb": "HĐ 58/2025/ĐTCT-KC-4.0/19-30 (15/02/2025); QĐ 3316/QĐ-BKHCN"}, {"u": "co-khi-o-to", "nam": 2025, "cap": "qg", "nguon": "Nafosted", "cn": "Hoàng Tiến Đạt", "ten": "Phát triển phương pháp thiết kế tối ưu đa tỉ lệ thuận nghịch cho siêu vật liệu in 3D lấy cảm hứng sinh học tích hợp dữ liệu đặc tính, ứng xử cơ - nhiệt ngẫu nhiên và trí tuệ nhân tạo", "kp": 1755.0, "tt": "Đang thực hiện", "vb": "HĐ 15/2025/HĐ-NCCB/107 (27/11/2025); QĐ 47/QĐ-HĐQL-NAFOSTED"}, {"u": "co-khi-o-to", "nam": 2025, "cap": "bo", "nguon": "Tỉnh Thái Bình", "cn": "Nguyễn Hồng Sơn", "ten": "Nghiên cứu, thiết kế, chế tạo thiết bị xử lý ô nhiễm về bụi, mùi trong không khí tại các hộ sản xuất trong các làng nghề sản xuất đồ gỗ và đồ thủ công mỹ nghệ tại tỉnh Thái Bình", "kp": 700.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2025, "cap": "bo", "nguon": "Bộ Công Thương", "cn": "Vũ Đình Giáp", "ten": "Xây dựng mô hình tái chế Bã mía thành vật liệu Hybid-Cellulose ứng dụng sản xuất hộp đựng thực phẩm dùng một lần có khả năng phân hủy sinh học", "kp": 500.0, "tt": "Hoàn thành", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2025, "cap": "bo", "nguon": "Tỉnh Hải Dương", "cn": "Đỗ Thị Cẩm Vân", "ten": "Nghiên cứu ứng dụng công nghệ enzyme sản xuất bột cà rốt biến tính giàu dinh dưỡng và hoạt chất sinh học trên địa bàn tỉnh Hải Dương”.", "kp": 2904.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "cong-nghe-hoa", "nam": 2025, "cap": "bo", "nguon": "Bộ Công Thương", "cn": "Đỗ Thị Cẩm Vân", "ten": "Nghiên cứu công nghệ lên men dị dưỡng vi tảo Chlorella sp. để sản xuất nguyên liệu giàu protein và lutein ứng dụng trong thực phẩm và thức ăn chăn nuôi", "kp": 3800.0, "tt": "Đang thực hiện", "vb": "HĐ 042.2025.ĐT.BO/HĐKHCN (26/6/2025); QĐ 636/QĐ-BCT"}, {"u": "dien-dien-tu", "nam": 2025, "cap": "bo", "nguon": "Đề án hỗ trợ doanh nghiệp VVN - Bộ Công thương", "cn": "Kiều Xuân Thực", "ten": "Hỗ trợ Tư vấn cho doanh nghiệp nhỏ và vừa áp dụng chuyển đổi số; hỗ trợ doanh nghiệp nhỏ và vừa trong các ngành sản xuất cơ khí, chế biến cao su, sản xuất chế biến thực phẩm tham gia cụm liên kết, chuỗi giá trị", "kp": 2550.0, "tt": "Hoàn thành", "vb": ""}, {"u": "dien-dien-tu", "nam": 2025, "cap": "bo", "nguon": "Tỉnh Sơn La", "cn": "Nguyễn Tuấn Anh", "ten": "Nghiên cứu phát triển vùng trồng gắn với chế biến để cây sâm bố chính trở thành sản phẩm hàng hoá", "kp": 1890.0, "tt": "Đang thực hiện", "vb": ""}, {"u": "dien-dien-tu", "nam": 2025, "cap": "qg", "nguon": "Quốc gia", "cn": "Trịnh Trọng Chưởng", "ten": "Nghiên cứu thiết kế, chế tạo hệ thống giám sát, chẩn đoán và định vị sự cố các phần tử trong nhà máy điện mặt trời", "kp": 7510.0, "tt": "Đang thực hiện", "vb": "HĐ 02/2025-HĐ-ĐTCT-KC.05.02/21-30 (01/11/2025); QĐ 469/QĐ-BKHCN"}, {"u": "giao-duc-dai-cuong", "nam": 2025, "cap": "bo", "nguon": "Bộ Giáo dục và Đào tạo", "cn": "Nguyễn Hữu Sáu", "ten": "Bài toán ổn định cho lớp hệ phương trình vi/sai phân có trễ/có xung và điều khiển kích hoạt sự kiện", "kp": 400.0, "tt": "Đang thực hiện", "vb": "Thuyết minh B2025-CTT-06 (đã đóng dấu); QĐ 1678/QĐ-BGDĐT"}, {"u": "kinh-te", "nam": 2025, "cap": "qg", "nguon": "Nafosted", "cn": "Nguyễn Văn Linh", "ten": "Tác động của các yếu tố công nghệ Blockchain, môi trường và tổ chức đến hiệu quả hệ thống kế toán hướng tới hiệu suất bền vững tại doanh nghiệp Việt Nam trong bối cảnh chuyển đổi số", "kp": 800.0, "tt": "Đang thực hiện", "vb": "HĐ 06/2025/HĐ-NCCB/502 (25/12/2025); QĐ 61/QĐ-HĐQL-NAFOSTED"}, {"u": "ngoai-ngu-du-lich", "nam": 2025, "cap": "qg", "nguon": "Nafosted", "cn": "Lê Ba Phong", "ten": "Tăng cường khả năng đổi mới sáng tạo của các doanh nghiệp Việt Nam thông qua lãnh đạo chuyển đổi và lãnh đạo số: Vai trò của văn hóa hợp tác, văn hóa số và quản trị tri thức", "kp": 1100.0, "tt": "Đang thực hiện", "vb": "HĐ NCCB/2025/502/13 (15/3/2025); QĐ 88/QĐ-HĐQL-NAFOSTED"}, {"u": "ngoai-ngu-du-lich", "nam": 2025, "cap": "bo", "nguon": "Bộ Công Thương", "cn": "Phạm Thị Vân Anh", "ten": "Nghiên cứu tiềm năng và khuyến nghị chính sách phát triển du lịch công nghiệp ở Việt Nam", "kp": 700.0, "tt": "Đang thực hiện", "vb": "HĐ 092.2025.ĐT.BO/HĐKHCN; QĐ 636/QĐ-BCT"}];
+  var TEN_DV = {"co-khi-o-to":"Trường Cơ khí - Ô tô","dien-dien-tu":"Trường Điện - Điện tử","kinh-te":"Trường Kinh tế","ngoai-ngu-du-lich":"Trường Ngoại ngữ - Du lịch","cntt-tt":"Trường Công nghệ thông tin và Truyền thông","cong-nghe-hoa":"Khoa Công nghệ Hóa","cong-nghe-may":"Khoa Công nghệ may và Thiết kế thời trang","giao-duc-dai-cuong":"Khoa Giáo dục đại cương"};
+  function nvNam(y){ return NV_CAP_TREN.filter(function(x){ return x.nam===y; }); }
+  function sumKp(L){ return L.reduce(function(s,x){ return s+(x.kp||0); },0); }
+  function escH(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+  function moDanhSach(title, sub, head, rows){
+    document.getElementById("dsTitle").textContent = title;
+    document.getElementById("dsSub").textContent = sub;
+    document.getElementById("dsBody").innerHTML = '<table class="score-table"><thead><tr>'+head.map(function(c){ return '<th>'+c+'</th>'; }).join("")+'</tr></thead><tbody>'+rows.join("")+'</tbody></table>';
+    document.getElementById("dsModal").classList.add("open");
+  }
+  function dongDanhSach(){ document.getElementById("dsModal").classList.remove("open"); }
+  function moNhiemVu(y){
+    var L = nvNam(y);
+    var rows = L.map(function(x,i){
+      return '<tr><td class="mono">'+(i+1)+'</td><td>'+escH(x.ten)+'</td><td>'+escH(x.cn)+'</td><td>'+escH(TEN_DV[x.u]||x.u)+'</td>'+
+        '<td><span class="ds-tag '+x.cap+'">'+(x.cap==="qg"?"Quốc gia":"Bộ/Tỉnh")+'</span><div style="font-size:12px;color:var(--ink-faint);margin-top:3px;">'+escH(x.nguon)+'</div></td>'+
+        '<td class="num">'+(x.kp==null?"—":x.kp.toLocaleString("vi-VN"))+'</td>'+
+        '<td>'+(x.vb?'<span class="ds-tag vb">Có văn bản</span><div style="font-size:12px;margin-top:3px;">'+escH(x.vb)+'</div>':'<span class="ds-tag ke">Theo số liệu kê khai</span>')+'</td></tr>';
+    });
+    moDanhSach("Nhiệm vụ cấp Bộ trở lên · năm "+y, L.length+" nhiệm vụ · "+(Math.round(sumKp(L))/1000).toLocaleString("vi-VN")+" tỷ đồng · năm bắt đầu theo hợp đồng/quyết định",
+      ["#","Tên nhiệm vụ","Chủ nhiệm","Đơn vị","Cấp","Kinh phí (triệu đồng)","Căn cứ"], rows);
+  }
+
   var UNITS = [
     {id:"co-khi-o-to", ten:"Trường Cơ khí - Ô tô", khoi:"a", kN:1, giangvien:248, tienSi:82,
       thamGiaKHCN:139, nuThamGia:13, nuTong:17,
@@ -585,15 +672,17 @@
     {lbl:"Nhóm NC mạnh + tiềm năng", num:n(totalNhomNC), sub:"toàn trường · 2025", badge:"proxy"},
     {lbl:"Sở hữu trí tuệ", num:n(TOAN_TRUONG.shtt), sub:"đơn ĐK + văn bằng, 2025, theo đơn vị bên dưới", badge:"proxy"},
     {lbl:"Hợp đồng CGCN/dịch vụ", num:n(TOAN_TRUONG.cgcnSoHD), sub:tyd(TOAN_TRUONG.cgcnTien)+" tỷ đồng", badge:"proxy"},
-    {lbl:"Nhiệm vụ cấp Bộ trở lên", num:n(TOAN_TRUONG.nvCapBoSL), sub:tyd(TOAN_TRUONG.nvCapBoTien)+" tỷ đồng", badge:"proxy"},
+    {lbl:"Nhiệm vụ cấp Bộ trở lên · 2025", num:n(nvNam(2025).length), sub:tyd(sumKp(nvNam(2025)))+" tỷ đồng · năm bắt đầu 2025", badge:"official", kc:"var(--c02)", click:"nv2025"},
+    {lbl:"Nhiệm vụ cấp Bộ trở lên · 2024", num:n(nvNam(2024).length), sub:tyd(sumKp(nvNam(2024)))+" tỷ đồng · năm bắt đầu 2024", badge:"official", kc:"var(--c01)", click:"nv2024"},
     {lbl:"Đề tài trọng điểm cấp ĐH", num:n(TOAN_TRUONG.deanTrongDiem), sub:"đợt 15/10/2025, toàn trường", badge:"proxy"},
     {lbl:"Đoàn ra · KHCN.03.03", num:n(TOAN_TRUONG.doanRa2025), sub:"2024: "+n(TOAN_TRUONG.doanRa2024)+" · toàn trường, chưa tách đơn vị", badge:"proxy"},
     {lbl:"Đoàn vào · KHCN.03.04", num:n(TOAN_TRUONG.doanVao2025), sub:"2024: "+n(TOAN_TRUONG.doanVao2024)+" · toàn trường, chưa tách đơn vị", badge:"proxy"}
   ];
-  kpiGrid.innerHTML = kpis.map(function(k){
-    return '<div class="kpi"><div class="lbl">'+k.lbl+' <span class="badge '+k.badge+'" style="padding:1px 7px;font-size:10px;"><span class="dot"></span>'+(k.badge==='official'?'chính thức':'sơ bộ')+'</span></div>'+
+  var KPI_MAU=["var(--c01)","var(--c05)","var(--c08)","var(--c07)","var(--c04)","var(--c06)"];
+  kpiGrid.innerHTML = kpis.map(function(k,i){
+    return '<div class="kpi'+(k.click?' clickable':'')+'"'+(k.click?' data-click="'+k.click+'" role="button" tabindex="0"':'')+' style="--kc:'+(k.kc||KPI_MAU[i%KPI_MAU.length])+'"'+'><div class="lbl">'+k.lbl+' <span class="badge '+k.badge+'" style="padding:1px 7px;font-size:10px;"><span class="dot"></span>'+(k.badge==='official'?'chính thức':'sơ bộ')+'</span></div>'+
       '<div class="num mono">'+k.num+'</div><div class="sub">'+k.sub+'</div>'+
-      (k.delta?'<div class="delta up">▲ '+k.delta+'</div>':'')+'</div>';
+      (k.delta?'<div class="delta up">▲ '+k.delta+'</div>':'')+(k.click?'<div class="more">Xem danh sách →</div>':'')+'</div>';
   }).join("");
 
   function lineChartSVG(cfg){
@@ -880,20 +969,27 @@
   }
 
   var PA2_HIEU_CHINH = {
-    "co-khi-o-to": {nv10_2025:[17,"Danh sách nhiệm vụ: 17 nhiệm vụ cấp cơ sở bắt đầu 2025"],
-      kp34_2025:[2.455,"0,7 tỷ (Tỉnh Thái Bình) + 1,755 tỷ (Nafosted, Hoàng Tiến Đạt)"]},
-    "dien-dien-tu": {kp34_2025:[11.95,"4,44 tỷ (Bộ Công Thương, Tỉnh Sơn La) + 7,51 tỷ (Quốc gia, Trịnh Trọng Chưởng)"]},
+    "co-khi-o-to": {nv10_2025:[17,"Danh sách nhiệm vụ: 17 nhiệm vụ cấp cơ sở bắt đầu 2025"]},
     "kinh-te": {nv10_2024:[14,"Danh sách nhiệm vụ: 14 nhiệm vụ cấp cơ sở bắt đầu 2024"]},
-    "ngoai-ngu-du-lich": {nv10_2025:[13,"Danh sách nhiệm vụ: 13 nhiệm vụ cấp cơ sở bắt đầu 2025"],
-      kp34_2025:[1.8,"0,7 tỷ (Bộ Công Thương, Phạm Thị Vân Anh) + 1,1 tỷ (Nafosted, Lê Ba Phong)"]},
-    "cntt-tt": {nv11_2025:[0,"Không có nhiệm vụ cấp Bộ/Tỉnh nào bắt đầu 2025 trong danh sách"],
-      kp34_2024:[0.68,"0,68 tỷ (Nafosted, Lê Thị Anh)"],
-      kp34_2025:[6.432,"Số cũ 2,225 tỷ không có nhiệm vụ nguồn, đưa về 0; cộng 6,432 tỷ (Quốc gia, Đặng Trọng Hợp)"]},
-    "cong-nghe-hoa": {kp34_2025:[7.204,"2,904 tỷ (Tỉnh Hải Dương) + 3,8 tỷ và 0,5 tỷ (Bộ Công Thương)"]}
+    "ngoai-ngu-du-lich": {nv10_2025:[13,"Danh sách nhiệm vụ: 13 nhiệm vụ cấp cơ sở bắt đầu 2025"]}
   };
+  ["co-khi-o-to","dien-dien-tu","kinh-te","ngoai-ngu-du-lich","cntt-tt","cong-nghe-hoa","cong-nghe-may","giao-duc-dai-cuong"].forEach(function(id){
+    var u = UNITS.filter(function(x){ return x.id===id; })[0]; if(!u) return;
+    [2024,2025].forEach(function(y){
+      var L = NV_CAP_TREN.filter(function(x){ return x.u===id && x.nam===y; });
+      var bo = L.filter(function(x){ return x.cap==="bo"; }).length, qg = L.filter(function(x){ return x.cap==="qg"; }).length;
+      var kp = Math.round(sumKp(L))/1000;
+      var hc = PA2_HIEU_CHINH[id] = PA2_HIEU_CHINH[id] || {};
+      var cc = "Danh mục nhiệm vụ cấp Bộ trở lên năm "+y+" (bấm ô ở mục Số liệu toàn trường để xem)";
+      if (u["nv11_"+y]!==bo) hc["nv11_"+y] = [bo, cc]; else delete hc["nv11_"+y];
+      if (u["nv12_"+y]!==qg) hc["nv12_"+y] = [qg, cc]; else delete hc["nv12_"+y];
+      if (Math.abs(u["kp34_"+y]-kp)>0.0005) hc["kp34_"+y] = [kp, cc]; else delete hc["kp34_"+y];
+    });
+  });
   var PA_FIELD_LABEL = {nv10_2024:"Nhiệm vụ cấp cơ sở 2024 (#10)", nv10_2025:"Nhiệm vụ cấp cơ sở 2025 (#10)",
-    nv11_2025:"Nhiệm vụ cấp Bộ 2025 (#11)", kp34_2024:"Kinh phí cấp trên cơ sở 2024 (#34, tỷ đồng)",
-    kp34_2025:"Kinh phí cấp trên cơ sở 2025 (#34, tỷ đồng)"};
+    nv11_2024:"Nhiệm vụ cấp Bộ 2024 (#11)", nv11_2025:"Nhiệm vụ cấp Bộ 2025 (#11)",
+    nv12_2024:"Nhiệm vụ cấp Quốc gia 2024 (#12)", nv12_2025:"Nhiệm vụ cấp Quốc gia 2025 (#12)",
+    kp34_2024:"Kinh phí cấp trên cơ sở 2024 (#34, tỷ đồng)", kp34_2025:"Kinh phí cấp trên cơ sở 2025 (#34, tỷ đồng)"};
   function unitsPA(pa){
     return UNITS.map(function(u){
       var v = Object.assign({}, u);
@@ -911,7 +1007,8 @@
     "06": (1000*W1_NORM.KHCN06).toFixed(0), "07": (1000*W1_NORM.KHCN07).toFixed(0),
     "08": (1000*W1_NORM.KHCN08).toFixed(0)
   };
-  function ptCell(v, max){ return '<td class="num mono" style="text-align:right;">'+v.toFixed(1)+'<span style="color:var(--ink-faint);font-size:11px;"> /'+max+'</span></td>'; }
+  var PT_MAU = {"135":"","122":"","270":"","68":""};
+  function ptCell(v, max, g){ var w = Math.max(0,Math.min(100, v/Number(max)*100)); return '<td class="num mono" style="text-align:right;">'+v.toFixed(1)+'<span style="color:var(--ink-faint);font-size:11px;"> /'+max+'</span><span class="ptbar"><i style="width:'+w.toFixed(0)+'%;background:var(--c'+(g||"01")+');"></i></span></td>'; }
   var PA_DESC = {
     1: "Số liệu tham số do đơn vị rà, xác nhận trên trang chi tiết (đồng bộ khi đơn vị bấm Gửi đi).",
     2: "Số liệu đơn vị cung cấp, thay bằng số Ban KHCN&ĐMST đếm lại từ danh sách nhiệm vụ chi tiết ở những ô lệch (xem bảng hiệu chỉnh bên dưới). Cột cuối so thứ hạng với PA1."
@@ -922,13 +1019,13 @@
     document.getElementById("paDesc").textContent = PA_DESC[pa];
     document.getElementById("officialRankingTable").innerHTML =
       '<table class="score-table"><thead><tr><th>#</th><th>Đơn vị</th>'+
-      '<th style="text-align:right">KHCN.01<br><span style="font-weight:400;font-size:11px;">Nhân lực</span></th>'+
-      '<th style="text-align:right">KHCN.02<br><span style="font-weight:400;font-size:11px;">Nhiệm vụ</span></th>'+
-      '<th style="text-align:right">KHCN.04<br><span style="font-weight:400;font-size:11px;">SHTT</span></th>'+
-      '<th style="text-align:right">KHCN.05<br><span style="font-weight:400;font-size:11px;">Công bố</span></th>'+
-      '<th style="text-align:right">KHCN.06<br><span style="font-weight:400;font-size:11px;">Thu KHCN</span></th>'+
-      '<th style="text-align:right">KHCN.07<br><span style="font-weight:400;font-size:11px;">Tiềm lực</span></th>'+
-      '<th style="text-align:right">KHCN.08<br><span style="font-weight:400;font-size:11px;">Sáng kiến</span></th>'+
+      '<th class="g01" style="text-align:right">KHCN.01<br><span style="font-weight:400;font-size:11px;">Nhân lực</span></th>'+
+      '<th class="g02" style="text-align:right">KHCN.02<br><span style="font-weight:400;font-size:11px;">Nhiệm vụ</span></th>'+
+      '<th class="g04" style="text-align:right">KHCN.04<br><span style="font-weight:400;font-size:11px;">SHTT</span></th>'+
+      '<th class="g05" style="text-align:right">KHCN.05<br><span style="font-weight:400;font-size:11px;">Công bố</span></th>'+
+      '<th class="g06" style="text-align:right">KHCN.06<br><span style="font-weight:400;font-size:11px;">Thu KHCN</span></th>'+
+      '<th class="g07" style="text-align:right">KHCN.07<br><span style="font-weight:400;font-size:11px;">Tiềm lực</span></th>'+
+      '<th class="g08" style="text-align:right">KHCN.08<br><span style="font-weight:400;font-size:11px;">Sáng kiến</span></th>'+
       '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000</span></th>'+
       (pa===2 ? '<th style="text-align:right">So với PA1</th>' : '')+'</tr></thead><tbody>'+
       ranked.map(function(u,i){
@@ -936,9 +1033,9 @@
         if (pa===2){ var d = hang1[u.id]-(i+1);
           doi = '<td class="num mono" style="text-align:right;">'+(d>0?'▲ '+d:(d<0?'▼ '+(-d):'—'))+' <span style="color:var(--ink-faint);font-size:11px;">(#'+hang1[u.id]+')</span></td>'; }
         return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+(pa===2&&PA2_HIEU_CHINH[u.id]?' <span style="color:var(--accent);">*</span>':'')+'</td>'+
-          ptCell(u.score.pt01, MAXPT["01"]) + ptCell(u.score.pt02, MAXPT["02"]) + ptCell(u.score.pt04, MAXPT["04"]) +
-          ptCell(u.score.pt05, MAXPT["05"]) + ptCell(u.score.pt06, MAXPT["06"]) + ptCell(u.score.pt07, MAXPT["07"]) + ptCell(u.score.pt08, MAXPT["08"]) +
-          '<td class="num mono" style="font-weight:700;">'+u.score.S.toFixed(1)+'</td>'+doi+'</tr>';
+          ptCell(u.score.pt01, MAXPT["01"],"01") + ptCell(u.score.pt02, MAXPT["02"],"02") + ptCell(u.score.pt04, MAXPT["04"],"04") +
+          ptCell(u.score.pt05, MAXPT["05"],"05") + ptCell(u.score.pt06, MAXPT["06"],"06") + ptCell(u.score.pt07, MAXPT["07"],"07") + ptCell(u.score.pt08, MAXPT["08"],"08") +
+          '<td class="num mono"><span class="stot">'+u.score.S.toFixed(1)+'</span></td>'+doi+'</tr>';
       }).join("")+'</tbody></table>';
     var adj = document.getElementById("paAdjust");
     if (pa!==2){ adj.innerHTML=''; return; }
@@ -1044,6 +1141,17 @@
     return '<div class="caveat"><div class="n">'+String(i+1).padStart(2,"0")+'</div><div class="t">'+c+'</div></div>';
   }).join("");
 
+  document.getElementById("kpiGrid").addEventListener("click", function(e){
+    var k = e.target.closest(".kpi.clickable"); if(!k) return;
+    var c = k.getAttribute("data-click");
+    if (c==="nv2025") moNhiemVu(2025); else if (c==="nv2024") moNhiemVu(2024);
+  });
+  document.getElementById("kpiGrid").addEventListener("keydown", function(e){
+    if ((e.key==="Enter"||e.key===" ") && e.target.classList.contains("clickable")){ e.preventDefault(); e.target.click(); }
+  });
+  document.getElementById("dsClose").addEventListener("click", dongDanhSach);
+  document.getElementById("dsModal").addEventListener("click", function(e){ if(e.target.id==="dsModal") dongDanhSach(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") dongDanhSach(); });
 })();
 </script>
 
