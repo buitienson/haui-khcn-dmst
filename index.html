@@ -558,7 +558,7 @@
   }
   new MutationObserver(function(){ ganNhan(); }).observe(document.body, {childList:true, subtree:true});
 
-  var APP_VERSION = "20261011-214422";
+  var APP_VERSION = "20261011-214626";
   (function(){
     var pill = document.getElementById("updPill");
     function kiem(){
@@ -801,7 +801,7 @@
     {lbl:"Hợp đồng CGCN/dịch vụ", num:n(TOAN_TRUONG.cgcnSoHD), sub:tyd(TOAN_TRUONG.cgcnTien)+" tỷ đồng", badge:"proxy"},
     {lbl:"Nhiệm vụ cấp Bộ trở lên năm 2025", num:n(nvNam(2025).length), sub:tyd(sumKp(nvNam(2025)))+" tỷ đồng, năm bắt đầu 2025", badge:"official", kc:"var(--c02)", click:"nv2025"},
     {lbl:"Nhiệm vụ cấp Bộ trở lên năm 2024", num:n(nvNam(2024).length), sub:tyd(sumKp(nvNam(2024)))+" tỷ đồng, năm bắt đầu 2024", badge:"official", kc:"var(--c01)", click:"nv2024"},
-    {lbl:"Đề tài trọng điểm cấp ĐH", num:n(TOAN_TRUONG.deanTrongDiem), sub:"đợt 15/10/2025, toàn trường", badge:"proxy"},
+    {lbl:"Nhiệm vụ KHCN&ĐMST cấp Đại học năm 2025, đợt 2", num:n(TOAN_TRUONG.deanTrongDiem), sub:"QĐ 1625/QĐ-ĐHCN ngày 03/10/2025, tổng kinh phí 5,14 tỷ đồng", badge:"official"},
     {lbl:"Đoàn ra, KHCN.03.03", num:n(TOAN_TRUONG.doanRa2025), sub:"2024: "+n(TOAN_TRUONG.doanRa2024)+", toàn trường, chưa tách đơn vị", badge:"proxy"},
     {lbl:"Đoàn vào, KHCN.03.04", num:n(TOAN_TRUONG.doanVao2025), sub:"2024: "+n(TOAN_TRUONG.doanVao2024)+", toàn trường, chưa tách đơn vị", badge:"proxy"}
   ];
