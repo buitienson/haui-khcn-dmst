@@ -78,9 +78,7 @@
   }
 
   *{box-sizing:border-box;}
-  /* Flex/grid children default to min-width:auto and refuse to shrink below their content —
-     this makes long Vietnamese unit names/sentences overflow their box instead of wrapping.
-     Force them to respect the track/flex-basis instead. */
+  
   .kpi-grid > *, .rank-row > div, .nq57-grid > *, .congbo-stats-grid > *,
   .barrow > div, .section-head > div, .metric-panel, .caveat > div { min-width: 0; }
   h1,h2,h3,p,.desc,.lede,.lbl,.ten,.target,.haui,.t,.name,.stat-line { overflow-wrap: break-word; }
@@ -107,21 +105,21 @@
   .badge.warn{background:var(--brick-soft); color:var(--brick);}
   .badge .dot{width:7px; height:7px; border-radius:50%; background:currentColor;}
 
-  /* ---------- Hero ---------- */
+  
   header.hero{padding:64px 0 48px; border-bottom:1px solid var(--line);}
   header.hero .eyebrow{margin-bottom:14px; display:block;}
   header.hero h1{font-size:clamp(28px,3.2vw,38px); font-weight:600; max-width:none;}
   header.hero p.lede{max-width:none; color:var(--ink-dim); font-size:17px; margin-top:16px;}
   .status-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
 
-  /* ---------- Sections ---------- */
+  
   section{padding:56px 0; border-bottom:1px solid var(--line);}
   section:last-of-type{border-bottom:none;}
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:28px; flex-wrap:wrap;}
   .section-head h2{font-size:26px; font-weight:600;}
   .section-head .desc{color:var(--ink-dim); font-size:14px; max-width:none; margin-top:6px;}
 
-  /* ---------- KPI grid ---------- */
+  
   .kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
   .kpi{background:var(--paper-raised); padding:22px 20px;}
   .kpi .lbl{font-size:12.5px; color:var(--ink-dim); font-weight:600; letter-spacing:.01em; min-height:32px;}
@@ -130,7 +128,7 @@
   .kpi .delta{font-size:13px; font-weight:600; margin-top:6px; display:flex; align-items:center; gap:4px;}
   .kpi .delta.up{color:var(--teal);}
 
-  /* ---------- Trend card ---------- */
+  
   .trend-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:28px 28px 22px; box-shadow:var(--shadow);}
   .trend-bars{display:flex; align-items:flex-end; gap:34px; height:140px; margin:24px 0 10px; padding-left:4px;}
   .trend-bar-col{display:flex; flex-direction:column; align-items:center; gap:8px; width:88px;}
@@ -139,7 +137,7 @@
   .trend-bar-col .yr{font-size:12.5px; color:var(--ink-dim); font-weight:600;}
   .trend-bar-col .val{font-size:13px; font-weight:600;}
 
-  /* ---------- Multi-year line charts ---------- */
+  
   .trend-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr)); gap:18px;}
   .linechart-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; padding:24px 26px; box-shadow:var(--shadow);}
   .linechart-card h3{font-size:17px; font-weight:600; margin-bottom:2px;}
@@ -149,11 +147,11 @@
   .lc-value-label{font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; fill:var(--ink);}
   .lc-future-label{font-family:Arial,Helvetica,sans-serif; font-size:11px; fill:var(--ink-faint); font-style:italic;}
 
-  /* ---------- Congbo stats ---------- */
+  
   .congbo-stats-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:18px;}
   @media (max-width:800px){ .congbo-stats-grid{grid-template-columns:1fr;} }
 
-  /* ---------- NQ57 grid ---------- */
+  
   .nq57-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
   .nq57-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:18px 20px;}
   .nq57-card .target{font-size:12.5px; color:var(--ink-dim); line-height:1.4;}
@@ -161,7 +159,7 @@
   .nq57-card .haui{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); font-size:13px;}
   .nq57-card .haui .val{font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--teal);}
 
-  /* ---------- Ranking table ---------- */
+  
   .rank-list{display:flex; flex-direction:column; gap:2px;}
   .rank-row{display:grid; grid-template-columns:40px 1fr 200px 84px; align-items:center; gap:14px; padding:12px 14px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; margin-bottom:8px;}
   .rank-medal{font-family:Arial,Helvetica,sans-serif; font-size:20px; font-weight:600; color:var(--ink-faint); text-align:center;}
@@ -172,7 +170,7 @@
   .rank-row .idx-fill{height:100%; background:var(--accent); border-radius:5px 0 0 5px;}
   .rank-row .idx-num{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-dim); margin-top:4px;}
 
-  /* ---------- Unit bar chart ---------- */
+  
   .barchart{display:flex; flex-direction:column; gap:10px;}
   .barrow{display:grid; grid-template-columns:200px 1fr 64px; align-items:center; gap:12px;}
   .barrow .name{font-size:13px; color:var(--ink); font-weight:500; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
@@ -188,7 +186,7 @@
   .metric-panel{display:none;}
   .metric-panel.active{display:block;}
 
-  /* ---------- Heatmap ---------- */
+  
   #officialRankingTable{overflow-x:auto;}
   .heatmap{border:1px solid var(--line); border-radius:12px; overflow-x:auto; overflow-y:hidden; background:var(--paper-raised);}
   .heatmap table{width:100%; border-collapse:collapse; font-size:13px;}
@@ -199,12 +197,12 @@
   .heatmap td:last-child, .heatmap th:last-child{border-right:none;}
   .heatcell{font-family:"IBM Plex Mono",monospace; font-weight:600;}
 
-  /* ---------- Legend ---------- */
+  
   .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-dim); margin-top:14px;}
   .legend span{display:inline-flex; align-items:center; gap:6px;}
   .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
 
-  /* ---------- Score table (dung chung: congbo, xep hang chinh thuc) ---------- */
+  
   .score-table{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:12px;}
   .score-table th, .score-table td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
   .score-table th{font-size:11.5px; text-transform:uppercase; letter-spacing:.02em; color:var(--ink-dim); font-weight:600;}
@@ -216,7 +214,7 @@
   .mucbadge.m4{background:var(--teal-soft); color:var(--teal-ink); opacity:.8;}
   .mucbadge.m5{background:var(--teal-soft); color:var(--teal-ink);}
 
-  /* ---------- Caveats ---------- */
+  
   .caveat-list{display:flex; flex-direction:column; gap:0;}
   .caveat{display:grid; grid-template-columns:36px 1fr; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);}
   .caveat:last-child{border-bottom:none;}
@@ -224,7 +222,7 @@
   .caveat .t{font-size:14px; color:var(--ink-dim);}
   .caveat .t b{color:var(--ink); font-weight:600;}
 
-  /* ---------- Edit panel ---------- */
+  
   details.ban-group{border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:var(--paper-raised); overflow:hidden;}
   details.ban-group summary{padding:14px 18px; cursor:pointer; font-weight:600; font-size:14px; list-style:none; display:flex; justify-content:space-between; align-items:center;}
   details.ban-group summary::-webkit-details-marker{display:none;}
@@ -410,7 +408,7 @@
     <div class="section-head">
       <div>
         <h2>Nhân lực KHCN&amp;ĐMST theo đơn vị</h2>
-        <div class="desc">KHCN.01.01/01.03/01.04: số liệu suy luận, chưa xác nhận.</div>
+        <div class="desc">KHCN.01.01/01.03/01.04: số liệu sơ bộ, đang xác nhận.</div>
       </div>
       <span class="badge warn"><span class="dot"></span>Chưa xác nhận</span>
     </div>
@@ -456,22 +454,9 @@
   </div>
 </section>
 
-<section id="edit">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Cập nhật số liệu</h2>
-        <div class="desc">Sửa trực tiếp, lưu tự động khi rời khỏi ô. Số liệu tại đây là nguồn cho toàn bộ tính toán ở trên.</div>
-      </div>
-    </div>
-    <div class="db-status" id="dbStatus">Đang kết nối cơ sở dữ liệu…</div>
-    <div id="banGroups"></div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap">
-    Nguồn: đối soát nội bộ từ dữ liệu Google Drive InnovationOffice (kê khai công trình khoa học 2025-2026, biểu TC-NS, sổ liệu tổng hợp KHCN&amp;ĐMST…) và văn bản dự thảo "Bo tieu chi (ban sach) v42.docx". Cập nhật lần gần nhất: 08/9/2026.
+    Nguồn: Ban Khoa học, Công nghệ và Đổi mới sáng tạo tổng hợp từ kê khai công trình khoa học, hồ sơ nhiệm vụ, số liệu nhân sự và dự thảo Quy định Bộ tiêu chí đánh giá hoạt động KHCN&amp;ĐMST.
   </div>
 </footer>
 
@@ -529,103 +514,26 @@
       congbo:152, sangkien:12, nhomNC:0, nhomManh:0, nhomTiemNang:0, deanSL:0, deanKP:0, hoithao:1,
       c0501:89, c0502:21, q1a:0, q1b:9, q2q:6, q3q:3, q4q:1, c0504:14, cKhac05:9, giaithuongGV:0, giaithuongSV:5}
   ];
-  // nv10_20xx/nv11_20xx/kp34_20xx (thêm 08.9.2026): T01_PhieuDuLieu_2021_2025_v1.xlsm (phiếu Bộ
-  // Công Thương, 2026.70/2026.74) Biểu F2 "Danh mục nhiệm vụ KHCN 2021-2025" — 359 đề tài riêng
-  // lẻ, match chủ nhiệm với roster SHCM (334/359 = 93%) để suy đơn vị. nv10 = KHCN.02.01 (đề tài
-  // "cấp cơ sở", theo năm bắt đầu). nv11 = KHCN.02.02 (đề tài "Bộ Công Thương" + đề án DNVVN-BCT
-  // + TOÀN BỘ đề tài cấp Tỉnh/Sở KH&CN — người dùng xác nhận 08.9.2026: cấp Tỉnh/thành phố tính
-  // tương đương cấp Bộ). KHCN.02.03 (cấp Quốc gia) = 0 toàn trường, rà hết 359 đề tài không thấy
-  // đề tài NAFOSTED/Quỹ ĐMCN quốc gia nào, khớp với nguồn khác — không thêm field riêng vì luôn 0.
-  // kp34 = KHCN.06.01, tổng kinh phí (Tỷ đồng) của các đề tài nhóm nv11, theo năm bắt đầu — kinh
-  // phí trong file là TỔNG cả vòng đời đề tài, không tách theo năm giải ngân, nên có thể lệch nhẹ
-  // so với "kinh phí thu trong kỳ" đúng nghĩa. CHƯA có #13/14 (tỷ lệ nghiệm thu đúng hạn) — file
-  // không có ngày nghiệm thu gốc để so hạn, chỉ ước lượng thô rất yếu (không seed).
-  // giangvien/tienSi: 01-nguon/Thống kê học vị và đơn vị sinh hoạt chuyên môn.xlsx (08.9.2026)
-  // — báo cáo "Công nhận công trình NCKH theo đơn vị SHCM", TOÀN BỘ giảng viên/viên chức hiện có
-  // theo đúng đơn vị SINH HOẠT CHUYÊN MÔN (không phải đơn vị công tác hành chính eGov) — người
-  // dùng xác nhận đây là mẫu số N_TVC chính thức dùng cho bộ tiêu chí, thay cho số cũ (131 v.v.)
-  // vốn lấy tạm từ 11 PDF sinh hoạt chuyên môn (thiếu hẳn Trường Cơ khí - Ô tô). Khoa Giáo dục đại
-  // cương = gộp 3 nhóm cũ Khoa Giáo dục đại cương + Khoa Khoa học cơ bản + Khoa Lý luận chính trị -
-  // Pháp luật trong file nguồn (đúng quy tắc hợp nhất đã áp cho `congbo`). tienSi = số người có học
-  // hàm/học vị bắt đầu "TS"/"PGS"/"GS" trong file — dùng được cho KHCN.01.03 khi cần.
-  // thamGiaKHCN/nuThamGia/nuTong (thêm 08.9.2026, cùng nguồn roster trên, KHCN.01.01/01.04):
-  // thamGiaKHCN = người có cột TỔNG GIỜ NĂM NAY > 0 (suy luận "có tham gia hoạt động KHCN&ĐMST"
-  // trong kỳ hiện tại — CHƯA xác nhận đúng khớp mốc 30/6 hay 31/12 của Quy định). nuThamGia/nuTong
-  // = số nữ trong nhóm tham gia / trong toàn bộ đơn vị, suy luận GIỚI TÍNH TỪ TÊN (có "Thị" ở tên
-  // đệm → nữ) vì file nguồn không có trường giới tính — CHƯA xác nhận, không dùng chấm điểm chính
-  // thức. VẪN CHƯA đưa vào officialScore() (không tính điểm chính thức) — nhưng THEO YÊU CẦU
-  // 08.9.2026 đã đưa ra bảng riêng "Nhân lực KHCN&ĐMST theo đơn vị" (mục nhanluc-stats bên dưới)
-  // để minh bạch, kèm nhãn cảnh báo rõ ràng thay vì ẩn đi — người xem PHẢI tự đối chiếu lại trước
-  // khi dùng cho việc khác. tienSi cùng tình trạng, cũng đưa vào bảng đó.
-  // giaithuongGV/giaithuongSV (KHCN.08.03/08.04) — SỬA GẤP 09.9.2026 theo yêu cầu trực tiếp "chỉ
-  // lấy đúng loại giải": đếm ban đầu (08.9.2026) dùng thẳng header nhóm "TÊN ĐƠN VỊ: N" trong file
-  // mà KHÔNG lọc cấp khen thưởng lẫn loại giải — lẫn cả giải thể thao/phong trào nội bộ (Pickleball,
-  // bóng bàn, TDTT, chạy...) và giải cấp Trường vào chung với giải KHCN&ĐMST thật, làm SV NCKH ra số
-  // ảo rất lớn (vd Cơ khí - Ô tô cũ = 124). Đã rà lại TỪNG DÒNG cả 3 file (PL VI giải GV, PL VII.1+2
-  // giải SV), lọc 2 lớp: (1) cột "Cấp khen thưởng" phải chứa Bộ/Tỉnh/Thành phố, Quốc gia, Quốc tế
-  // hoặc "toàn quốc" — loại thẳng mọi giải "cấp Trường"; (2) tên giải KHÔNG được chứa từ khoá thể
-  // thao/phong trào (bóng bàn, bóng đá, bóng ném, cầu lông, quần vợt, pickleball, TDTT, bơi, chạy,
-  // chính luận bảo vệ nền tảng tư tưởng...) — loại cả khi những giải này ở cấp Bộ/Tỉnh thật (vd thi
-  // đấu thể thao giữa các trường đại học khu vực Hà Nội, không phải KHCN&ĐMST). Rồi mới match người
-  // với roster SHCM (8 đơn vị) để suy đơn vị, KHÔNG dùng lại header nhóm gốc của file (đã thấy
-  // header nhóm ĐÔI KHI lệch với "Đơn vị công tác" thật của từng dòng, ví dụ Nguyễn Văn Tình).
-  // Kết quả sau lọc: giaithuongGV chỉ còn ĐÚNG 1 giải thật toàn bộ 2 file (Best Paper Award, Hội
-  // thảo quốc tế SETSM 2026, Nguyễn Văn Tình → CNTT&TT theo roster — khác nhóm gốc "Ngoại ngữ - Du
-  // lịch" cũ dùng nhầm giải "cấp Trường, cuộc thi chính luận" không liên quan KHCN). giaithuongSV
-  // giảm mạnh về mức hợp lý (Cơ khí - Ô tô 124→14, CNTT&TT 122→13, Điện-Điện tử 85→5, Giáo dục đại
-  // cương 23→5, Ngoại ngữ-Du lịch 86→4, Kinh tế 122→1, CN Hóa/CN May 56/9→0) — giờ CÓ PHÂN HOÁ THẬT
-  // giữa các đơn vị thay vì gần như đơn vị nào cũng chạm trần mức 5. Data đã đủ tin cậy để đưa cả
-  // 08.03 VÀ 08.04 vào officialScore() (trước đó chỉ dùng 08.03, cố tình loại 08.04).
-  // nhomManh/nhomTiemNang (sửa 08.9.2026, đối chiếu QĐ 2296/QĐ-ĐHCN 30/12/2025 "Phê duyệt và
-  // thành lập các nhóm nghiên cứu mạnh, nhóm nghiên cứu tiềm năng năm 2025" + danh sách 12 nhóm
-  // kèm theo): Cơ khí - Ô tô sửa 2→3 (thiếu nhóm "Tối ưu hóa thiết kế và gia công cơ khí..." của
-  // Nguyễn Hồng Sơn, đơn vị gốc Viện Công nghệ - HaUI, quy đổi theo roster SHCM → Cơ khí - Ô tô,
-  // khớp cả nội dung nhóm). CN Hóa (nhóm "Hóa học ứng dụng..." của Nguyễn Quang Tùng, cũng Viện
-  // Công nghệ → quy đổi CN Hóa qua roster) đã đúng sẵn từ trước. Tổng 8 đơn vị = 12 (1 mạnh + 11
-  // tiềm năng), khớp đúng số nhóm trong quyết định.
-  // Nguồn 05.01-05.04 (cập nhật 08.9.2026, chuyển sang NĂM DƯƠNG LỊCH 2025 thay vì NH2025-2026):
-  // gộp 3 đợt kê khai giờ khoa học — NH2023-2024 (01-nguon/2023-2024/.../Sep 15), NH2024-2025
-  // (2026.81/.../Bộ hồ sơ mẫu Quyết định/Công trình khoa học), NH2025-2026 (01-nguon/14.) — mỗi
-  // đợt có cột "Thời gian xuất bản" (M/YYYY) để tách đúng theo năm dương lịch, quy đổi đơn vị qua
-  // 3 tầng: khớp trực tiếp 1/8 đơn vị > bảng đối soát có sẵn (chỉ NH2025-2026) > tra theo tác giả
-  // chính trong roster SHCM > 21 tác giả còn lại (chỉ NH2025-2026) tự suy theo lĩnh vực bài báo.
-  // NH2023-2024/2024-2025 KHÔNG có bảng đối soát riêng nên một số bản ghi ở đơn vị ngoài 8 trường/
-  // khoa (không khớp roster) bị loại khỏi tổng — số liệu 2023/2024 vì vậy có thể còn THIẾU.
-  // c0501=Bài trong nước; c0502=Báo cáo trong nước ISBN; q1a=Q1 top ≤5% (chỉ NH2025-2026 có tách
-  // mức này); q1b=Q1 khác; q2q/q3q/q4q=Q2/Q3/Q4 (kể cả "WoS/Scopus chưa xếp hạng"); c0504=RAW báo
-  // cáo QT ISBN/WoS-Scopus (CHƯA quy đổi hạng CORE, KHÔNG dùng chấm điểm 05.04); cKhac05=không xếp
-  // được vào 4 mục trên, loại khỏi mọi phép tính điểm.
+
   UNITS.forEach(function(u){ u.congboPerGV = Math.round((u.congbo/u.giangvien)*100)/100; });
 
-  // shttDonDK25/shttVanBang25 (KHCN.04.01/04.02, thêm 08.9.2026): cùng phương pháp gộp 3 đợt kê
-  // khai + quy đổi đơn vị qua roster SHCM như công bố khoa học, lọc năm dương lịch 2025 (2023/2024
-  // số quá ít & rải rác, chưa tách theo năm). Tổng 2025 toàn trường: 3 đơn ĐK (Cơ khí - Ô tô 3,
-  // CN Hóa 3... - xem bảng) + 8 văn bằng (Cơ khí - Ô tô 4, CN may 1...).
-
   var TOAN_TRUONG = {
-    thu2024:41147, thu2025:113333, // triệu đồng (hiển thị đổi sang tỷ đồng ở KPI/biểu đồ toàn trường theo yêu cầu 09.9.2026 — số gốc giữ nguyên triệu đồng), CHÍNH THỨC mốc 31/12 — LƯU Ý: đây thực ra là #52
-    // "Tổng nguồn thu của Đại học" (mẫu số KHCN.11.01/11.02), khớp CHÍNH XÁC với T01 sheet
-    // D_TaiChinh dòng "A TỔNG NGUỒN THU" — KHÔNG PHẢI KHCN.12.03 (Tổng kinh phí thu TỪ HOẠT ĐỘNG
-    // KHCN&ĐMST, tiêu chí này vẫn "Chưa có") dù nhãn KPI phía dưới đang ghi "Thu từ hoạt động
-    // KHCN&ĐMST" — CHƯA sửa nhãn (thuộc diện cần hỏi trước khi đổi nội dung hiển thị công khai).
-    shtt:11, // KHCN.04, năm dương lịch 2025 (xem bảng nhiemVuTable + comment shttDonDK25 ở trên)
+    thu2024:41147, thu2025:113333,
+
+    shtt:11,
     cgcnSoHD:4, cgcnTien:666.6, nvCapBoSL:11, nvCapBoTien:44227, deanTrongDiem:39,
-    // doanRa/doanVao (KHCN.03.03/03.04, thêm 08.9.2026 THEO YÊU CẦU): T01_PhieuDuLieu_2021_2025_
-    // v1.xlsm sheet H_HopTac, dòng "Số lượt đoàn ra"/"Số lượt đoàn vào" — SỐ THẬT, không suy luận,
-    // nhưng CHỈ CÓ TOÀN TRƯỜNG, file nguồn không tách theo 8 đơn vị.
+
     doanRa2024:17, doanRa2025:17, doanVao2024:65, doanVao2025:70
   };
 
-  // Chuỗi 3 năm dương lịch liên tiếp, toàn trường, proxy — 2023 CHƯA ĐẦY ĐỦ (thiếu nguồn NH2022-2023)
   var CONGBO_SERIES = {
     nhan: ["2023","2024","2025"],
     trongNuoc: [207, 652, 734],
     quocTe: [210, 444, 700]
   };
 
-  var THU_SERIES = { nhan:["2024","2025"], gia_tri:[Math.round(TOAN_TRUONG.thu2024/1000*100)/100, Math.round(TOAN_TRUONG.thu2025/1000*100)/100] }; // tỷ đồng
+  var THU_SERIES = { nhan:["2024","2025"], gia_tri:[Math.round(TOAN_TRUONG.thu2024/1000*100)/100, Math.round(TOAN_TRUONG.thu2025/1000*100)/100] };
 
-  // Nghị quyết 57-NQ/TW (22/12/2024) — mục tiêu quốc gia đến 2030
   var NQ57_TARGETS = [
     {ten:"Công bố khoa học quốc tế", muctieu:"tăng trung bình ≥10%/năm", haui:"Số liệu sơ bộ theo năm dương lịch, 2023 chưa đầy đủ, xem thống kê chi tiết bên dưới", tieuchi:"KHCN.12.05"},
     {ten:"Đơn đăng ký/văn bằng sáng chế", muctieu:"tăng trung bình 16–18%/năm, khai thác thương mại 8-10%", haui:"HaUI đo bằng KHCN.04, KHCN.12.08, nhưng chưa đủ chuỗi năm để tính tốc độ tăng trưởng", tieuchi:"KHCN.04 / KHCN.12.08"},
@@ -653,7 +561,6 @@
     "KHCN.05.03: ngưỡng 5 mức hiện chỉ tính từ 8 quan sát (8 đơn vị × 1 năm). Bản thân Phụ lục II tự ghi chú cần điều chỉnh khi có số liệu chính thức nhiều năm hơn."
   ];
 
-  // Phụ lục III — 64 tham số, gộp theo Ban chủ trì cho khung nhập liệu
   var THAM_SO = [{"tt":1,"ten":"Tổng số giảng viên","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.01","KHCN.02.01","KHCN.05.03"]},{"tt":2,"ten":"Số giảng viên tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.01.01"]},{"tt":3,"ten":"Tổng số người học","dvt":"Người","chu_tri":"Ban Đào tạo","tc":["KHCN.01.02"]},{"tt":4,"ten":"Số người học tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.01.02"]},{"tt":5,"ten":"Số giảng viên có học vị tiến sĩ","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.03"]},{"tt":6,"ten":"Số nữ viên chức, người lao động tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":7,"ten":"Tổng số viên chức, người lao động tham gia hoạt động KHCN&ĐMST","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":8,"ten":"Tổng số nữ viên chức, người lao động thuộc đơn vị","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":9,"ten":"Tổng số viên chức, người lao động thuộc đơn vị","dvt":"Người","chu_tri":"Ban Tổ chức - Nhân sự","tc":["KHCN.01.04"]},{"tt":10,"ten":"Số nhiệm vụ KHCN&ĐMST cấp cơ sở phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.01"]},{"tt":11,"ten":"Số nhiệm vụ KHCN&ĐMST cấp Bộ phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.02"]},{"tt":12,"ten":"Số nhiệm vụ KHCN&ĐMST cấp Quốc gia phê duyệt mới","dvt":"Nhiệm vụ","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.03"]},{"tt":13,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp cơ sở nghiệm thu đúng hạn","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.04"]},{"tt":14,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp trên cơ sở nghiệm thu đúng hạn","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.05"]},{"tt":15,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp cơ sở được ứng dụng","dvt":"%","chu_tri":"Ban Đào tạo","tc":["KHCN.02.06"]},{"tt":16,"ten":"Tỷ lệ nhiệm vụ KHCN&ĐMST cấp trên cơ sở được ứng dụng","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.07"]},{"tt":17,"ten":"Số người được đào tạo qua nhiệm vụ KHCN&ĐMST cấp cơ sở","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.02.08"]},{"tt":18,"ten":"Số người được đào tạo qua nhiệm vụ KHCN&ĐMST cấp trên cơ sở","dvt":"Người","chu_tri":"Ban Đào tạo","tc":["KHCN.02.09"]},{"tt":19,"ten":"Số nhiệm vụ KHCN&ĐMST hợp tác quốc tế","dvt":"Nhiệm vụ","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.01"]},{"tt":20,"ten":"Số tác giả nước ngoài tham gia nghiên cứu chung","dvt":"Người","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.02"]},{"tt":21,"ten":"Số đoàn ra","dvt":"Đoàn","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.03"]},{"tt":22,"ten":"Số đoàn vào","dvt":"Đoàn","chu_tri":"Ban Hợp tác đối ngoại","tc":["KHCN.03.04"]},{"tt":23,"ten":"Số lượt báo cáo tại hội thảo quốc tế","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.05"]},{"tt":24,"ten":"Số lượt báo cáo mời quốc tế","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.03.06"]},{"tt":25,"ten":"Số đơn đăng ký quyền sở hữu trí tuệ","dvt":"Đơn","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.01"]},{"tt":26,"ten":"Số văn bằng bảo hộ","dvt":"Văn bằng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.02"]},{"tt":27,"ten":"Số đơn đăng ký quốc tế","dvt":"Đơn","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.03"]},{"tt":28,"ten":"Số hợp đồng chuyển giao công nghệ từ quyền sở hữu trí tuệ","dvt":"Hợp đồng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.04.04"]},{"tt":29,"ten":"Số bài báo khoa học trong nước thuộc danh mục do Bộ Khoa học và Công nghệ công bố","dvt":"Bài","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.01"]},{"tt":30,"ten":"Số báo cáo khoa học trong nước có ISBN","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.02"]},{"tt":31,"ten":"Số bài báo quốc tế WoS/Scopus","dvt":"Bài","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.03"]},{"tt":32,"ten":"Số báo cáo quốc tế thuộc WoS/Scopus","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.04"]},{"tt":33,"ten":"Tổng số trích dẫn","dvt":"Lượt","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.05.05"]},{"tt":34,"ten":"Tổng kinh phí thu từ nhiệm vụ cấp trên cơ sở","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.01"]},{"tt":35,"ten":"Tổng kinh phí thu từ hợp đồng chuyển giao công nghệ","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.02"]},{"tt":36,"ten":"Tổng kinh phí thu từ dịch vụ KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.03"]},{"tt":37,"ten":"Tổng kinh phí thu từ hoạt động KHCN&ĐMST khác","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.06.04"]},{"tt":38,"ten":"Số phòng thí nghiệm phục vụ nghiên cứu","dvt":"Phòng","chu_tri":"Ban Cơ sở vật chất","tc":["KHCN.07.01"]},{"tt":39,"ten":"Số không gian nghiên cứu chung","dvt":"Không gian","chu_tri":"Ban Cơ sở vật chất","tc":["KHCN.07.02"]},{"tt":40,"ten":"Số nhóm nghiên cứu mạnh","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.03"]},{"tt":41,"ten":"Số nhóm nghiên cứu tiềm năng","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.04"]},{"tt":42,"ten":"Số nhóm nghiên cứu chuyên môn","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.07.05"]},{"tt":43,"ten":"Số sáng kiến cấp cơ sở","dvt":"Sáng kiến","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.01"]},{"tt":44,"ten":"Số sáng kiến cấp trên cơ sở","dvt":"Sáng kiến","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.02"]},{"tt":45,"ten":"Số giải thưởng KHCN&ĐMST của giảng viên","dvt":"Giải","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.08.03"]},{"tt":46,"ten":"Số giải thưởng KHCN&ĐMST của người học","dvt":"Giải","chu_tri":"Ban Hỗ trợ người học","tc":["KHCN.08.04"]},{"tt":47,"ten":"Số doanh nghiệp/dự án/sản phẩm của giảng viên được hỗ trợ","dvt":"Số lượng","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.09.01"]},{"tt":48,"ten":"Số doanh nghiệp/dự án/sản phẩm của người học được hỗ trợ","dvt":"Số lượng","chu_tri":"Ban Hỗ trợ người học","tc":["KHCN.09.02"]},{"tt":49,"ten":"Số công trình vi phạm liêm chính học thuật","dvt":"Công trình","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.10.01"]},{"tt":50,"ten":"Tỷ lệ công trình được kiểm tra liêm chính học thuật (trùng lặp) và đánh giá đạo đức (nếu thuộc diện) trước khi công bố/nghiệm thu","dvt":"%","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.10.02"]},{"tt":51,"ten":"Tổng kinh phí chi cho KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.01"]},{"tt":52,"ten":"Tổng nguồn thu của Đại học","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.01","KHCN.11.02"]},{"tt":53,"ten":"Tổng kinh phí chi đào tạo, bồi dưỡng, thu hút nhân lực chất lượng cao","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.11.02"]},{"tt":54,"ten":"Tổng số nhóm nghiên cứu mạnh được công nhận","dvt":"Nhóm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.11.03"]},{"tt":55,"ten":"Tổng thu từ hoạt động triển khai nhiệm vụ KHCN&ĐMST cấp trên cơ sở và nhiệm vụ có đối ứng bằng kinh phí","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.01"]},{"tt":56,"ten":"Tổng thu từ hoạt động chuyển giao công nghệ, dịch vụ KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.02"]},{"tt":57,"ten":"Tổng kinh phí thu từ hoạt động KHCN&ĐMST","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.03"]},{"tt":58,"ten":"Tổng kinh phí thu của Đại học","dvt":"Tỷ đồng","chu_tri":"Ban Kế hoạch - Tài chính","tc":["KHCN.12.03"]},{"tt":59,"ten":"Tổng số bài báo khoa học trong nước","dvt":"Bài báo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.04"]},{"tt":60,"ten":"Tổng số bài báo khoa học quốc tế","dvt":"Bài báo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.05"]},{"tt":61,"ten":"Tổng số báo cáo khoa học quốc tế","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.06"]},{"tt":62,"ten":"Tổng số báo cáo khoa học trong nước","dvt":"Báo cáo","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.07"]},{"tt":63,"ten":"Tổng số sản phẩm sở hữu trí tuệ","dvt":"Sản phẩm","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.08"]},{"tt":64,"ten":"Chỉ số FWCI của Đại học","dvt":"Chỉ số","chu_tri":"Ban KHCN&ĐMST","tc":["KHCN.12.09"]}];
 
   var BAN_ORDER = ["Ban Tổ chức - Nhân sự","Ban Đào tạo","Ban Hợp tác đối ngoại","Ban Kế hoạch - Tài chính","Ban Cơ sở vật chất","Ban Hỗ trợ người học","Ban Khoa học, Công nghệ và Đổi mới sáng tạo"];
@@ -665,11 +572,9 @@
 
   var fmt = new Intl.NumberFormat("vi-VN");
   function n(x){ return (x===null||x===undefined||isNaN(x)) ? "—" : fmt.format(x); }
-  // Số toàn trường gốc lưu triệu đồng — hiển thị đổi sang tỷ đồng cho dễ đọc (yêu cầu 09.9.2026),
-  // số theo đơn vị (nhỏ hơn) vẫn giữ triệu đồng, không đổi.
+
   function tyd(x){ return (x===null||x===undefined||isNaN(x)) ? "—" : (Math.round(x/1000*100)/100).toLocaleString("vi-VN"); }
 
-  // ---------- KPI ----------
   var kpiGrid = document.getElementById("kpiGrid");
   var totalCongbo=0, totalSangkien=0, totalNhomNC=0;
   UNITS.forEach(function(u){ totalCongbo+=u.congbo; totalSangkien+=u.sangkien; totalNhomNC+=u.nhomNC; });
@@ -691,7 +596,6 @@
       (k.delta?'<div class="delta up">▲ '+k.delta+'</div>':'')+'</div>';
   }).join("");
 
-  // ---------- Multi-year line chart (built to keep growing) ----------
   function lineChartSVG(cfg){
     var W=560,H=190,padL=48,padR=30,padT=18,padB=28;
     var numPts = cfg.years.length, slots = numPts+1;
@@ -716,7 +620,7 @@
         svg += '<circle cx="'+xAt(i).toFixed(1)+'" cy="'+yAt(v).toFixed(1)+'" r="4" fill="'+s.color+'"/>';
       });
     });
-    // Value labels: computed per x-index so close points never overlap (min 13px vertical gap)
+
     for (var i=0; i<numPts; i++){
       var labels = cfg.series.map(function(s){ return {y: yAt(s.values[i])-10, text:n(s.values[i]), color:s.color}; });
       labels.sort(function(a,b){ return a.y-b.y; });
@@ -744,9 +648,8 @@
     lineChartSVG({years:THU_SERIES.nhan, series:[{label:"Thu KHCN", color:"var(--teal)", values:THU_SERIES.gia_tri}]});
   trendGrid.appendChild(card1);
 
-  // ---------- Thống kê công bố khoa học (bar chart nhóm + bảng chi tiết) ----------
   function groupedBarSVG(cfg){
-    // cfg: {cats:[...], series:[{label,color,values}]}
+
     var W=520,H=210,padL=44,padR=16,padT=16,padB=30;
     var innerW=W-padL-padR, innerH=H-padT-padB;
     var nCat=cfg.cats.length, nSer=cfg.series.length;
@@ -801,7 +704,6 @@
     '<thead><tr><th>Năm</th><th style="text-align:right">Trong nước</th><th style="text-align:right">Quốc tế WoS/Scopus</th><th style="text-align:right">Tổng</th><th style="text-align:right">% Quốc tế</th></tr></thead>'+
     '<tbody>'+congboRows.join("")+'</tbody>';
 
-  // ---------- Bảng chi tiết KHCN.05.01-05.04 theo đơn vị ----------
   (function(){
     var totCols = ['c0501','c0502','q05_03','c0504','cKhac05','tong05'];
     var sums = {c0501:0,c0502:0,q05_03:0,c0504:0,cKhac05:0,tong05:0};
@@ -823,22 +725,6 @@
       '<th style="text-align:right">Khác</th><th style="text-align:right">Tổng</th></tr></thead><tbody>'+rows05.join("")+'</tbody>';
   })();
 
-  // ---------- Nhiệm vụ KHCN&ĐMST theo cấp (T01, 2024-2025) ----------
-  // SỬA 09.9.2026: phát hiện Biểu F2 trong T01 có THÊM 33 dòng nhiệm vụ (Nafosted/Quỹ Nafosted/
-  // Cấp Nhà nước/Quốc gia/Bộ Xây Dựng...) nằm NGAY SAU 359 dòng đã gắn mã theo dõi TT/MaBieu —
-  // 33 dòng này bị BỎ TRỐNG cột MaBieu (không phải lỗi đánh máy của HaUI, có thể do người nhập
-  // liệu nối thêm bảng mà không copy lại 4 cột đầu) nên lần trích trước đây (lọc theo MaBieu=='F2')
-  // BỎ SÓT HOÀN TOÀN — không phải "0 cấp Quốc gia" là đúng, mà là CHƯA BAO GIỜ NHÌN THẤY phần này.
-  // Trong 33 dòng, 8 dòng rơi vào năm bắt đầu 2024/2025 (khớp đúng phạm vi đang theo dõi):
-  // nv12 MỚI THÊM (KHCN.02.03, cấp Quốc gia — không còn luôn = 0 nữa): Trịnh Trọng Chưởng (Điện -
-  // Điện tử, "Quốc gia" KC.05.02, 2025), Đặng Trọng Hợp (CNTT&TT, "Quốc gia", 2025), Lê Thị Anh
-  // (CNTT&TT, Quỹ Nafosted, 2024), **Hoàng Tiến Đạt (Cơ khí - Ô tô, Quỹ Nafosted 107.01-2025.61,
-  // 2025 — đúng nhiệm vụ người dùng hỏi trực tiếp 09.9.2026)**, Lê Ba Phong (Ngoại ngữ - Du lịch,
-  // Quỹ Nafosted, 2025). nv11_2025 SỬA TĂNG: Khoa Công nghệ Hóa 1→3 (+2, Bộ Công Thương 406/407),
-  // Ngoại ngữ - Du lịch 0→1 (+1, Bộ Công Thương 408). KHÔNG sửa kp34 (kinh phí) — 5 dòng "Quốc
-  // gia" mới có giá trị KinhPhi kiểu 6-9 (vd 7.51, 6.4) trong khi cột này ghi rõ "TrieuDong" —
-  // NGHI đơn vị thật là TỶ đồng bị nhập nhầm cột, nhưng CHƯA XÁC NHẬN được — cố tình KHÔNG cộng
-  // vào kp34 để tránh làm sai kinh phí theo hướng khác, chờ hỏi lại nguồn trước khi xử lý tiếp.
   (function(){
     var sums = {c10_24:0,c10_25:0,c11_24:0,c11_25:0,c12_24:0,c12_25:0,kp_24:0,kp_25:0,dk25:0,vb25:0};
     var rowsNV = UNITS.map(function(u){
@@ -870,14 +756,6 @@
       '<tbody>'+rowsNV.join("")+'</tbody>';
   })();
 
-  // ---------- Cộng dồn cấp Đại học (KHCN.12, thêm 08.9.2026 tiếp) ----------
-  // #59-62 (KHCN.12.04-12.07): cộng dồn trực tiếp từ UNITS[].c0501/c0502/q1a+q1b+q2q+q3q+q4q/c0504
-  // đã seed cho KHCN.05.01-05.04 theo đơn vị (năm 2025) — không cần nguồn mới, đúng bằng tổng cột
-  // trong bảng "Tách theo hạng KHCN.05.01-05.04" ở mục Thống kê công bố khoa học phía trên.
-  // #63 (KHCN.12.08): CHỈ tính shttVanBang25 (văn bằng ĐÃ ĐƯỢC CẤP) — khác TOAN_TRUONG.shtt=11
-  // vốn gộp cả đơn ĐK, theo đúng lựa chọn người dùng xác nhận 08.9.2026 (tên tham số Phụ lục III
-  // ghi "văn bằng bảo hộ... được cấp", đơn đăng ký đang xét không tính).
-  // #64 (KHCN.12.09, FWCI): xác nhận KHÔNG có nguồn nào trong 2026.70/2026.81/2026.84 — để "—".
   (function(){
     var sum59=0, sum60=0, sum61=0, sum62=0, sum63=0;
     UNITS.forEach(function(u){
@@ -901,9 +779,6 @@
     }).join("");
   })();
 
-  // ---------- Nhân lực KHCN&ĐMST theo đơn vị (KHCN.01.01/01.03/01.04, thêm 08.9.2026 THEO YÊU
-  // CẦU trực tiếp — dữ liệu đã có sẵn trong UNITS[] từ trước nhưng chưa từng hiển thị; đẩy lên
-  // kèm nhãn cảnh báo rõ ràng thay vì tiếp tục ẩn) ----------
   (function(){
     var sums = {gv:0, tg:0, ts:0, nutg:0, nutong:0};
     var rows = UNITS.map(function(u){
@@ -925,8 +800,6 @@
       '<th style="text-align:right">KHCN.01.04<br><span style="font-weight:400;font-size:11px;">nữ tham gia / tổng nữ</span></th></tr></thead><tbody>'+rows.join("")+'</tbody>';
   })();
 
-  // ---------- Giải thưởng KHCN&ĐMST theo đơn vị (KHCN.08.03/08.04, thêm 08.9.2026 THEO YÊU CẦU
-  // trực tiếp — biết rõ #46 nghi sai định nghĩa nhưng vẫn đẩy lên kèm cảnh báo, không ẩn) ------
   (function(){
     var sums = {gv:0, sv:0};
     var rows = UNITS.map(function(u){
@@ -939,37 +812,28 @@
       '<th style="text-align:right">KHCN.08.04<br><span style="font-weight:400;font-size:11px;">giải thưởng người học</span></th></tr></thead><tbody>'+rows.join("")+'</tbody>';
   })();
 
-  // ---------- NQ57 ----------
   document.getElementById("nq57Grid").innerHTML = NQ57_TARGETS.map(function(t){
     return '<div class="nq57-card"><div class="target"><b>'+t.ten+'</b><br>Mục tiêu quốc gia đến 2030: '+t.muctieu+'</div>'+
       '<div class="haui"><span class="val">'+t.tieuchi+'</span> — '+t.haui+'</div></div>';
   }).join("");
 
-  // ---------- Bảng xếp hạng thang điểm 1.000 (CHÍNH THỨC, công thức Phụ lục II) ----------
-  // Mở rộng từ 3 nhóm (05/07/08) lên 7/10 nhóm cấp 1 (01,02,04,05,06,07,08) — trọng số chuẩn hoá
-  // lại trong phạm vi 7 nhóm này để điểm S luôn chạy đúng thang 0-1.000.
   function mucNguong(x, t1,t2,t3,t4){ if(x<t1) return 1; if(x<t2) return 2; if(x<t3) return 3; if(x<t4) return 4; return 5; }
-  // Mức chung cho công thức ngưỡng dạng "0 / 1 / 2 / 3 / ≥4" (đếm tuyệt đối) — dùng cho 02.02,
-  // 02.03, 04.01, 04.02, 04.04, 07.03, 07.04, 08.03.
+
   function mucNguong0134(x){ if(x<=0) return 1; if(x===1) return 2; if(x===2) return 3; if(x===3) return 4; return 5; }
   function diem(muc){ return (muc-1)/4; }
 
-  // Ngưỡng mức KHCN.05.01/05.02/05.03 — Phụ lục II
   function muc0501(x){ if(x<3) return 1; if(x<10) return 2; if(x<26) return 3; if(x<57) return 4; return 5; }
   function muc0502(x){ if(x<1) return 1; if(x<2) return 2; if(x<4) return 3; if(x<7) return 4; return 5; }
   function muc0503(bqt){ if(bqt<0.49) return 1; if(bqt<0.72) return 2; if(bqt<0.76) return 3; if(bqt<1.43) return 4; return 5; }
   function bqt0503(u){ return (4*u.q1a + 3*u.q1b + 2*u.q2q + 1.5*u.q3q + 1*u.q4q) / u.giangvien; }
-  // KHCN.01.01/01.03/01.04, 02.01 — % theo Phụ lục II (ngưỡng lấy nguyên văn, nửa mở)
+
   function muc0101(u){ return mucNguong(u.thamGiaKHCN/u.giangvien*100, 30,51,71,91); }
   function muc0103(u){ return mucNguong(u.tienSi/u.giangvien*100, 30,40,50,70); }
   function muc0104(u){ return mucNguong(u.nuThamGia/u.thamGiaKHCN*100, 11,16,21,31); }
   function muc0201(u){ return mucNguong(u.nv10_2025/u.giangvien*100, 10,15,20,30); }
-  // KHCN.06.01 — tỷ đồng, ngưỡng "0,5–0,9/1,0–1,9/2,0–2,9/≥3,0" hiểu theo lối làm tròn liền kề
-  // (giống cách đã áp cho 05.01: mốc trên +1 đơn vị = mốc dưới của mức kế) → 0.5/1.0/2.0/3.0.
+
   function muc0601(u){ return mucNguong(u.kp34_2025, 0.5,1.0,2.0,3.0); }
 
-  // Trọng số gốc Phụ lục I, CHUẨN HOÁ LẠI trong phạm vi 7 nhóm đang có dữ liệu để điểm S luôn
-  // chạy đúng thang 0-1.000.
   var W1_GOC = {KHCN01:0.10, KHCN02:0.10, KHCN04:0.09, KHCN05:0.10, KHCN06:0.20, KHCN07:0.10, KHCN08:0.05};
   var W1_SUM = W1_GOC.KHCN01+W1_GOC.KHCN02+W1_GOC.KHCN04+W1_GOC.KHCN05+W1_GOC.KHCN06+W1_GOC.KHCN07+W1_GOC.KHCN08;
   var W1_NORM = {}; Object.keys(W1_GOC).forEach(function(k){ W1_NORM[k]=W1_GOC[k]/W1_SUM; });
@@ -983,7 +847,7 @@
     "07.03":0.5, "07.04":0.2,
     "08.02":0.4, "08.03":0.2
   };
-  // Chuẩn hoá w2 trong từng nhóm về tổng 1.0 (dùng đúng tiêu chí đang có dữ liệu của nhóm đó).
+
   function normGroup(keys){
     var sum = keys.reduce(function(s,k){ return s+W2_GOC[k]; },0);
     var out = {}; keys.forEach(function(k){ out[k]=W2_GOC[k]/sum; });
@@ -997,8 +861,6 @@
   var W2_07 = normGroup(["07.03","07.04"]);
   var W2_08 = normGroup(["08.02","08.03"]);
 
-  // KHCN.10.01 (Điều 17 + Phụ lục II): cơ chế TRỪ ĐIỂM sau điểm tổng hợp, không qua w2 — nhẹ -20/ca, vừa -50, nặng -100.
-  // Không hiển thị lý do/tên đơn vị công khai — chỉ trừ ngầm vào S theo yêu cầu người dùng.
   var DIEM_TRU_LIEM_CHINH = { "kinh-te": 20, "cntt-tt": 20 };
 
   function officialScore(u){
@@ -1017,9 +879,6 @@
     return {S:S, pt01:pt01, pt02:pt02, pt04:pt04, pt05:pt05, pt06:pt06, pt07:pt07, pt08:pt08};
   }
 
-  // PA2 = số đơn vị cung cấp (UNITS[], đồng bộ từ trang chi tiết khi Gửi đi) + hiệu chỉnh của Ban
-  // KHCN&ĐMST theo danh sách nhiệm vụ chi tiết (D1, rà 11.10.2026). Kinh phí #34 tính cả nhiệm vụ
-  // Quốc gia/Nafosted; số 2,225 tỷ của CNTT&TT không tìm được nhiệm vụ nguồn nên đưa về 0.
   var PA2_HIEU_CHINH = {
     "co-khi-o-to": {nv10_2025:[17,"Danh sách nhiệm vụ: 17 nhiệm vụ cấp cơ sở bắt đầu 2025"],
       kp34_2025:[2.455,"0,7 tỷ (Tỉnh Thái Bình) + 1,755 tỷ (Nafosted, Hoàng Tiến Đạt)"]},
@@ -1099,7 +958,6 @@
     });
   });
 
-  // ---------- Ranking (chỉ số hoạt động tổng hợp, KHÔNG phải điểm chính thức) ----------
   var RANK_W = {congbo:0.30, sangkien:0.25, nhomNC:0.20, deanSL:0.15, hoithao:0.10};
   var rankMax = {};
   METRICS.forEach(function(m){ rankMax[m.key] = Math.max.apply(null, UNITS.map(function(u){return u[m.key];})) || 1; });
@@ -1122,7 +980,6 @@
         '<div class="badge '+(quartile===0?"official":quartile===3?"warn":"proxy")+'" style="justify-self:end;">'+MUC_LABEL[quartile]+'</div></div>';
     }).join("")+'</div>';
 
-  // ---------- Compare tabs ----------
   var tabsEl = document.getElementById("metricTabs");
   var panelsEl = document.getElementById("metricPanels");
   METRICS.forEach(function(m,i){
@@ -1157,12 +1014,11 @@
     panelsEl.appendChild(panel);
   });
 
-  // ---------- Heatmap ----------
   var hm = document.getElementById("heatmapWrap");
   var maxByMetric = {};
   METRICS.forEach(function(m){ maxByMetric[m.key] = Math.max.apply(null, UNITS.map(function(u){return u[m.key];})) || 1; });
   function heatColor(pct){
-    // interpolate paper-raised -> accent
+
     var a = Math.round(20 + pct*0.65);
     return "background:color-mix(in srgb, var(--accent) "+a+"%, var(--paper-raised));";
   }
@@ -1184,95 +1040,9 @@
     if (x<=0) return 1; if (x===1) return 2; if (x===2) return 3; if (x===3) return 4; return 5;
   }
 
-  // ---------- Caveats ----------
   document.getElementById("caveatList").innerHTML = CAVEATS.map(function(c,i){
     return '<div class="caveat"><div class="n">'+String(i+1).padStart(2,"0")+'</div><div class="t">'+c+'</div></div>';
   }).join("");
-
-  // ---------- Edit panel (grouped by Ban) ----------
-  var groups = {};
-  THAM_SO.forEach(function(t){ var b=banCuaThamSo(t); (groups[b]=groups[b]||[]).push(t); });
-  var banGroupsEl = document.getElementById("banGroups");
-  var inputRefs = {}; // unitId -> tt -> input el
-
-  BAN_ORDER.forEach(function(ban){
-    var items = groups[ban]; if(!items) return;
-    var det = document.createElement("details");
-    det.className = "ban-group";
-    var summary = document.createElement("summary");
-    summary.innerHTML = '<span>'+ban+' <span style="color:var(--ink-faint);font-weight:400;">('+items.length+' tham số)</span></span><span class="chev">›</span>';
-    det.appendChild(summary);
-    var wrap = document.createElement("div"); wrap.className="edit-table-wrap";
-    var table = document.createElement("table"); table.className="edit-table";
-    var thead = "<thead><tr><th>Tham số</th>";
-    UNITS.forEach(function(u){ thead += "<th>"+u.ten.replace("Trường ","").replace("Khoa ","")+"</th>"; });
-    thead += "</tr></thead>";
-    var tbody = "<tbody>";
-    items.forEach(function(t){
-      tbody += '<tr><td>'+t.tt+'. '+t.ten+' <span style="color:var(--ink-faint)">('+t.dvt+')</span></td>';
-      UNITS.forEach(function(u){
-        tbody += '<td><input type="number" step="any" data-unit="'+u.id+'" data-tt="'+t.tt+'"><span class="save-flash">✓</span></td>';
-      });
-      tbody += '</tr>';
-    });
-    tbody += "</tbody>";
-    table.innerHTML = thead+tbody;
-    wrap.appendChild(table);
-    det.appendChild(wrap);
-    banGroupsEl.appendChild(det);
-  });
-
-  // ---------- DB wiring ----------
-  var dbStatusEl = document.getElementById("dbStatus");
-  var dbRef = null;
-
-  function slugName(u){ return u.ten; }
-
-  function applyDocToInputs(unitId, data){
-    if (!data || !data.tham_so) return;
-    document.querySelectorAll('input[data-unit="'+unitId+'"]').forEach(function(inp){
-      var tt = inp.getAttribute("data-tt");
-      if (data.tham_so[tt]!==undefined && data.tham_so[tt]!==null && document.activeElement!==inp){
-        inp.value = data.tham_so[tt];
-      }
-    });
-  }
-
-  document.addEventListener("blur", function(e){
-    var el = e.target;
-    if (!el.matches || !el.matches('input[data-unit][data-tt]')) return;
-    var unitId = el.getAttribute("data-unit");
-    var tt = el.getAttribute("data-tt");
-    var val = el.value === "" ? null : Number(el.value);
-    var flash = el.nextElementSibling;
-    if (!dbRef){ return; }
-    var patch = { tham_so: {} };
-    patch.tham_so[tt] = val;
-    dbRef.collection("don_vi").doc(unitId).update(patch).catch(function(err){
-      if (err && err.code === "invalid_argument"){
-        // doc chưa tồn tại — tạo mới với đầy đủ tên đơn vị + tham số vừa sửa
-        var unitMeta = UNITS.filter(function(u){return u.id===unitId;})[0] || {};
-        dbRef.collection("don_vi").doc(unitId).set({ ten: unitMeta.ten, tham_so: patch.tham_so }).catch(function(){});
-      }
-    });
-    if (flash){ flash.classList.add("show"); setTimeout(function(){flash.classList.remove("show");}, 1200); }
-  }, true);
-
-  (async function initDb(){
-    try{
-      if (!window.claude || !window.claude.use){ dbStatusEl.textContent = "Chỉnh sửa ở đây cần mở trang trong Claude — hiện chưa kết nối được cơ sở dữ liệu, số liệu hiển thị phía trên vẫn là số liệu đã đối soát gần nhất."; return; }
-      dbRef = await window.claude.use("db");
-      if (!dbRef){ dbStatusEl.textContent = "Không dùng được cơ sở dữ liệu trong chế độ xem này — số liệu hiển thị phía trên là số liệu đã đối soát gần nhất, chưa chỉnh sửa được ở đây."; return; }
-      dbStatusEl.textContent = "Đã kết nối — sửa số liệu, tự lưu khi rời khỏi ô.";
-      UNITS.forEach(function(u){
-        dbRef.collection("don_vi").doc(u.id).onSnapshot(function(snap){
-          if (snap.exists) applyDocToInputs(u.id, snap.data());
-        }, function(){});
-      });
-    }catch(e){
-      dbStatusEl.textContent = "Không kết nối được cơ sở dữ liệu — số liệu hiển thị phía trên là số liệu đã đối soát gần nhất.";
-    }
-  })();
 
 })();
 </script>
