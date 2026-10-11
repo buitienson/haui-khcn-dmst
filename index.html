@@ -292,8 +292,14 @@
         <div class="desc">Công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>7/10 nhóm tiêu chí đã có dữ liệu</b>: KHCN.01 (Nhân lực), 02 (Nhiệm vụ), 04 (SHTT), 05 (Công bố khoa học), 06 (Thu KHCN), 07 (Tiềm lực), 08 (Sáng kiến). 3 nhóm còn lại (03, 09, 10) loại khỏi phép tính; trọng số w1/w2 chuẩn hoá lại trong phạm vi 7 nhóm này theo Điều 6 khoản 2. KHCN.11/12 không thuộc thang điểm đơn vị, dùng riêng cho "Điểm Đại học" (xem mục "Cộng dồn cấp Đại học" ở trên).</div>
       </div>
     </div>
+    <div class="metric-tabs" id="paTabs">
+      <button class="metric-tab active" data-pa="1">PA1 · Số liệu đơn vị cung cấp</button>
+      <button class="metric-tab" data-pa="2">PA2 · Đơn vị cung cấp + Ban KHCN&amp;ĐMST hiệu chỉnh</button>
+    </div>
+    <div id="paDesc" style="font-size:13px;color:var(--ink-dim);margin:-8px 0 14px;"></div>
     <div id="officialRankingTable"></div>
-    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.01: tỷ lệ tham gia + tiến sĩ + nữ tham gia. KHCN.02: nhiệm vụ cấp cơ sở/Bộ/Quốc gia. KHCN.04: đơn ĐK + văn bằng + chuyển giao. KHCN.05: 05.01+05.02+05.03 (Q1 top ≤5%=4, Q1 khác=3, Q2=2, Q3=1,5, Q4=1). KHCN.06: thu từ nhiệm vụ cấp Bộ. KHCN.07: nhóm mạnh + tiềm năng. KHCN.08: sáng kiến + giải thưởng giảng viên + giải thưởng người học (đã lọc đúng cấp Bộ/Quốc gia/Quốc tế, loại giải cấp Trường và giải thể thao/phong trào).</p>
+    <div id="paAdjust" style="margin-top:18px;"></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">KHCN.01: tỷ lệ tham gia + tiến sĩ + nữ tham gia. KHCN.02: nhiệm vụ cấp cơ sở/Bộ/Quốc gia. KHCN.04: đơn ĐK + văn bằng + chuyển giao. KHCN.05: 05.01+05.02+05.03 (Q1 top ≤5%=4, Q1 khác=3, Q2=2, Q3=1,5, Q4=1). KHCN.06: thu từ nhiệm vụ cấp trên cơ sở (Bộ, Tỉnh, Quốc gia, Nafosted). KHCN.07: nhóm mạnh + tiềm năng. KHCN.08: sáng kiến + giải thưởng giảng viên. Giải thưởng người học (KHCN.08.04) tạm loại khỏi phép tính vì số liệu vượt xa ngưỡng mức 5 của Phụ lục II.</p>
   </div>
 </section>
 
@@ -975,7 +981,7 @@
     "05.01":0.1, "05.02":0.1, "05.03":0.3,
     "06.01":0.25,
     "07.03":0.5, "07.04":0.2,
-    "08.02":0.4, "08.03":0.2, "08.04":0.2
+    "08.02":0.4, "08.03":0.2
   };
   // Chuẩn hoá w2 trong từng nhóm về tổng 1.0 (dùng đúng tiêu chí đang có dữ liệu của nhóm đó).
   function normGroup(keys){
@@ -989,7 +995,7 @@
   var W2_05 = normGroup(["05.01","05.02","05.03"]);
   var W2_06 = normGroup(["06.01"]);
   var W2_07 = normGroup(["07.03","07.04"]);
-  var W2_08 = normGroup(["08.02","08.03","08.04"]);
+  var W2_08 = normGroup(["08.02","08.03"]);
 
   // KHCN.10.01 (Điều 17 + Phụ lục II): cơ chế TRỪ ĐIỂM sau điểm tổng hợp, không qua w2 — nhẹ -20/ca, vừa -50, nặng -100.
   // Không hiển thị lý do/tên đơn vị công khai — chỉ trừ ngầm vào S theo yêu cầu người dùng.
@@ -1002,7 +1008,7 @@
     var diemNhom05 = W2_05["05.01"]*diem(muc0501(u.c0501)) + W2_05["05.02"]*diem(muc0502(u.c0502)) + W2_05["05.03"]*diem(muc0503(bqt0503(u)));
     var diemNhom06 = W2_06["06.01"]*diem(muc0601(u));
     var diemNhom07 = W2_07["07.03"]*diem(mucNguong0134(u.nhomManh)) + W2_07["07.04"]*diem(mucNguong0134(u.nhomTiemNang));
-    var diemNhom08 = W2_08["08.02"]*diem(mucSangKien(u.sangkien)) + W2_08["08.03"]*diem(mucNguong0134(u.giaithuongGV)) + W2_08["08.04"]*diem(mucNguong0134(u.giaithuongSV));
+    var diemNhom08 = W2_08["08.02"]*diem(mucSangKien(u.sangkien)) + W2_08["08.03"]*diem(mucNguong0134(u.giaithuongGV));
     var pt01 = 1000*W1_NORM.KHCN01*diemNhom01, pt02 = 1000*W1_NORM.KHCN02*diemNhom02, pt04 = 1000*W1_NORM.KHCN04*diemNhom04,
         pt05 = 1000*W1_NORM.KHCN05*diemNhom05, pt06 = 1000*W1_NORM.KHCN06*diemNhom06, pt07 = 1000*W1_NORM.KHCN07*diemNhom07,
         pt08 = 1000*W1_NORM.KHCN08*diemNhom08;
@@ -1011,8 +1017,35 @@
     return {S:S, pt01:pt01, pt02:pt02, pt04:pt04, pt05:pt05, pt06:pt06, pt07:pt07, pt08:pt08};
   }
 
-  var officialRanked = UNITS.map(function(u){ return Object.assign({}, u, {score: officialScore(u)}); })
-    .sort(function(a,b){ return b.score.S - a.score.S; });
+  // PA2 = số đơn vị cung cấp (UNITS[], đồng bộ từ trang chi tiết khi Gửi đi) + hiệu chỉnh của Ban
+  // KHCN&ĐMST theo danh sách nhiệm vụ chi tiết (D1, rà 11.10.2026). Kinh phí #34 tính cả nhiệm vụ
+  // Quốc gia/Nafosted; số 2,225 tỷ của CNTT&TT không tìm được nhiệm vụ nguồn nên đưa về 0.
+  var PA2_HIEU_CHINH = {
+    "co-khi-o-to": {nv10_2025:[17,"Danh sách nhiệm vụ: 17 nhiệm vụ cấp cơ sở bắt đầu 2025"],
+      kp34_2025:[2.455,"0,7 tỷ (Tỉnh Thái Bình) + 1,755 tỷ (Nafosted, Hoàng Tiến Đạt)"]},
+    "dien-dien-tu": {kp34_2025:[11.95,"4,44 tỷ (Bộ Công Thương, Tỉnh Sơn La) + 7,51 tỷ (Quốc gia, Trịnh Trọng Chưởng)"]},
+    "kinh-te": {nv10_2024:[14,"Danh sách nhiệm vụ: 14 nhiệm vụ cấp cơ sở bắt đầu 2024"]},
+    "ngoai-ngu-du-lich": {nv10_2025:[13,"Danh sách nhiệm vụ: 13 nhiệm vụ cấp cơ sở bắt đầu 2025"],
+      kp34_2025:[1.8,"0,7 tỷ (Bộ Công Thương, Phạm Thị Vân Anh) + 1,1 tỷ (Nafosted, Lê Ba Phong)"]},
+    "cntt-tt": {nv11_2025:[0,"Không có nhiệm vụ cấp Bộ/Tỉnh nào bắt đầu 2025 trong danh sách"],
+      kp34_2024:[0.68,"0,68 tỷ (Nafosted, Lê Thị Anh)"],
+      kp34_2025:[6.432,"Số cũ 2,225 tỷ không có nhiệm vụ nguồn, đưa về 0; cộng 6,432 tỷ (Quốc gia, Đặng Trọng Hợp)"]},
+    "cong-nghe-hoa": {kp34_2025:[7.204,"2,904 tỷ (Tỉnh Hải Dương) + 3,8 tỷ và 0,5 tỷ (Bộ Công Thương)"]}
+  };
+  var PA_FIELD_LABEL = {nv10_2024:"Nhiệm vụ cấp cơ sở 2024 (#10)", nv10_2025:"Nhiệm vụ cấp cơ sở 2025 (#10)",
+    nv11_2025:"Nhiệm vụ cấp Bộ 2025 (#11)", kp34_2024:"Kinh phí cấp trên cơ sở 2024 (#34, tỷ đồng)",
+    kp34_2025:"Kinh phí cấp trên cơ sở 2025 (#34, tỷ đồng)"};
+  function unitsPA(pa){
+    return UNITS.map(function(u){
+      var v = Object.assign({}, u);
+      if (pa===2 && PA2_HIEU_CHINH[u.id]) Object.keys(PA2_HIEU_CHINH[u.id]).forEach(function(f){ v[f]=PA2_HIEU_CHINH[u.id][f][0]; });
+      return v;
+    });
+  }
+  function rankPA(pa){
+    return unitsPA(pa).map(function(u){ return Object.assign({}, u, {score: officialScore(u)}); })
+      .sort(function(a,b){ return b.score.S - a.score.S; });
+  }
   var MAXPT = {
     "01": (1000*W1_NORM.KHCN01).toFixed(0), "02": (1000*W1_NORM.KHCN02).toFixed(0),
     "04": (1000*W1_NORM.KHCN04).toFixed(0), "05": (1000*W1_NORM.KHCN05).toFixed(0),
@@ -1020,22 +1053,51 @@
     "08": (1000*W1_NORM.KHCN08).toFixed(0)
   };
   function ptCell(v, max){ return '<td class="num mono" style="text-align:right;">'+v.toFixed(1)+'<span style="color:var(--ink-faint);font-size:11px;"> /'+max+'</span></td>'; }
-  document.getElementById("officialRankingTable").innerHTML =
-    '<table class="score-table"><thead><tr><th>#</th><th>Đơn vị</th>'+
-    '<th style="text-align:right">KHCN.01<br><span style="font-weight:400;font-size:11px;">Nhân lực</span></th>'+
-    '<th style="text-align:right">KHCN.02<br><span style="font-weight:400;font-size:11px;">Nhiệm vụ</span></th>'+
-    '<th style="text-align:right">KHCN.04<br><span style="font-weight:400;font-size:11px;">SHTT</span></th>'+
-    '<th style="text-align:right">KHCN.05<br><span style="font-weight:400;font-size:11px;">Công bố</span></th>'+
-    '<th style="text-align:right">KHCN.06<br><span style="font-weight:400;font-size:11px;">Thu KHCN</span></th>'+
-    '<th style="text-align:right">KHCN.07<br><span style="font-weight:400;font-size:11px;">Tiềm lực</span></th>'+
-    '<th style="text-align:right">KHCN.08<br><span style="font-weight:400;font-size:11px;">Sáng kiến</span></th>'+
-    '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000</span></th></tr></thead><tbody>'+
-    officialRanked.map(function(u,i){
-      return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+'</td>'+
-        ptCell(u.score.pt01, MAXPT["01"]) + ptCell(u.score.pt02, MAXPT["02"]) + ptCell(u.score.pt04, MAXPT["04"]) +
-        ptCell(u.score.pt05, MAXPT["05"]) + ptCell(u.score.pt06, MAXPT["06"]) + ptCell(u.score.pt07, MAXPT["07"]) + ptCell(u.score.pt08, MAXPT["08"]) +
-        '<td class="num mono" style="font-weight:700;">'+u.score.S.toFixed(1)+'</td></tr>';
-    }).join("")+'</tbody></table>';
+  var PA_DESC = {
+    1: "Số liệu tham số do đơn vị rà, xác nhận trên trang chi tiết (đồng bộ khi đơn vị bấm Gửi đi).",
+    2: "Số liệu đơn vị cung cấp, thay bằng số Ban KHCN&ĐMST đếm lại từ danh sách nhiệm vụ chi tiết ở những ô lệch (xem bảng hiệu chỉnh bên dưới). Cột cuối so thứ hạng với PA1."
+  };
+  function renderOfficial(pa){
+    var ranked = rankPA(pa), hang1 = {};
+    rankPA(1).forEach(function(u,i){ hang1[u.id]=i+1; });
+    document.getElementById("paDesc").textContent = PA_DESC[pa];
+    document.getElementById("officialRankingTable").innerHTML =
+      '<table class="score-table"><thead><tr><th>#</th><th>Đơn vị</th>'+
+      '<th style="text-align:right">KHCN.01<br><span style="font-weight:400;font-size:11px;">Nhân lực</span></th>'+
+      '<th style="text-align:right">KHCN.02<br><span style="font-weight:400;font-size:11px;">Nhiệm vụ</span></th>'+
+      '<th style="text-align:right">KHCN.04<br><span style="font-weight:400;font-size:11px;">SHTT</span></th>'+
+      '<th style="text-align:right">KHCN.05<br><span style="font-weight:400;font-size:11px;">Công bố</span></th>'+
+      '<th style="text-align:right">KHCN.06<br><span style="font-weight:400;font-size:11px;">Thu KHCN</span></th>'+
+      '<th style="text-align:right">KHCN.07<br><span style="font-weight:400;font-size:11px;">Tiềm lực</span></th>'+
+      '<th style="text-align:right">KHCN.08<br><span style="font-weight:400;font-size:11px;">Sáng kiến</span></th>'+
+      '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000</span></th>'+
+      (pa===2 ? '<th style="text-align:right">So với PA1</th>' : '')+'</tr></thead><tbody>'+
+      ranked.map(function(u,i){
+        var doi = '';
+        if (pa===2){ var d = hang1[u.id]-(i+1);
+          doi = '<td class="num mono" style="text-align:right;">'+(d>0?'▲ '+d:(d<0?'▼ '+(-d):'—'))+' <span style="color:var(--ink-faint);font-size:11px;">(#'+hang1[u.id]+')</span></td>'; }
+        return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+(pa===2&&PA2_HIEU_CHINH[u.id]?' <span style="color:var(--accent);">*</span>':'')+'</td>'+
+          ptCell(u.score.pt01, MAXPT["01"]) + ptCell(u.score.pt02, MAXPT["02"]) + ptCell(u.score.pt04, MAXPT["04"]) +
+          ptCell(u.score.pt05, MAXPT["05"]) + ptCell(u.score.pt06, MAXPT["06"]) + ptCell(u.score.pt07, MAXPT["07"]) + ptCell(u.score.pt08, MAXPT["08"]) +
+          '<td class="num mono" style="font-weight:700;">'+u.score.S.toFixed(1)+'</td>'+doi+'</tr>';
+      }).join("")+'</tbody></table>';
+    var adj = document.getElementById("paAdjust");
+    if (pa!==2){ adj.innerHTML=''; return; }
+    var rows = [];
+    UNITS.forEach(function(u){ var hc = PA2_HIEU_CHINH[u.id]; if(!hc) return;
+      Object.keys(hc).forEach(function(f){
+        rows.push('<tr><td>'+u.ten+'</td><td>'+PA_FIELD_LABEL[f]+'</td><td class="num mono">'+String(u[f]).replace('.',',')+'</td><td class="num mono" style="font-weight:700;">'+String(hc[f][0]).replace('.',',')+'</td><td style="font-size:12.5px;">'+hc[f][1]+'</td></tr>');
+      }); });
+    adj.innerHTML = '<h3 style="font-size:15px;margin:0 0 8px;"><span style="color:var(--accent);">*</span> Các ô PA2 hiệu chỉnh so với PA1</h3>'+
+      '<div style="overflow-x:auto;"><table class="score-table"><thead><tr><th>Đơn vị</th><th>Tham số</th><th style="text-align:right">PA1</th><th style="text-align:right">PA2</th><th>Căn cứ</th></tr></thead><tbody>'+rows.join("")+'</tbody></table></div>';
+  }
+  renderOfficial(1);
+  document.querySelectorAll("#paTabs .metric-tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll("#paTabs .metric-tab").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active"); renderOfficial(Number(btn.getAttribute("data-pa")));
+    });
+  });
 
   // ---------- Ranking (chỉ số hoạt động tổng hợp, KHÔNG phải điểm chính thức) ----------
   var RANK_W = {congbo:0.30, sangkien:0.25, nhomNC:0.20, deanSL:0.15, hoithao:0.10};
