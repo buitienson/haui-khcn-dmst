@@ -333,6 +333,8 @@
     .ptbar{width:80px; margin-left:auto;}
   }
   .ds-tools .sx{flex:0 1 220px;}
+  .pa-info{width:30px; height:30px; border-radius:50%; border:1.5px solid var(--c01); background:var(--paper-raised); color:var(--c01); font:italic 700 15px Georgia,serif; cursor:pointer; align-self:center;}
+  .pa-info:hover{background:var(--c01); color:#fff;}
   .ds-modal{position:fixed; inset:0; z-index:50; display:none; align-items:flex-start; justify-content:center;
     background:rgba(11,22,48,.55); padding:40px 16px; overflow-y:auto;}
   .ds-modal.open{display:flex;}
@@ -369,7 +371,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Số liệu toàn trường</h2>
+        <h2>Số liệu toàn Đại học</h2>
         <div class="desc">Tổng hợp từ dữ liệu đã thu thập được tính đến 07/9/2026. Ô có huy hiệu vàng là số liệu tạm; huy hiệu xanh là số liệu chính thức theo đúng mốc dương lịch của Quy định.</div>
       </div>
     </div>
@@ -388,6 +390,7 @@
     <div class="metric-tabs" id="paTabs">
       <button class="metric-tab active" data-pa="2">PA1, Số liệu đã đối chiếu văn bản</button>
       <button class="metric-tab" data-pa="1">PA2, Số liệu đơn vị cung cấp</button>
+      <button class="pa-info" id="paInfo" type="button" title="Xem các ô PA1 hiệu chỉnh so với PA2" aria-label="Xem các ô PA1 hiệu chỉnh so với PA2">i</button>
     </div>
     <div id="paDesc" style="font-size:13px;color:var(--ink-dim);margin:-8px 0 14px;"></div>
     <div id="officialRankingTable"></div>
@@ -455,7 +458,7 @@
     <div class="section-head">
       <div>
         <h2>Thống kê công bố khoa học</h2>
-        <div class="desc">Số liệu sơ bộ theo năm dương lịch, tổng hợp từ kê khai công trình khoa học toàn trường, tách riêng trong nước và quốc tế WoS/Scopus, kèm bảng chi tiết.</div>
+        <div class="desc">Số liệu sơ bộ theo năm dương lịch, tổng hợp từ kê khai công trình khoa học toàn Đại học, tách riêng trong nước và quốc tế WoS/Scopus, kèm bảng chi tiết.</div>
       </div>
     </div>
     <div class="congbo-stats-grid">
@@ -558,7 +561,7 @@
   }
   new MutationObserver(function(){ ganNhan(); }).observe(document.body, {childList:true, subtree:true});
 
-  var APP_VERSION = "20261011-214837";
+  var APP_VERSION = "20261011-215518";
   (function(){
     var pill = document.getElementById("updPill");
     function kiem(){
@@ -792,7 +795,7 @@
   UNITS.forEach(function(u){ totalCongbo+=u.congbo; totalSangkien+=u.sangkien; totalNhomNC+=u.nhomNC; });
   var kpis = [
     {lbl:"Thu từ hoạt động KHCN&ĐMST, 2025", num:tyd(TOAN_TRUONG.thu2025)+" tỷ đ", sub:"2024: "+tyd(TOAN_TRUONG.thu2024)+" tỷ đ", delta:"+175% so với 2024", badge:"official"},
-    {lbl:"Công bố khoa học, toàn trường", num:n(totalCongbo), sub:"8 đơn vị, năm 2025", badge:"proxy"},
+    {lbl:"Công bố khoa học, toàn Đại học", num:n(totalCongbo), sub:"8 đơn vị, năm 2025", badge:"proxy"},
     {lbl:"Sáng kiến cấp Bộ năm 2025", num:n(SANGKIEN_DS.filter(function(x){return x.c==="bo";}).length), sub:"GXN 8169/GXN-BCT, Bộ Công Thương", badge:"official", click:"skbo"},
     {lbl:"Sáng kiến cấp cơ sở năm 2025", num:"82", sub:"QĐ 1297/QĐ-ĐHCN ngày 11/8/2025", badge:"official", click:"skcs2025"},
     {lbl:"Sáng kiến cấp cơ sở năm 2026", num:"104", sub:"QĐ 1368/QĐ-ĐHCN ngày 22/7/2026", badge:"official", click:"skcs2026"},
@@ -802,8 +805,8 @@
     {lbl:"Nhiệm vụ cấp Bộ trở lên năm 2025", num:n(nvNam(2025).length), sub:tyd(sumKp(nvNam(2025)))+" tỷ đồng, năm bắt đầu 2025", badge:"official", kc:"var(--c02)", click:"nv2025"},
     {lbl:"Nhiệm vụ cấp Bộ trở lên năm 2024", num:n(nvNam(2024).length), sub:tyd(sumKp(nvNam(2024)))+" tỷ đồng, năm bắt đầu 2024", badge:"official", kc:"var(--c01)", click:"nv2024"},
     {lbl:"Nhiệm vụ KHCN&ĐMST cấp Đại học năm 2025, đợt 2", num:n(TOAN_TRUONG.deanTrongDiem), sub:"QĐ 1625/QĐ-ĐHCN ngày 03/10/2025, tổng kinh phí 5,14 tỷ đồng", badge:"official"},
-    {lbl:"Đoàn ra, KHCN.03.03", num:n(TOAN_TRUONG.doanRa2025), sub:"2024: "+n(TOAN_TRUONG.doanRa2024)+", toàn trường, chưa tách đơn vị", badge:"proxy"},
-    {lbl:"Đoàn vào, KHCN.03.04", num:n(TOAN_TRUONG.doanVao2025), sub:"2024: "+n(TOAN_TRUONG.doanVao2024)+", toàn trường, chưa tách đơn vị", badge:"proxy"}
+    {lbl:"Đoàn ra, KHCN.03.03", num:n(TOAN_TRUONG.doanRa2025), sub:"2024: "+n(TOAN_TRUONG.doanRa2024)+", toàn Đại học, chưa tách đơn vị", badge:"proxy"},
+    {lbl:"Đoàn vào, KHCN.03.04", num:n(TOAN_TRUONG.doanVao2025), sub:"2024: "+n(TOAN_TRUONG.doanVao2024)+", toàn Đại học, chưa tách đơn vị", badge:"proxy"}
   ];
   var KPI_MAU=["var(--c01)","var(--c05)","var(--c08)","var(--c07)","var(--c04)","var(--c06)"];
   kpiGrid.innerHTML = kpis.map(function(k,i){
@@ -860,7 +863,7 @@
   var card1 = document.createElement("div"); card1.className="linechart-card";
   card1.innerHTML = '<span class="badge official" style="margin-bottom:8px;"><span class="dot"></span>Chính thức, mốc 31/12</span>'+
     '<h3>Thu từ hoạt động KHCN&ĐMST</h3>'+
-    '<div class="stat-line">Toàn trường, tỷ đồng, tăng <b style="color:var(--teal)">+175%</b> từ 2024 sang 2025</div>'+
+    '<div class="stat-line">Toàn Đại học, tỷ đồng, tăng <b style="color:var(--teal)">+175%</b> từ 2024 sang 2025</div>'+
     lineChartSVG({years:THU_SERIES.nhan, series:[{label:"Thu KHCN", color:"var(--teal)", values:THU_SERIES.gia_tri}]});
   trendGrid.appendChild(card1);
 
@@ -1108,7 +1111,7 @@
       var bo = L.filter(function(x){ return x.cap==="bo"; }).length, qg = L.filter(function(x){ return x.cap==="qg"; }).length;
       var kp = Math.round(sumKp(L))/1000;
       var hc = PA2_HIEU_CHINH[id] = PA2_HIEU_CHINH[id] || {};
-      var cc = "Danh mục nhiệm vụ cấp Bộ trở lên năm "+y+" (bấm ô ở mục Số liệu toàn trường để xem)";
+      var cc = "Danh mục nhiệm vụ cấp Bộ trở lên năm "+y+" (bấm ô ở mục Số liệu toàn Đại học để xem)";
       if (u["nv11_"+y]!==bo) hc["nv11_"+y] = [bo, cc]; else delete hc["nv11_"+y];
       if (u["nv12_"+y]!==qg) hc["nv12_"+y] = [qg, cc]; else delete hc["nv12_"+y];
       if (Math.abs(u["kp34_"+y]-kp)>0.0005) hc["kp34_"+y] = [kp, cc]; else delete hc["kp34_"+y];
@@ -1150,9 +1153,10 @@
   var PT_MAU = {"135":"","122":"","270":"","68":""};
   function ptCell(v, max, g){ var w = Math.max(0,Math.min(100, v/Number(max)*100)); return '<td class="num mono" style="text-align:right;">'+v.toFixed(1)+'<span style="color:var(--ink-faint);font-size:11px;"> /'+max+'</span><span class="ptbar"><i style="width:'+w.toFixed(0)+'%;background:var(--c'+(g||"01")+');"></i></span></td>'; }
   var PA_DESC = {
-    2: "Số liệu đơn vị cung cấp, thay bằng số Ban KHCN&ĐMST đối chiếu với văn bản gốc (hợp đồng, quyết định, văn bằng) ở những ô lệch, xem bảng hiệu chỉnh bên dưới. Cột cuối so thứ hạng với PA2.",
+    2: "Số liệu đơn vị cung cấp, thay bằng số Ban KHCN&ĐMST đối chiếu với văn bản gốc (hợp đồng, quyết định, văn bằng) ở những ô lệch; bấm nút (i) để xem chi tiết. Cột cuối so thứ hạng với PA2.",
     1: "Số liệu tham số do đơn vị rà, xác nhận trên trang chi tiết (đồng bộ khi đơn vị bấm Gửi đi)."
   };
+  var PA_ADJ_ROWS = [];
   function renderOfficial(pa){
     var ranked = rankPA(pa), hang1 = {};
     rankPA(1).forEach(function(u,i){ hang1[u.id]=i+1; });
@@ -1177,17 +1181,18 @@
           ptCell(u.score.pt05, MAXPT["05"],"05") + ptCell(u.score.pt06, MAXPT["06"],"06") + ptCell(u.score.pt07, MAXPT["07"],"07") + ptCell(u.score.pt08, MAXPT["08"],"08") +
           '<td class="num mono"><span class="stot">'+u.score.S.toFixed(1)+'</span></td>'+doi+'</tr>';
       }).join("")+'</tbody></table>';
-    var adj = document.getElementById("paAdjust");
-    if (pa!==2){ adj.innerHTML=''; return; }
-    var rows = [];
+    PA_ADJ_ROWS = [];
+    var rows = PA_ADJ_ROWS;
     UNITS.forEach(function(u){ var hc = PA2_HIEU_CHINH[u.id]; if(!hc) return;
       Object.keys(hc).forEach(function(f){
         rows.push('<tr><td>'+u.ten+'</td><td>'+PA_FIELD_LABEL[f]+'</td><td class="num mono">'+String(u[f]).replace('.',',')+'</td><td class="num mono" style="font-weight:700;">'+String(hc[f][0]).replace('.',',')+'</td><td style="font-size:12.5px;">'+hc[f][1]+'</td></tr>');
       }); });
-    adj.innerHTML = '<h3 style="font-size:15px;margin:0 0 8px;"><span style="color:var(--accent);">*</span> Các ô PA1 hiệu chỉnh so với PA2</h3>'+
-      '<div class="bang-bao"><table class="score-table"><thead><tr><th>Đơn vị</th><th>Tham số</th><th style="text-align:right">PA2 (đơn vị)</th><th style="text-align:right">PA1 (đã đối chiếu)</th><th>Căn cứ</th></tr></thead><tbody>'+rows.join("")+'</tbody></table></div>';
   }
   renderOfficial(2);
+  document.getElementById("paInfo").addEventListener("click", function(){
+    moDanhSach("Các ô PA1 hiệu chỉnh so với PA2", PA_ADJ_ROWS.length+" ô, PA1 thay số đơn vị cung cấp bằng số đã đối chiếu văn bản gốc",
+      ["Đơn vị","Tham số","PA2 (đơn vị)","PA1 (đã đối chiếu)","Căn cứ"], PA_ADJ_ROWS);
+  });
   document.querySelectorAll("#paTabs .metric-tab").forEach(function(btn){
     btn.addEventListener("click", function(){
       document.querySelectorAll("#paTabs .metric-tab").forEach(function(b){ b.classList.remove("active"); });
