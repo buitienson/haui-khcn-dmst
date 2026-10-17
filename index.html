@@ -391,11 +391,6 @@
         <div class="desc">Công thức Phụ lục II (S = 1.000 × w1 × w2 × ((mức−1)/4)), tính trên <b>7/10 nhóm tiêu chí đã có dữ liệu</b>: KHCN.01 (Nhân lực), 02 (Nhiệm vụ), 04 (SHTT), 05 (Công bố khoa học), 06 (Thu KHCN), 07 (Tiềm lực), 08 (Sáng kiến). 3 nhóm còn lại (03, 09, 10) loại khỏi phép tính; trọng số w1/w2 chuẩn hoá lại trong phạm vi 7 nhóm này theo Điều 6 khoản 2. KHCN.11/12 không thuộc thang điểm đơn vị, dùng riêng cho "Điểm Đại học" (xem mục "Cộng dồn cấp Đại học" ở trên).</div>
       </div>
     </div>
-    <div class="metric-tabs" id="paTabs">
-      <button class="metric-tab active" data-pa="2">PA1, Số liệu đã đối chiếu văn bản</button>
-      <button class="metric-tab" data-pa="1">PA2, Số liệu đơn vị cung cấp</button>
-      <button class="pa-info" id="paInfo" type="button" title="Xem các ô PA1 hiệu chỉnh so với PA2" aria-label="Xem các ô PA1 hiệu chỉnh so với PA2">i</button>
-    </div>
     <div id="paDesc" style="font-size:13px;color:var(--ink-dim);margin:-8px 0 14px;"></div>
     <div id="officialRankingTable"></div>
     <div class="ds-modal" id="dsModal" role="dialog" aria-modal="true"><div class="ds-box"><div class="ds-head"><div><h3 id="dsTitle"></h3><div class="sub" id="dsSub"></div></div><button class="ds-close" id="dsClose" type="button">Đóng ✕</button></div><div class="ds-body" id="dsBody"></div></div></div>
@@ -412,7 +407,6 @@
         <div class="desc">Chỉ số tổng hợp, trọng số 5 chỉ số sơ bộ (công bố, sáng kiến, nhóm nghiên cứu, nhiệm vụ KHCN&ĐMST trọng điểm, hội thảo). Công bố dùng số gộp, khác điểm KHCN.05 chính thức ở bảng trên. <b>Không dùng công thức Phụ lục II.</b> Mức xếp loại theo tứ phân vị trong 8 đơn vị.</div>
       </div>
     </div>
-    <div id="nangSuatPA" class="badge official" style="margin-bottom:12px;"></div>
     <div id="rankingTable"></div>
   </div>
 </section>
@@ -566,7 +560,7 @@
   }
   new MutationObserver(function(){ ganNhan(); }).observe(document.body, {childList:true, subtree:true});
 
-  var APP_VERSION = "20261016-073856";
+  var APP_VERSION = "20261017-180339";
   (function(){
     var pill = document.getElementById("updPill");
     function kiem(){
@@ -1214,7 +1208,7 @@
   var PT_MAU = {"135":"","122":"","270":"","68":""};
   function ptCell(v, max, g){ var w = Math.max(0,Math.min(100, v/Number(max)*100)); return '<td class="num mono" style="text-align:right;">'+v.toFixed(1)+'<span style="color:var(--ink-faint);font-size:11px;"> /'+max+'</span><span class="ptbar"><i style="width:'+w.toFixed(0)+'%;background:var(--c'+(g||"01")+');"></i></span></td>'; }
   var PA_DESC = {
-    2: "Số liệu đơn vị cung cấp, thay bằng số Ban KHCN&ĐMST đối chiếu với văn bản gốc (hợp đồng, quyết định, văn bằng) ở những ô lệch; bấm nút (i) để xem chi tiết. Cột cuối so thứ hạng với PA2.",
+    2: "Số liệu đơn vị cung cấp, đã đối chiếu với văn bản gốc (hợp đồng, quyết định, văn bằng); ô nào lệch thì dùng số theo văn bản.",
     1: "Số liệu tham số do đơn vị rà, xác nhận trên trang chi tiết (đồng bộ khi đơn vị bấm Gửi đi)."
   };
   var PA_ADJ_ROWS = [];
@@ -1233,12 +1227,12 @@
       '<th class="g07" style="text-align:right">KHCN.07<br><span style="font-weight:400;font-size:11px;">Tiềm lực</span></th>'+
       '<th class="g08" style="text-align:right">KHCN.08<br><span style="font-weight:400;font-size:11px;">Sáng kiến</span></th>'+
       '<th style="text-align:right">Điểm S<br><span style="font-weight:400;font-size:11px;">/1.000</span></th>'+
-      (pa===2 ? '<th style="text-align:right">So với PA2</th>' : '')+'</tr></thead><tbody>'+
+      ''+'</tr></thead><tbody>'+
       ranked.map(function(u,i){
         var doi = '';
-        if (pa===2){ var d = hang1[u.id]-(i+1);
+        if (false){ var d = hang1[u.id]-(i+1);
           doi = '<td class="num mono" style="text-align:right;">'+(d>0?'▲ '+d:(d<0?'▼ '+(-d):'-'))+' <span style="color:var(--ink-faint);font-size:11px;">(#'+hang1[u.id]+')</span></td>'; }
-        return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+(pa===2&&PA2_HIEU_CHINH[u.id]?' <span style="color:var(--accent);">*</span>':'')+'</td>'+
+        return '<tr><td class="mono">'+(i+1)+'</td><td>'+u.ten+''+'</td>'+
           ptCell(u.score.pt01, MAXPT["01"],"01") + ptCell(u.score.pt02, MAXPT["02"],"02") + ptCell(u.score.pt04, MAXPT["04"],"04") +
           ptCell(u.score.pt05, MAXPT["05"],"05") + ptCell(u.score.pt06, MAXPT["06"],"06") + ptCell(u.score.pt07, MAXPT["07"],"07") + ptCell(u.score.pt08, MAXPT["08"],"08") +
           '<td class="num mono"><span class="stot">'+u.score.S.toFixed(1)+'</span></td>'+doi+'</tr>';
@@ -1251,7 +1245,7 @@
       }); });
   }
   renderOfficial(2);
-  document.getElementById("paInfo").addEventListener("click", function(){
+  if (document.getElementById("paInfo")) document.getElementById("paInfo").addEventListener("click", function(){
     moDanhSach("Các ô PA1 hiệu chỉnh so với PA2", PA_ADJ_ROWS.length+" ô, PA1 thay số đơn vị cung cấp bằng số đã đối chiếu văn bản gốc",
       ["Đơn vị","Tham số","PA2 (đơn vị)","PA1 (đã đối chiếu)","Căn cứ"], PA_ADJ_ROWS);
   });
